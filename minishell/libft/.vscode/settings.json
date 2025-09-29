@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"stdbool.h": "c",
-		"libft.h": "c",
-		"string": "c"
-	}
-}
