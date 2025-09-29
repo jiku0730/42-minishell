@@ -6,13 +6,13 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/02 20:46:59 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/09/29 15:03:45 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 RM		=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror -I../includes/
+CFLAGS	=	-Wall -Wextra -Werror -I.
 NAME	=	libft.a
 
 SRCS	=	conversion/ft_atoi.c \
