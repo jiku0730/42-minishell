@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 21:07:26 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/05/05 13:14:10 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:59:18 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,22 +109,3 @@ char	**ft_split(char const *s, char c)
 	*splitted = NULL;
 	return (p);
 }
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char *target_str = "//Hello/World /42/ Tok/yo!.../..";
-// 	char delimiter = '/';
-// 	int n = count_words_(target_str, delimiter);
-// 	char	**strs = ft_split(target_str, delimiter);
-
-// 	printf("%d\n", n);
-// 	printf("%d\n", ft_strlen_for_split_(target_str, delimiter));
-// 	for (int i = 0; i <= n; i++)
-// 	{
-// 		printf("[%d] : %s\n", i, strs[i]);
-// 		free(strs[i]);
-// 	}
-// 	free(strs);
-// 	return (0);
-// }

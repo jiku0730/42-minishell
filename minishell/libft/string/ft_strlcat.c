@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 11:41:28 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/05/04 11:54:38 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:59:36 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_length + i] = '\0';
 	return (dst_length + src_length);
 }
-
-// #include <stdio.h>
-// #include <string.h>
-
-// int	main(void)
-// {
-// 	char	dest[200] = "12345";
-// 	char	src[200] = "1234567890";
-// 	size_t		result;
-
-// 	printf("%zu\n", ft_strnlen(dest, 3));
-// 	result = ft_strlcat(dest, src, 3);
-// 	printf("dest = %s\n", dest);
-// 	printf("result = %zu\n", result);
-// 	return (0);
-// }

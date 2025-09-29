@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:57:28 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/05/04 11:36:10 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:59:45 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	rtv_str[index] = '\0';
 	return (rtv_str);
 }
-
-// #include <stdio.h>
-
-// char	convert_to_upper(unsigned int index, char c)
-// {
-// 	(void)index;
-// 	if ('a' <= c && c <= 'z')
-// 		return (c - 'a' + 'A');
-// 	return (c);
-// }
-
-// int main(void)
-// {
-// 	char *str = "42Tokyo";
-// 	printf("%zu\n", ft_strlen_(str));
-
-// 	char *convert_str = ft_strmapi(str, convert_to_upper);
-// 	printf("%s\n", convert_str);
-// 	free(convert_str);
-// 	return (0);
-// }

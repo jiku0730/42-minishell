@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:55:06 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/05/04 21:19:09 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:57:13 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,3 @@ char	*ft_itoa(int n)
 	dest_str[i] = n % 10 + '0';
 	return (dest_str);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int	number_set[] = {0, 1, -1, -10, 10, -11, 2147483647, 2147483647,
-// 	-2147483648, -2147483648, 1234567};
-// 	for (int i = 0; i < (sizeof(number_set) / sizeof(number_set[0])); i++)
-// 	{
-// 		char *number_char = ft_itoa(number_set[i]);
-// 		printf("%d : %11d : %d\n",i, number_set[i], number_len(number_set[i]));
-// 		printf("%d : %11d : %s\n\n",i, number_set[i], number_char);
-// 		free(number_char);
-// 	}
-
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:26:53 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/05/05 13:27:01 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:58:15 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,3 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(p, total_size);
 	return (p);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int	main(void)
-// {
-// 	int		*p;
-// 	char	*str[10];
-
-// 	p = (int *)ft_calloc(10, sizeof(int));
-// 	for (size_t i = 0; i < 10; i++)
-// 	{
-// 		printf("%d\n", p[i]);
-// 	}
-// 	printf("\n");
-// 	str = (char **)ft_calloc(10, sizeof(char *));
-// 	for (size_t i = 0; i < 10; i++)
-// 	{
-// 		str[i] = "0123456789";
-// 		printf("%s\n", str[i]);
-// 	}
-// 	free(p);
-// 	free(str);
-// 	return (0);
-// }
-// // % gcc -fsanitize=address -g ft_calloc.c ft_bzero.c -o test_calloc
-// // gcc -g ft_calloc.c ft_bzero.c -o test_calloc_valgrind  # ASanなしでコンパイル
-// // valgrind --leak-check=full --track-origins=yes ./test_calloc_valgrind
-// gcc -Wall -Wextra -Werror -Wpedantic -Wconversion -Wshadow -Wundef
-// -Wcast-align -Wwrite-strings -Wformat=2
-// -g ft_calloc.c ft_bzero.c -o test_calloc_debug
