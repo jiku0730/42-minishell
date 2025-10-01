@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int	on_input(char *input)
 {
@@ -23,6 +23,7 @@ int	on_input(char *input)
 		return (0);
 	}
 	write(STDOUT_FILENO, input, ft_strlen(input));
+	write(STDOUT_FILENO, "\n", 1);
 	return (1);
 }
 

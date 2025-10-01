@@ -6,68 +6,70 @@ OBJDIR = obj
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(INCDIR) -I$(INCDIR)/libft -I$(INCDIR)/prompt
+INCLUDES = -Iincludes -Ilibft
 
-LIBFT_SRCS = $(SRCDIR)/libft/conversion/ft_atoi.c \
-             $(SRCDIR)/libft/conversion/ft_itoa.c \
-             $(SRCDIR)/libft/conversion/ft_tolower.c \
-             $(SRCDIR)/libft/conversion/ft_toupper.c \
-             $(SRCDIR)/libft/judge/ft_isalnum.c \
-             $(SRCDIR)/libft/judge/ft_isalpha.c \
-             $(SRCDIR)/libft/judge/ft_isascii.c \
-             $(SRCDIR)/libft/judge/ft_isdigit.c \
-             $(SRCDIR)/libft/judge/ft_isprint.c \
-             $(SRCDIR)/libft/list/ft_lstadd_back.c \
-             $(SRCDIR)/libft/list/ft_lstadd_front.c \
-             $(SRCDIR)/libft/list/ft_lstclear.c \
-             $(SRCDIR)/libft/list/ft_lstdelone.c \
-             $(SRCDIR)/libft/list/ft_lstiter.c \
-             $(SRCDIR)/libft/list/ft_lstlast.c \
-             $(SRCDIR)/libft/list/ft_lstmap.c \
-             $(SRCDIR)/libft/list/ft_lstnew.c \
-             $(SRCDIR)/libft/list/ft_lstsize.c \
-             $(SRCDIR)/libft/memory/ft_bzero.c \
-             $(SRCDIR)/libft/memory/ft_calloc.c \
-             $(SRCDIR)/libft/memory/ft_memchr.c \
-             $(SRCDIR)/libft/memory/ft_memcmp.c \
-             $(SRCDIR)/libft/memory/ft_memcpy.c \
-             $(SRCDIR)/libft/memory/ft_memmove.c \
-             $(SRCDIR)/libft/memory/ft_memrchr.c \
-             $(SRCDIR)/libft/memory/ft_memset.c \
-             $(SRCDIR)/libft/original/ft_isspace.c \
-             $(SRCDIR)/libft/original/ft_max.c \
-             $(SRCDIR)/libft/original/ft_min.c \
-             $(SRCDIR)/libft/original/ft_swap.c \
-             $(SRCDIR)/libft/output/ft_putchar_fd.c \
-             $(SRCDIR)/libft/output/ft_putendl_fd.c \
-             $(SRCDIR)/libft/output/ft_putnbr_fd.c \
-             $(SRCDIR)/libft/output/ft_putstr_fd.c \
-             $(SRCDIR)/libft/string/ft_split.c \
-             $(SRCDIR)/libft/string/ft_strchr.c \
-             $(SRCDIR)/libft/string/ft_strdup.c \
-             $(SRCDIR)/libft/string/ft_striteri.c \
-             $(SRCDIR)/libft/string/ft_strjoin.c \
-             $(SRCDIR)/libft/string/ft_strlcat.c \
-             $(SRCDIR)/libft/string/ft_strlcpy.c \
-             $(SRCDIR)/libft/string/ft_strlen.c \
-             $(SRCDIR)/libft/string/ft_strmapi.c \
-             $(SRCDIR)/libft/string/ft_strncmp.c \
-             $(SRCDIR)/libft/string/ft_strnstr.c \
-             $(SRCDIR)/libft/string/ft_strrchr.c \
-             $(SRCDIR)/libft/string/ft_strtrim.c \
-             $(SRCDIR)/libft/string/ft_substr.c
+LIBFT_SRCS = libft/conversion/ft_atoi.c \
+             libft/conversion/ft_itoa.c \
+             libft/conversion/ft_tolower.c \
+             libft/conversion/ft_toupper.c \
+             libft/judge/ft_isalnum.c \
+             libft/judge/ft_isalpha.c \
+             libft/judge/ft_isascii.c \
+             libft/judge/ft_isdigit.c \
+             libft/judge/ft_isprint.c \
+             libft/list/ft_lstadd_back.c \
+             libft/list/ft_lstadd_front.c \
+             libft/list/ft_lstclear.c \
+             libft/list/ft_lstdelone.c \
+             libft/list/ft_lstiter.c \
+             libft/list/ft_lstlast.c \
+             libft/list/ft_lstmap.c \
+             libft/list/ft_lstnew.c \
+             libft/list/ft_lstsize.c \
+             libft/memory/ft_bzero.c \
+             libft/memory/ft_calloc.c \
+             libft/memory/ft_memchr.c \
+             libft/memory/ft_memcmp.c \
+             libft/memory/ft_memcpy.c \
+             libft/memory/ft_memmove.c \
+             libft/memory/ft_memrchr.c \
+             libft/memory/ft_memset.c \
+             libft/original/ft_isspace.c \
+             libft/original/ft_max.c \
+             libft/original/ft_min.c \
+             libft/original/ft_swap.c \
+             libft/output/ft_putchar_fd.c \
+             libft/output/ft_putendl_fd.c \
+             libft/output/ft_putnbr_fd.c \
+             libft/output/ft_putstr_fd.c \
+             libft/string/ft_split.c \
+             libft/string/ft_strchr.c \
+             libft/string/ft_strdup.c \
+             libft/string/ft_striteri.c \
+             libft/string/ft_strjoin.c \
+             libft/string/ft_strlcat.c \
+             libft/string/ft_strlcpy.c \
+             libft/string/ft_strlen.c \
+             libft/string/ft_strmapi.c \
+             libft/string/ft_strncmp.c \
+             libft/string/ft_strnstr.c \
+             libft/string/ft_strrchr.c \
+             libft/string/ft_strtrim.c \
+             libft/string/ft_substr.c
 
 PROMPT_SRCS = $(SRCDIR)/prompt/prompt.c
 
 MAIN_SRCS = $(SRCDIR)/main.c
 
-SRCS = $(MAIN_SRCS) $(LIBFT_SRCS) $(PROMPT_SRCS)
+SRCS = $(MAIN_SRCS) $(PROMPT_SRCS) $(LIBFT_SRCS)
 
-OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJS = $(MAIN_SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o) \
+       $(PROMPT_SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o) \
+       $(LIBFT_SRCS:%.c=$(OBJDIR)/%.o)
 
-HEADERS = $(INCDIR)/minishell.h \
-		  $(INCDIR)/libft/libft.h \
-		  $(INCDIR)/prompt/prompt.h
+HEADERS = includes/minishell.h \
+		  includes/prompt.h \
+		  libft/libft.h
 
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
@@ -82,6 +84,11 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN) $(NAME) created successfully!$(NC)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)Compiling $<...$(NC)"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR)/%.o: %.c $(HEADERS) | $(OBJDIR)
 	@mkdir -p $(dir $@)
 	@echo "$(YELLOW)Compiling $<...$(NC)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@

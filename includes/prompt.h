@@ -14,13 +14,14 @@
 # define PROMPT_H
 
 # include "../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 int	prompt(int (*handler)(char *input));
 
-# define PROMPT_BUFFER_SIZE 1024
 # define PROMPT "minishell$ "
 
 #endif
