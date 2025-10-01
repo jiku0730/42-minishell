@@ -3,8 +3,6 @@ name: Norminette Check
 on:
   push:
     branches: [ "main", "develop", "urassh/*" ]
-  pull_request:
-    branches: [ "main", "develop" ]
 
 jobs:
   norminette:
