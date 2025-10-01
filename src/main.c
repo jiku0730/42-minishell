@@ -28,5 +28,6 @@ int on_input(char *input)
 
 int main(void)
 {
+    console(on_input);
     return (0);
 }

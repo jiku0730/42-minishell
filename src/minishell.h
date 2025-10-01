@@ -14,5 +14,6 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "console.h"
 
 #endif
