@@ -1,0 +1,40 @@
+name: Norminette Check
+
+on:
+  push:
+    branches: [ "main", "develop", "urassh/*" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  norminette:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    
+    - name: Install norminette
+      run: |
+        python -m pip install --upgrade pip
+        pip install norminette
+    
+    - name: Check norminette version
+      run: norminette --version
+    
+    - name: Run norminette on C files
+      run: |
+        echo "Checking C and header files..."
+        find . -name "*.c" -o -name "*.h" | grep -E "\.(c|h)$" | while read file; do
+          echo "Checking: $file"
+          norminette "$file"
+        done
+    
+    - name: Run norminette summary
+      run: |
+        echo "Running norminette on all C and header files..."
+        norminette $(find . -name "*.c" -o -name "*.h")
