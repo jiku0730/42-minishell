@@ -55,7 +55,8 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 #─ sources & objects ─────────────────────────────────────────────────────────
 
 #mandatory sources
-SRCS_MAND	:=	src/main.c
+SRCS_MAND	:=	src/main.c \
+				src/prompt/prompt.c
 
 #bonus sources
 

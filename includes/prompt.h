@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/09/29 15:17:31 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/10/01 15:35:18 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/01 16:50:03 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PROMPT_H
+# define PROMPT_H
 
-#include "../libft/libft.h"
-#include "prompt.h"
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+int	prompt(int (*handler)(char *input));
+
+# define PROMPT_BUFFER_SIZE 1024
+# define PROMPT "minishell$ "
 
 #endif
