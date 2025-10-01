@@ -2,7 +2,7 @@ name: Norminette Check
 
 on:
   push:
-    branches: [ "main", "develop", "urassh/*" ]
+    branches: [ "main", "develop", "urassh/*", "jiku/*" ]
 
 jobs:
   norminette:
