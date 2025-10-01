@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   console.h                                          :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:35:18 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/01 15:48:29 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/01 16:50:03 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSOLE_H
-# define CONSOLE_H
+#ifndef PROMPT_H
+# define PROMPT_H
 
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-#include "libft.h"
+int	prompt(int (*handler)(char *input));
 
-int			console(int (*handler)(char *input));
-
-#define CONSOLE_BUFFER_SIZE 1024
-#define PROMPT "minishell$ "
+# define PROMPT_BUFFER_SIZE 1024
+# define PROMPT "minishell$ "
 
 #endif
