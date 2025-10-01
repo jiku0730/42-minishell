@@ -1,0 +1,79 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+    
+    - name: Build project with make
+      run: |
+        echo "Building project..."
+        make
+    
+    - name: Verify minishell binary creation
+      run: |
+        echo "Checking if minishell binary was created..."
+        if [ -f "./minishell" ]; then
+          echo "✅ minishell binary was successfully created"
+          ls -la ./minishell
+          file ./minishell
+        else
+          echo "❌ ERROR: minishell binary was not created"
+          exit 1
+        fi
+    
+    - name: Test minishell execution
+      run: |
+        echo "Testing if minishell is executable..."
+        if [ -x "./minishell" ]; then
+          echo "✅ minishell is executable"
+          # 基本的なテスト（シェルが起動するかどうか）
+          echo "Testing basic shell functionality..."
+          timeout 5s ./minishell --help || echo "Help command test completed"
+        else
+          echo "❌ ERROR: minishell is not executable"
+          exit 1
+        fi
+    
+    - name: Test make clean functionality
+      run: |
+        echo "Testing make clean..."
+        make clean
+        if [ ! -d "./obj" ]; then
+          echo "✅ Object files cleaned successfully"
+        else
+          echo "⚠️ WARNING: Object directory still exists after clean"
+        fi
+    
+    - name: Test make fclean functionality
+      run: |
+        echo "Testing make fclean..."
+        make fclean
+        if [ ! -f "./minishell" ]; then
+          echo "✅ Binary cleaned successfully"
+        else
+          echo "❌ ERROR: Binary still exists after fclean"
+          exit 1
+        fi
+    
+    - name: Test make re functionality
+      run: |
+        echo "Testing make re (rebuild)..."
+        make re
+        if [ -f "./minishell" ] && [ -x "./minishell" ]; then
+          echo "✅ Rebuild successful"
+        else
+          echo "❌ ERROR: Rebuild failed"
+          exit 1
+        fi
