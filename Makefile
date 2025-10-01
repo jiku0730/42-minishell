@@ -6,9 +6,7 @@ OBJDIR = obj
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(INCDIR) -I$(INCDIR)/console -I$(INCDIR)/libft
-
-CONSOLE_SRCS = $(SRCDIR)/console/console.c
+INCLUDES = -I$(INCDIR) -I$(INCDIR)/libft
 
 LIBFT_SRCS = $(SRCDIR)/libft/conversion/ft_atoi.c \
              $(SRCDIR)/libft/conversion/ft_itoa.c \
@@ -61,12 +59,11 @@ LIBFT_SRCS = $(SRCDIR)/libft/conversion/ft_atoi.c \
 
 MAIN_SRCS = $(SRCDIR)/main.c
 
-SRCS = $(MAIN_SRCS) $(CONSOLE_SRCS) $(LIBFT_SRCS)
+SRCS = $(MAIN_SRCS) $(LIBFT_SRCS)
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 HEADERS = $(INCDIR)/minishell.h \
-		  $(INCDIR)/console/console.h \
 		  $(INCDIR)/libft/libft.h
 
 GREEN = \033[0;32m
