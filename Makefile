@@ -1,127 +1,116 @@
-NAME = minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
+#    Updated: 2025/09/29 15:17:10 by kjikuhar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCDIR = src
-INCDIR = src
-OBJDIR = obj
+#-----------------------------------------------------------------------------
+#> options
+#-----------------------------------------------------------------------------
+BLACK	:=	\033[30m
+RED		:=	\033[31m
+GREEN	:=	\033[32m
+YELLOW	:=	\033[33m
+BLUE	:=	\033[96m
+MAGENTA	:=	\033[38;5;206m
+CYAN	:=	\033[36m
+WHITE	:=	\033[37m
+RESET	:=	\033[0m
+BOLD	:=	\033[1m
+DIM		:=	\033[2m
+ITALIC	:=	\033[3m
+UNDER	:=	\033[4m
+BLINK	:=	\033[5m
+REVERSE	:=	\033[7m
+HIDDEN	:=	\033[8m
+PINK	:=	\033[35m
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -Iincludes -Ilibft
+#-----------------------------------------------------------------------------
 
-LIBFT_SRCS = libft/conversion/ft_atoi.c \
-             libft/conversion/ft_itoa.c \
-             libft/conversion/ft_tolower.c \
-             libft/conversion/ft_toupper.c \
-             libft/judge/ft_isalnum.c \
-             libft/judge/ft_isalpha.c \
-             libft/judge/ft_isascii.c \
-             libft/judge/ft_isdigit.c \
-             libft/judge/ft_isprint.c \
-             libft/list/ft_lstadd_back.c \
-             libft/list/ft_lstadd_front.c \
-             libft/list/ft_lstclear.c \
-             libft/list/ft_lstdelone.c \
-             libft/list/ft_lstiter.c \
-             libft/list/ft_lstlast.c \
-             libft/list/ft_lstmap.c \
-             libft/list/ft_lstnew.c \
-             libft/list/ft_lstsize.c \
-             libft/memory/ft_bzero.c \
-             libft/memory/ft_calloc.c \
-             libft/memory/ft_memchr.c \
-             libft/memory/ft_memcmp.c \
-             libft/memory/ft_memcpy.c \
-             libft/memory/ft_memmove.c \
-             libft/memory/ft_memrchr.c \
-             libft/memory/ft_memset.c \
-             libft/original/ft_isspace.c \
-             libft/original/ft_max.c \
-             libft/original/ft_min.c \
-             libft/original/ft_swap.c \
-             libft/output/ft_putchar_fd.c \
-             libft/output/ft_putendl_fd.c \
-             libft/output/ft_putnbr_fd.c \
-             libft/output/ft_putstr_fd.c \
-             libft/string/ft_split.c \
-             libft/string/ft_strchr.c \
-             libft/string/ft_strdup.c \
-             libft/string/ft_striteri.c \
-             libft/string/ft_strjoin.c \
-             libft/string/ft_strlcat.c \
-             libft/string/ft_strlcpy.c \
-             libft/string/ft_strlen.c \
-             libft/string/ft_strmapi.c \
-             libft/string/ft_strncmp.c \
-             libft/string/ft_strnstr.c \
-             libft/string/ft_strrchr.c \
-             libft/string/ft_strtrim.c \
-             libft/string/ft_substr.c
+#▸ variables
 
-PROMPT_SRCS = $(SRCDIR)/prompt/prompt.c
+#-----------------------------------------------------------------------------
 
-MAIN_SRCS = $(SRCDIR)/main.c
+NAME		:=	minishell
 
-SRCS = $(MAIN_SRCS) $(PROMPT_SRCS) $(LIBFT_SRCS)
+#─ compile config ────────────────────────────────────────────────────────────
 
-OBJS = $(MAIN_SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o) \
-       $(PROMPT_SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o) \
-       $(LIBFT_SRCS:%.c=$(OBJDIR)/%.o)
+CC			:=	cc
+CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
 
-HEADERS = includes/minishell.h \
-		  includes/prompt.h \
-		  libft/libft.h
+#─ directory name ────────────────────────────────────────────────────────────
 
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RED = \033[0;31m
-NC = \033[0m
+SRCDIR		:=	src
+MAND 		:=	mandatory
+OBJDIR		:=	obj
+LIBFT_DIR	:=	libft
+LIBFT_A		:=	$(LIBFT_DIR)/libft.a
+
+#─ sources & objects ─────────────────────────────────────────────────────────
+
+#mandatory sources
+SRCS_MAND	:=	src/main.c \
+				src/prompt/prompt.c
+
+#bonus sources
+
+SRCS_BONUS	:=
+
+#object files
+
+OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJS_BONUS	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+# OBJS	 	:=	$(OBJS_MAND) $(OBJS_BONUS)
+
+#-----------------------------------------------------------------------------
+
+#▸ rules
+
+#-----------------------------------------------------------------------------
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@echo "$(YELLOW)Linking $(NAME)...$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME)
-	@echo "$(GREEN) $(NAME) created successfully!$(NC)"
+$(NAME): $(LIBFT_A) $(OBJS_MAND)
+	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
+	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) -lreadline
+	@echo "$(YELLOW)$(BOLD)========================================="
+	@echo "    You can use My $(NAME)!!"
+	@echo "=========================================$(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+# compile object files
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	@echo "$(YELLOW)Compiling $<...$(NC)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "Compiled ✅ $(WHITE) $(BOLD) $^ $(RESET)"
+	@$(CC) $(CFLAGS) -c -o $@ $^
 
-$(OBJDIR)/%.o: %.c $(HEADERS) | $(OBJDIR)
-	@mkdir -p $(dir $@)
-	@echo "$(YELLOW)Compiling $<...$(NC)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+# libft
+$(LIBFT_A):
+	@$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)/prompt
-	@mkdir -p $(OBJDIR)/libft/conversion
-	@mkdir -p $(OBJDIR)/libft/judge
-	@mkdir -p $(OBJDIR)/libft/list
-	@mkdir -p $(OBJDIR)/libft/memory
-	@mkdir -p $(OBJDIR)/libft/original
-	@mkdir -p $(OBJDIR)/libft/output
-	@mkdir -p $(OBJDIR)/libft/string
-
-%:
-	@:
-
+# clean targets
 clean:
-	@if [ -d $(OBJDIR) ]; then \
-		echo "$(RED)Removing object files...$(NC)"; \
-		rm -rf $(OBJDIR); \
-		echo "$(GREEN) Object files removed!$(NC)"; \
-	fi
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@if [ -f $(NAME) ]; then \
-		echo "$(RED)Removing $(NAME)...$(NC)"; \
-		rm -f $(NAME); \
-		echo "$(GREEN) $(NAME) removed!$(NC)"; \
-	fi
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# bonus: $(LIBFT_A) $(OBJS_BONUS)
+# 	@cp $(LIBFT_A) $(NAME)
+# 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
+# 	@ar rcs $(NAME) $(OBJS_BONUS)
+# 	@echo "$(YELLOW)$(BOLD)========================================="
+# 	@echo "  You can use My Bonus_$(NAME)!!"
+# 	@echo "=========================================$(RESET)"
 
-.PRECIOUS: $(OBJDIR)/%.o
+.PHONY: all clean fclean re bonus
