@@ -12,10 +12,9 @@
 
 #include "prompt.h"
 
-void	prompt(int (*handler)(char *input))
+void	prompt(void (*handler)(char *input))
 {
 	char	*input;
-	int		should_continue;
 
 	while (1)
 	{
@@ -24,11 +23,7 @@ void	prompt(int (*handler)(char *input))
 			break ;
 		if (*input)
 			add_history(input);
-		should_continue = 1;
 		if (handler)
-			should_continue = handler(input);
-		free(input);
-		if (!should_continue)
-			break ;
+			handler(input);
 	}
 }
