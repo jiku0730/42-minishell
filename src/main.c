@@ -19,7 +19,7 @@ int	on_input(char *input)
 	if (ft_strncmp(input, "exit", 4) == 0 && (input[4] == '\0'
 			|| ft_isspace(input[4])))
 	{
-		write(STDOUT_FILENO, "exit", 4);
+		write(STDOUT_FILENO, "exit\n", 5);
 		return (0);
 	}
 	write(STDOUT_FILENO, input, ft_strlen(input));
