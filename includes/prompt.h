@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	prompt(int (*handler)(char *input));
+void	prompt(int (*handler)(char *input));
 
 # define PROMPT "minishell$ "
 

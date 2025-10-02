@@ -12,7 +12,7 @@
 
 #include "prompt.h"
 
-int	prompt(int (*handler)(char *input))
+void	prompt(int (*handler)(char *input))
 {
 	char	*input;
 	int		should_continue;
@@ -31,5 +31,4 @@ int	prompt(int (*handler)(char *input))
 		if (!should_continue)
 			break ;
 	}
-	return (0);
 }
