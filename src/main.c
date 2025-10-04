@@ -12,10 +12,24 @@
 
 #include "minishell.h"
 
-int	main(int argc, char const *argv[])
+void	on_input(char *input)
 {
-	(void)argc;
-	(void)argv;
-	printf("test\n");
+	if (!input)
+		return ;
+	if (ft_strncmp(input, "exit", 4) == 0 && (input[4] == '\0'
+			|| ft_isspace(input[4])))
+	{
+		write(STDOUT_FILENO, "exit\n", 5);
+		free(input);
+		exit(0);
+	}
+	write(STDOUT_FILENO, input, ft_strlen(input));
+	write(STDOUT_FILENO, "\n", 1);
+	free(input);
+}
+
+int	main(void)
+{
+	prompt(on_input);
 	return (0);
 }

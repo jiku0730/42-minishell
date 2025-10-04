@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/09/29 15:17:31 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/10/01 15:35:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/01 16:49:19 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "prompt.h"
 
-# include "libft.h"
-# include "prompt.h"
+void	prompt(void (*handler)(char *input))
+{
+	char	*input;
 
-#endif
+	while (1)
+	{
+		input = readline(PROMPT);
+		if (!input)
+			break ;
+		if (*input)
+			add_history(input);
+		if (handler)
+			handler(input);
+	}
+}

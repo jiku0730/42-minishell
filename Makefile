@@ -55,7 +55,8 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 #─ sources & objects ─────────────────────────────────────────────────────────
 
 #mandatory sources
-SRCS_MAND	:=	src/main.c
+SRCS_MAND	:=	src/main.c \
+				src/prompt/prompt.c
 
 #bonus sources
 
@@ -77,7 +78,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A)
+	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) -lreadline
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"
