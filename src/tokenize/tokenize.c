@@ -40,8 +40,7 @@ t_list	*tokenize(char *input)
 			return (on_success(&token_list));
 		else if (state == ON_ERROR)
 			return (on_error(&token_list));
-		if (state != IN_OPERATOR)
-			current_ptr++;
+		current_ptr++;
 	}
 }
 
