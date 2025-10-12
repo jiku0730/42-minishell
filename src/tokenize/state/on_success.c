@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/10 17:17:43 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:35:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/13 00:35:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-
-// callbacks
-void	on_input(char *input);
-
-#endif
+t_list	*on_success(t_list **token_list)
+{
+	return (*token_list);
+}

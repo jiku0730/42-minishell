@@ -6,7 +6,7 @@
 #    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/10/10 17:06:33 by urassh           ###   ########.fr        #
+#    Updated: 2025/10/10 17:16:16 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,16 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
 				src/prompt/prompt.c \
-				src/callback/on_input.c
+				src/callback/on_input.c \
+				src/tokenize/tokenize.c \
+				src/tokenize/push_token.c \
+				src/tokenize/is_operator.c \
+				src/tokenize/state/in_normal.c \
+				src/tokenize/state/in_double_quote.c \
+				src/tokenize/state/in_single_quote.c \
+				src/tokenize/state/in_operator.c \
+				src/tokenize/state/on_success.c \
+				src/tokenize/state/on_error.c
 
 #bonus sources
 
