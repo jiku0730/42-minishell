@@ -81,7 +81,7 @@ static void	by_quote(t_list **token_list, char **begin_ptr, char **current_ptr,
 	*begin_ptr = *current_ptr + 1;
 	if (ft_strncmp(*current_ptr, "\"", 1) == 0)
 		*state = IN_DOUBLE_QUOTE;
-	if (ft_strncmp(*current_ptr, "\"", 1) == 0)
+	else if (ft_strncmp(*current_ptr, "'", 1) == 0)
 		*state = IN_SINGLE_QUOTE;
 }
 
