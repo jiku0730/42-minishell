@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 14:20:53 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/13 16:17:37 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	on_input(char *input)
 {
 	t_list	*token_list;
 
-	if (!input)
+	if (ft_isspace_str(input))
 		return ;
 	token_list = tokenize(input);
 	if (!token_list)

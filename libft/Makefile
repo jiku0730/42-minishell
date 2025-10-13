@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/09/29 15:03:45 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/10/13 16:17:08 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ SRCS	=	conversion/ft_atoi.c \
 			original/ft_swap.c \
 			original/ft_max.c \
 			original/ft_min.c \
-			original/ft_isspace.c
+			original/ft_isspace.c \
+			original/ft_isspace_str.c
 
 BLACK	:=	\033[30m
 RED		:=	\033[31m
