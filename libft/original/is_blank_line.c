@@ -18,7 +18,7 @@ int	is_blank_line(const char *s)
 		return (1);
 	while (*s)
 	{
-		if (!ft_isspace(*s))
+		if (!ft_isspace((unsigned char)*s))
 			return (0);
 		s++;
 	}
