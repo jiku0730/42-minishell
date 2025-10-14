@@ -6,13 +6,13 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 02:20:22 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/15 01:43:37 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-bool	is_operator(char *str)
+bool	is_operator(const char *str)
 {
 	if (ft_strncmp(str, "&&", 2) == 0)
 		return (true);

@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 00:55:05 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/15 01:43:37 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_token_state
 
 t_list	*tokenize(char *input);
 void	push_token(t_list **list, char *token);
-bool	is_operator(char *str);
+bool	is_operator(const char *str);
 
 void	in_normal(t_list **token_list, char **begin_ptr, char **current_ptr,
 			t_token_state *state);
