@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/13 16:16:07 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/15 01:37:33 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				*ft_memset(void *s, int c, size_t n);
 
 // original functions
 void				ft_swap(int *a, int *b);
-int					ft_isspace_str(const char *s);
+int					is_blank_line(const char *s);
 int					ft_isspace(const char c);
 int					ft_max_int(int a, int b, int *m);
 long				ft_max_long(long a, long b);

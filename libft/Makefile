@@ -6,7 +6,7 @@
 #    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/10/13 16:17:08 by urassh           ###   ########.fr        #
+#    Updated: 2025/10/15 01:37:33 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ SRCS	=	conversion/ft_atoi.c \
 			original/ft_max.c \
 			original/ft_min.c \
 			original/ft_isspace.c \
-			original/ft_isspace_str.c
+			original/is_blank_line.c
 
 BLACK	:=	\033[30m
 RED		:=	\033[31m
