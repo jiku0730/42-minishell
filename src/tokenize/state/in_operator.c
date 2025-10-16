@@ -6,13 +6,14 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:47:06 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:58:05 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	in_operator(t_token_store *store, t_token_state *state, char current)
+void	in_operator(t_token_store *store, t_token_state *state,
+		const char current)
 {
 	if (current == '\0')
 		*state = ON_ERROR;

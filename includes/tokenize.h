@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 01:57:10 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:58:18 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_list		*tokenize(char *input);
 
 // operator
 bool		is_operator(const char *str);
-bool		is_operator_char(char c);
+bool		is_operator_char(const char c);
 
 // store
 int			push_token(t_token_store *store);
@@ -45,13 +45,14 @@ int			add_buffer(t_token_store *store, const char c);
 void		free_store(t_token_store *store);
 
 // state handler
-void		in_normal(t_token_store *store, t_token_state *state, char current);
+void		in_normal(t_token_store *store, t_token_state *state,
+				const char current);
 void		in_double_quote(t_token_store *store, t_token_state *state,
-				char current);
+				const char current);
 void		in_single_quote(t_token_store *store, t_token_state *state,
-				char current);
+				const char current);
 void		in_operator(t_token_store *store, t_token_state *state,
-				char current);
+				const char current);
 t_list		*on_success(t_token_store *store);
 t_list		*on_error(t_token_store *store);
 

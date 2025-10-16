@@ -6,19 +6,23 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:18:56 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:57:55 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	by_last(t_token_store *store, t_token_state *state, char current);
-static void	by_space(t_token_store *store, t_token_state *state, char current);
-static void	by_quote(t_token_store *store, t_token_state *state, char current);
+static void	by_last(t_token_store *store, t_token_state *state,
+				const char current);
+static void	by_space(t_token_store *store, t_token_state *state,
+				const char current);
+static void	by_quote(t_token_store *store, t_token_state *state,
+				const char current);
 static void	by_operator(t_token_store *store, t_token_state *state,
-				char current);
+				const char current);
 
-void	in_normal(t_token_store *store, t_token_state *state, char current)
+void	in_normal(t_token_store *store, t_token_state *state,
+		const char current)
 {
 	if (current == '\0')
 		by_last(store, state, current);
@@ -32,7 +36,8 @@ void	in_normal(t_token_store *store, t_token_state *state, char current)
 		add_buffer(store, current);
 }
 
-static void	by_last(t_token_store *store, t_token_state *state, char current)
+static void	by_last(t_token_store *store, t_token_state *state,
+		const char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -43,7 +48,8 @@ static void	by_last(t_token_store *store, t_token_state *state, char current)
 	*state = ON_SUCCESS;
 }
 
-static void	by_space(t_token_store *store, t_token_state *state, char current)
+static void	by_space(t_token_store *store, t_token_state *state,
+		const char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -54,7 +60,8 @@ static void	by_space(t_token_store *store, t_token_state *state, char current)
 	*state = IN_NORMAL;
 }
 
-static void	by_quote(t_token_store *store, t_token_state *state, char current)
+static void	by_quote(t_token_store *store, t_token_state *state,
+		const char current)
 {
 	(void)store;
 	if (current == '\"')
@@ -64,7 +71,7 @@ static void	by_quote(t_token_store *store, t_token_state *state, char current)
 }
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-		char current)
+		const char current)
 {
 	if (push_token(store) == ERROR || add_buffer(store, current) == ERROR)
 	{

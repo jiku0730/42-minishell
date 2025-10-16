@@ -12,7 +12,7 @@
 
 #include "tokenize.h"
 
-bool	is_operator_char(char c)
+bool	is_operator_char(const char c)
 {
 	if (c == '&')
 		return (true);

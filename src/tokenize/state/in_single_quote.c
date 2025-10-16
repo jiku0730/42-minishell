@@ -13,7 +13,7 @@
 #include "tokenize.h"
 
 void	in_single_quote(t_token_store *store, t_token_state *state,
-		char current)
+		const char current)
 {
 	if (current == '\0')
 		*state = ON_ERROR;
