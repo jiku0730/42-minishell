@@ -6,48 +6,47 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:14:04 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 00:23:58 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 01:55:48 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	initialize(char **begin_ptr, char **current_ptr,
-				t_token_state *state, char *input);
+static void	initialize(t_token_store *store, t_token_state *state,
+				char **current, char *input);
 
 t_list	*tokenize(char *input)
 {
 	t_token_store	store;
 	t_token_state	state;
-	char			*begin_ptr;
-	char			*current_ptr;
+	char			*current;
 
 	if (!input)
 		return (NULL);
-	init_store(&store);
-	initialize(&begin_ptr, &current_ptr, &state, input);
+	initialize(&store, &state, &current, input);
 	while (true)
 	{
 		if (state == IN_NORMAL)
-			in_normal(&token_list, &begin_ptr, &current_ptr, &state);
+			in_normal(&store, &state, *current);
 		else if (state == IN_DOUBLE_QUOTE)
-			in_double_quote(&token_list, &begin_ptr, &current_ptr, &state);
+			in_double_quote(&store, &state, *current);
 		else if (state == IN_SINGLE_QUOTE)
-			in_single_quote(&token_list, &begin_ptr, &current_ptr, &state);
+			in_single_quote(&store, &state, *current);
 		else if (state == IN_OPERATOR)
-			in_operator(&token_list, &begin_ptr, &current_ptr, &state);
+			in_operator(&store, &state, *current);
 		else if (state == ON_SUCCESS)
 			return (on_success(&store));
 		else if (state == ON_ERROR)
 			return (on_error(&store));
-		current_ptr++;
+		current++;
 	}
 }
 
-static void	initialize(char **begin_ptr, char **current_ptr,
-		t_token_state *state, char *input)
+static void	initialize(t_token_store *store, t_token_state *state,
+		char **current, char *input)
 {
-	*begin_ptr = input;
-	*current_ptr = input;
+	store->tokens = NULL;
+	store->buffer = NULL;
+	*current = input;
 	*state = IN_NORMAL;
 }

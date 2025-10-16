@@ -66,7 +66,6 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/state/in_operator.c \
 				src/tokenize/state/on_success.c \
 				src/tokenize/state/on_error.c \
-				src/tokenize/store/init_store.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \

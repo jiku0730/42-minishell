@@ -6,32 +6,25 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:23:16 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:02:19 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	in_operator(t_list **token_list, char **begin_ptr, char **current_ptr,
-		t_token_state *state)
+void	in_operator(t_token_store *store, t_token_state *state, char current)
 {
-	char	*token;
-	size_t	operator_len;
-
-	*current_ptr = *begin_ptr;
-	if (ft_strncmp(*current_ptr, "&&", 2) == 0 || ft_strncmp(*current_ptr, "||",
-			2) == 0 || ft_strncmp(*current_ptr, "<<", 2) == 0
-		|| ft_strncmp(*current_ptr, ">>", 2) == 0)
-		operator_len = 2;
-	else
-		operator_len = 1;
-	token = ft_substr(*current_ptr, 0, operator_len);
-	if (!token || push_token(token_list, token) == ERROR)
-	{
+	if (current == '\0')
 		*state = ON_ERROR;
-		return ;
+	else if (is_operator_char(current))
+	{
+		if (add_buffer(store, current) == ERROR)
+			*state = ON_ERROR;
 	}
-	*current_ptr += operator_len - 1;
-	*begin_ptr = *current_ptr + 1;
-	*state = IN_NORMAL;
+	else
+	{
+		push_token(store);
+		*state = IN_NORMAL;
+		in_normal(store, state, current);
+	}
 }

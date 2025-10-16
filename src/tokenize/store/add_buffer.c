@@ -6,13 +6,13 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 00:00:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 00:46:16 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-int	add_buffer(t_token_store *store, char c)
+int	add_buffer(t_token_store *store, const char c)
 {
 	char	*char_ptr;
 	t_list	*new_node;

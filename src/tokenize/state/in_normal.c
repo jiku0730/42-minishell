@@ -6,113 +6,75 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:21:50 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:00:23 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	by_last(t_list **token_list, char **begin_ptr, char **current_ptr,
-				t_token_state *state);
-static void	by_space(t_list **token_list, char **begin_ptr, char **current_ptr,
-				t_token_state *state);
-static void	by_quote(t_list **token_list, char **begin_ptr, char **current_ptr,
-				t_token_state *state);
-static void	by_operator(t_list **token_list, char **begin_ptr,
-				char **current_ptr, t_token_state *state);
+static void	by_last(t_token_store *store, t_token_state *state, char current);
+static void	by_space(t_token_store *store, t_token_state *state, char current);
+static void	by_quote(t_token_store *store, t_token_state *state, char current);
+static void	by_operator(t_token_store *store, t_token_state *state,
+				char current);
 
-void	in_normal(t_list **token_list, char **begin_ptr, char **current_ptr,
-		t_token_state *state)
+void	in_normal(t_token_store *store, t_token_state *state, char current)
 {
-	if (!**current_ptr)
-		by_last(token_list, begin_ptr, current_ptr, state);
-	else if (ft_isspace(**current_ptr))
-		by_space(token_list, begin_ptr, current_ptr, state);
-	else if (ft_strncmp(*current_ptr, "\"", 1) == 0 || ft_strncmp(*current_ptr,
-			"'", 1) == 0)
-		by_quote(token_list, begin_ptr, current_ptr, state);
-	else if (is_operator(*current_ptr))
-		by_operator(token_list, begin_ptr, current_ptr, state);
+	if (current == '\0')
+		by_last(store, state, current);
+	else if (ft_isspace(current))
+		by_space(store, state, current);
+	else if (is_operator_char(current))
+		by_operator(store, state, current);
+	else if (current == '\"' || current == '\'')
+		by_quote(store, state, current);
+	else
+		add_buffer(store, current);
 }
 
-static void	by_last(t_list **token_list, char **begin_ptr, char **current_ptr,
-		t_token_state *state)
+static void	by_last(t_token_store *store, t_token_state *state, char current)
 {
-	size_t	len;
-	char	*token;
-
-	if (*begin_ptr < *current_ptr)
+	(void)current;
+	if (!store->buffer || push_token(store) == ERROR)
 	{
-		len = *current_ptr - *begin_ptr;
-		token = ft_substr(*begin_ptr, 0, len);
-		if (!token || push_token(token_list, token) == ERROR)
-		{
-			*state = ON_ERROR;
-			return ;
-		}
+		*state = ON_ERROR;
+		return ;
 	}
 	*state = ON_SUCCESS;
 }
 
-static void	by_space(t_list **token_list, char **begin_ptr, char **current_ptr,
-		t_token_state *state)
+static void	by_space(t_token_store *store, t_token_state *state, char current)
 {
-	size_t	len;
-	char	*token;
-
-	if (*begin_ptr < *current_ptr)
+	(void)current;
+	if (!store->buffer || push_token(store) == ERROR)
 	{
-		len = *current_ptr - *begin_ptr;
-		token = ft_substr(*begin_ptr, 0, len);
-		if (!token || push_token(token_list, token) == ERROR)
-		{
-			*state = ON_ERROR;
-			return ;
-		}
+		*state = ON_ERROR;
+		return ;
 	}
-	*begin_ptr = *current_ptr + 1;
 	*state = IN_NORMAL;
 }
 
-static void	by_quote(t_list **token_list, char **begin_ptr, char **current_ptr,
-		t_token_state *state)
+static void	by_quote(t_token_store *store, t_token_state *state, char current)
 {
-	size_t	len;
-	char	*token;
-
-	if (*begin_ptr < *current_ptr)
+	if (!store->buffer)
 	{
-		len = *current_ptr - *begin_ptr;
-		token = ft_substr(*begin_ptr, 0, len);
-		if (!token || push_token(token_list, token) == ERROR)
-		{
-			*state = ON_ERROR;
-			return ;
-		}
+		*state = ON_ERROR;
+		return ;
 	}
-	*begin_ptr = *current_ptr + 1;
-	if (ft_strncmp(*current_ptr, "\"", 1) == 0)
+	if (current == '\"')
 		*state = IN_DOUBLE_QUOTE;
-	else if (ft_strncmp(*current_ptr, "'", 1) == 0)
+	else if (current == '\'')
 		*state = IN_SINGLE_QUOTE;
 }
 
-static void	by_operator(t_list **token_list, char **begin_ptr,
-		char **current_ptr, t_token_state *state)
+static void	by_operator(t_token_store *store, t_token_state *state,
+		char current)
 {
-	size_t	len;
-	char	*token;
-
-	if (*begin_ptr < *current_ptr)
+	if (!store->buffer || push_token(store) == ERROR || add_buffer(store,
+			current) == ERROR)
 	{
-		len = *current_ptr - *begin_ptr;
-		token = ft_substr(*begin_ptr, 0, len);
-		if (!token || push_token(token_list, token) == ERROR)
-		{
-			*state = ON_ERROR;
-			return ;
-		}
+		*state = ON_ERROR;
+		return ;
 	}
-	*begin_ptr = *current_ptr;
 	*state = IN_OPERATOR;
 }
