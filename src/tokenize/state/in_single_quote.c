@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 01:26:35 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:27:47 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	in_single_quote(t_token_store *store, t_token_state *state,
 {
 	if (current == '\0')
 		*state = ON_ERROR;
-else if (current == '\'')
+	else if (current == '\'')
 		*state = IN_NORMAL;
 	else
 		add_buffer(store, current);
