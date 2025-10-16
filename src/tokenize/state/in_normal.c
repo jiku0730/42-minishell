@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:07:33 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:18:56 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	in_normal(t_token_store *store, t_token_state *state, char current)
 static void	by_last(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
-	if (!store->buffer || push_token(store) == ERROR)
+	if (push_token(store) == ERROR)
 	{
 		*state = ON_ERROR;
 		return ;

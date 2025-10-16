@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:13:34 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 00:00:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:18:40 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ static char	*build_token_from_buffer(t_list *buffer)
 	return (token);
 }
 
+static bool	is_buffer_empty(t_list *buffer)
+{
+	return (!buffer);
+}
+
 int	push_token(t_token_store *store)
 {
 	char	*token;
@@ -44,6 +49,8 @@ int	push_token(t_token_store *store)
 
 	if (!store)
 		return (ERROR);
+	if (is_buffer_empty(store->buffer))
+		return (SUCCESS);
 	token = build_token_from_buffer(store->buffer);
 	if (!token)
 		return (ERROR);
