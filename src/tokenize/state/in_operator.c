@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 02:00:51 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:05:25 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,20 @@ void	in_operator(t_list **token_list, char **begin_ptr, char **current_ptr,
 	size_t	operator_len;
 
 	*current_ptr = *begin_ptr;
-	if (ft_strncmp(*current_ptr, "&&", 2) == 0 || ft_strncmp(*current_ptr,
-			"||", 2) == 0 || ft_strncmp(*current_ptr, "<<", 2) == 0
+	if (ft_strncmp(*current_ptr, "&&", 2) == 0 || ft_strncmp(*current_ptr, "||",
+			2) == 0 || ft_strncmp(*current_ptr, "<<", 2) == 0
 		|| ft_strncmp(*current_ptr, ">>", 2) == 0)
 		operator_len = 2;
 	else
 		operator_len = 1;
 	token = ft_substr(*current_ptr, 0, operator_len);
-	push_token(token_list, token);
-	*current_ptr += operator_len - 1;
-	*begin_ptr = *current_ptr + 1;
-	*state = IN_NORMAL;
+	if (!token)
+		*state = ON_ERROR;
+	else
+	{
+		push_token(token_list, token);
+		*current_ptr += operator_len - 1;
+		*begin_ptr = *current_ptr + 1;
+		*state = IN_NORMAL;
+	}
 }
