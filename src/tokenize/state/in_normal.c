@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:00:23 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:07:33 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	by_last(t_token_store *store, t_token_state *state, char current)
 static void	by_space(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
-	if (!store->buffer || push_token(store) == ERROR)
+	if (push_token(store) == ERROR)
 	{
 		*state = ON_ERROR;
 		return ;
@@ -56,11 +56,7 @@ static void	by_space(t_token_store *store, t_token_state *state, char current)
 
 static void	by_quote(t_token_store *store, t_token_state *state, char current)
 {
-	if (!store->buffer)
-	{
-		*state = ON_ERROR;
-		return ;
-	}
+	(void)store;
 	if (current == '\"')
 		*state = IN_DOUBLE_QUOTE;
 	else if (current == '\'')
@@ -70,8 +66,7 @@ static void	by_quote(t_token_store *store, t_token_state *state, char current)
 static void	by_operator(t_token_store *store, t_token_state *state,
 		char current)
 {
-	if (!store->buffer || push_token(store) == ERROR || add_buffer(store,
-			current) == ERROR)
+	if (push_token(store) == ERROR || add_buffer(store, current) == ERROR)
 	{
 		*state = ON_ERROR;
 		return ;
