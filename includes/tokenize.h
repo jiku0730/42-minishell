@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:56:28 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 00:19:30 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@ typedef enum e_token_state
 	IN_OPERATOR,
 	ON_SUCCESS,
 	ON_ERROR,
-}			t_token_state;
+}				t_token_state;
 
 typedef struct s_token_store
 {
-	t_list	*tokens;
-	t_list	*buffer;
-}			t_token_store;
+	t_list		*tokens;
+	t_list		*buffer;
+}				t_token_store;
 
-t_list		*tokenize(char *input);
-bool		is_operator(const char *str);
+t_list			*tokenize(char *input);
+bool			is_operator(const char *str);
 
 // store
 t_token_store	*init_store(void);
-int			push_token(t_token_store **store);
-int			add_buffer(t_token_store **store, char c);
-void		free_store(t_token_store **store);
+int				push_token(t_token_store **store);
+int				add_buffer(t_token_store **store, char c);
+void			free_store(t_token_store **store);
 
 // state handler
-void		in_normal(t_list **token_list, char **begin_ptr, char **current_ptr,
-				t_token_state *state);
-void		in_double_quote(t_list **token_list, char **begin_ptr,
-				char **current_ptr, t_token_state *state);
-void		in_single_quote(t_list **token_list, char **begin_ptr,
-				char **current_ptr, t_token_state *state);
-void		in_operator(t_list **token_list, char **begin_ptr,
-				char **current_ptr, t_token_state *state);
-t_list		*on_success(t_list **token_list);
-t_list		*on_error(t_list **token_list);
+void			in_normal(t_list **token_list, char **begin_ptr,
+					char **current_ptr, t_token_state *state);
+void			in_double_quote(t_list **token_list, char **begin_ptr,
+					char **current_ptr, t_token_state *state);
+void			in_single_quote(t_list **token_list, char **begin_ptr,
+					char **current_ptr, t_token_state *state);
+void			in_operator(t_list **token_list, char **begin_ptr,
+					char **current_ptr, t_token_state *state);
+t_list			*on_success(t_list **token_list);
+t_list			*on_error(t_list **token_list);
 
 #endif

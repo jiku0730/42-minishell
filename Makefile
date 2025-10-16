@@ -59,14 +59,17 @@ SRCS_MAND	:=	src/main.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/tokenize/tokenize.c \
-				src/tokenize/push_token.c \
 				src/tokenize/is_operator.c \
 				src/tokenize/state/in_normal.c \
 				src/tokenize/state/in_double_quote.c \
 				src/tokenize/state/in_single_quote.c \
 				src/tokenize/state/in_operator.c \
 				src/tokenize/state/on_success.c \
-				src/tokenize/state/on_error.c
+				src/tokenize/state/on_error.c \
+				src/tokenize/store/init_store.c \
+				src/tokenize/store/free_store.c \
+				src/tokenize/store/push_token.c \
+				src/tokenize/store/add_buffer.c \
 
 #bonus sources
 
