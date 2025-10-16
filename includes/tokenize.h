@@ -6,13 +6,14 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/15 01:43:37 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:15:51 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
+# include "constants.h"
 # include "libft.h"
 # include <stdlib.h>
 
@@ -27,7 +28,7 @@ typedef enum e_token_state
 }		t_token_state;
 
 t_list	*tokenize(char *input);
-void	push_token(t_list **list, char *token);
+int		push_token(t_list **list, char *token);
 bool	is_operator(const char *str);
 
 void	in_normal(t_list **token_list, char **begin_ptr, char **current_ptr,

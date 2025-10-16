@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:02:20 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:21:50 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static void	by_last(t_list **token_list, char **begin_ptr, char **current_ptr,
 	{
 		len = *current_ptr - *begin_ptr;
 		token = ft_substr(*begin_ptr, 0, len);
-		if (!token)
+		if (!token || push_token(token_list, token) == ERROR)
+		{
 			*state = ON_ERROR;
-		else
-			push_token(token_list, token);
+			return ;
+		}
 	}
 	*state = ON_SUCCESS;
 }
@@ -63,10 +64,11 @@ static void	by_space(t_list **token_list, char **begin_ptr, char **current_ptr,
 	{
 		len = *current_ptr - *begin_ptr;
 		token = ft_substr(*begin_ptr, 0, len);
-		if (!token)
+		if (!token || push_token(token_list, token) == ERROR)
+		{
 			*state = ON_ERROR;
-		else
-			push_token(token_list, token);
+			return ;
+		}
 	}
 	*begin_ptr = *current_ptr + 1;
 	*state = IN_NORMAL;
@@ -82,10 +84,11 @@ static void	by_quote(t_list **token_list, char **begin_ptr, char **current_ptr,
 	{
 		len = *current_ptr - *begin_ptr;
 		token = ft_substr(*begin_ptr, 0, len);
-		if (!token)
+		if (!token || push_token(token_list, token) == ERROR)
+		{
 			*state = ON_ERROR;
-		else
-			push_token(token_list, token);
+			return ;
+		}
 	}
 	*begin_ptr = *current_ptr + 1;
 	if (ft_strncmp(*current_ptr, "\"", 1) == 0)
@@ -104,10 +107,11 @@ static void	by_operator(t_list **token_list, char **begin_ptr,
 	{
 		len = *current_ptr - *begin_ptr;
 		token = ft_substr(*begin_ptr, 0, len);
-		if (!token)
+		if (!token || push_token(token_list, token) == ERROR)
+		{
 			*state = ON_ERROR;
-		else
-			push_token(token_list, token);
+			return ;
+		}
 	}
 	*begin_ptr = *current_ptr;
 	*state = IN_OPERATOR;

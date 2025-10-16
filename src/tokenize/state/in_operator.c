@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:05:25 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:23:16 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	in_operator(t_list **token_list, char **begin_ptr, char **current_ptr,
 	else
 		operator_len = 1;
 	token = ft_substr(*current_ptr, 0, operator_len);
-	if (!token)
-		*state = ON_ERROR;
-	else
+	if (!token || push_token(token_list, token) == ERROR)
 	{
-		push_token(token_list, token);
-		*current_ptr += operator_len - 1;
-		*begin_ptr = *current_ptr + 1;
-		*state = IN_NORMAL;
+		*state = ON_ERROR;
+		return ;
 	}
+	*current_ptr += operator_len - 1;
+	*begin_ptr = *current_ptr + 1;
+	*state = IN_NORMAL;
 }
