@@ -6,14 +6,14 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 00:35:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 00:35:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-t_list	*on_error(t_list **token_list)
+t_list	*on_error(t_token_store *store)
 {
-	ft_lstclear(token_list, free);
+	free_store(store);
 	return (NULL);
 }

@@ -12,12 +12,12 @@
 
 #include "tokenize.h"
 
-int	add_buffer(t_token_store **store, char c)
+int	add_buffer(t_token_store *store, char c)
 {
 	char	*char_ptr;
 	t_list	*new_node;
 
-	if (!store || !*store)
+	if (!store)
 		return (ERROR);
 	char_ptr = (char *)malloc(sizeof(char));
 	if (!char_ptr)
@@ -29,6 +29,6 @@ int	add_buffer(t_token_store **store, char c)
 		free(char_ptr);
 		return (ERROR);
 	}
-	ft_lstadd_back(&((*store)->buffer), new_node);
+	ft_lstadd_back(&(store->buffer), new_node);
 	return (SUCCESS);
 }

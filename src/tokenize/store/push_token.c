@@ -37,14 +37,14 @@ static char	*build_token_from_buffer(t_list *buffer)
 	return (token);
 }
 
-int	push_token(t_token_store **store)
+int	push_token(t_token_store *store)
 {
 	char	*token;
 	t_list	*new_node;
 
-	if (!store || !*store)
+	if (!store)
 		return (ERROR);
-	token = build_token_from_buffer((*store)->buffer);
+	token = build_token_from_buffer(store->buffer);
 	if (!token)
 		return (ERROR);
 	new_node = ft_lstnew(token);
@@ -53,8 +53,8 @@ int	push_token(t_token_store **store)
 		free(token);
 		return (ERROR);
 	}
-	ft_lstadd_back(&((*store)->tokens), new_node);
-	ft_lstclear(&((*store)->buffer), free);
-	(*store)->buffer = NULL;
+	ft_lstadd_back(&(store->tokens), new_node);
+	ft_lstclear(&(store->buffer), free);
+	store->buffer = NULL;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:14:04 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/13 01:38:04 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 00:23:58 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	initialize(char **begin_ptr, char **current_ptr,
 
 t_list	*tokenize(char *input)
 {
-	t_list			*token_list;
+	t_token_store	store;
 	t_token_state	state;
 	char			*begin_ptr;
 	char			*current_ptr;
 
 	if (!input)
 		return (NULL);
-	token_list = NULL;
+	init_store(&store);
 	initialize(&begin_ptr, &current_ptr, &state, input);
 	while (true)
 	{
@@ -37,9 +37,9 @@ t_list	*tokenize(char *input)
 		else if (state == IN_OPERATOR)
 			in_operator(&token_list, &begin_ptr, &current_ptr, &state);
 		else if (state == ON_SUCCESS)
-			return (on_success(&token_list));
+			return (on_success(&store));
 		else if (state == ON_ERROR)
-			return (on_error(&token_list));
+			return (on_error(&store));
 		current_ptr++;
 	}
 }

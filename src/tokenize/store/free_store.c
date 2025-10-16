@@ -12,14 +12,12 @@
 
 #include "tokenize.h"
 
-void	free_store(t_token_store **store)
+void	free_store(t_token_store *store)
 {
-	if (!store || !*store)
+	if (!store)
 		return ;
-	if ((*store)->buffer)
-		ft_lstclear(&((*store)->buffer), free);
-	if ((*store)->tokens)
-		ft_lstclear(&((*store)->tokens), free);
-	free(*store);
-	*store = NULL;
+	if (store->buffer)
+		ft_lstclear(&(store->buffer), free);
+	if (store->tokens)
+		ft_lstclear(&(store->tokens), free);
 }
