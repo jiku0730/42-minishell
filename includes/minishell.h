@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/16 23:15:21 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 # include "libft.h"
 # include "prompt.h"
 # include "tokenize.h"
-
-// macros
-# define SUCCESS 0
-# define ERROR -1
 
 // callbacks
 void	on_input(char *input);
