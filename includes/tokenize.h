@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:58:18 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 22:49:29 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		in_single_quote(t_token_store *store, t_token_state *state,
 				const char current);
 void		in_operator(t_token_store *store, t_token_state *state,
 				const char current);
-t_list		*on_success(t_token_store *store);
-t_list		*on_error(t_token_store *store);
+t_list		*on_success(t_token_store *store, char *current);
+t_list		*on_error(t_token_store *store, char *current);
 
 #endif
