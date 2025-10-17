@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:57:55 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/17 22:48:01 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	in_normal(t_token_store *store, t_token_state *state,
 		by_operator(store, state, current);
 	else if (current == '\"' || current == '\'')
 		by_quote(store, state, current);
-	else
-		add_buffer(store, current);
+	else if (add_buffer(store, current) == ERROR)
+		*state = ON_ERROR;
 }
 
 static void	by_last(t_token_store *store, t_token_state *state,
