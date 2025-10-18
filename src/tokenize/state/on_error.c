@@ -12,10 +12,10 @@
 
 #include "tokenize.h"
 
-t_list	*on_error(t_token_store *store, char *current)
+t_list	*on_error(t_token_store *store, char *input)
 {
-	if (current)
-		free(current);
+	if (input)
+		free(input);
 	free_store(store);
 	return (NULL);
 }

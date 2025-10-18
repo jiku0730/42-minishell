@@ -12,14 +12,14 @@
 
 #include "tokenize.h"
 
-t_list	*on_success(t_token_store *store, char *current)
+t_list	*on_success(t_token_store *store, char *input)
 {
 	t_list	*tokens;
 
 	if (!store)
 		return (NULL);
-	if (current)
-		free(current);
+	if (input)
+		free(input);
 	tokens = store->tokens;
 	store->tokens = NULL;
 	if (store->buffer)

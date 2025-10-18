@@ -53,7 +53,7 @@ void		in_single_quote(t_token_store *store, t_token_state *state,
 				const char current);
 void		in_operator(t_token_store *store, t_token_state *state,
 				const char current);
-t_list		*on_success(t_token_store *store, char *current);
-t_list		*on_error(t_token_store *store, char *current);
+t_list		*on_success(t_token_store *store, char *input);
+t_list		*on_error(t_token_store *store, char *input);
 
 #endif

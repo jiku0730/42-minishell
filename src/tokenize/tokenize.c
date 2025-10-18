@@ -35,9 +35,9 @@ t_list	*tokenize(char *input)
 		else if (state == IN_OPERATOR)
 			in_operator(&store, &state, *current);
 		else if (state == ON_SUCCESS)
-			return (on_success(&store, current));
+			return (on_success(&store, input));
 		else if (state == ON_ERROR)
-			return (on_error(&store, current));
+			return (on_error(&store, input));
 		current++;
 	}
 }
