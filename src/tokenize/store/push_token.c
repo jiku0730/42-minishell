@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:13:34 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:18:40 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/22 12:31:20 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*build_token_from_buffer(t_list *buffer)
 	return (token);
 }
 
-static bool	is_buffer_empty(t_list *buffer)
+static bool	is_buffer_empty(const t_list *buffer)
 {
 	return (!buffer);
 }
