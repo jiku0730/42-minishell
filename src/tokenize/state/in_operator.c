@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   in_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/17 02:58:05 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+void	in_operator(t_token_store *store, t_token_state *state,
+		const char current)
+{
+	if (current == '\0')
+		*state = ON_ERROR;
+	else if (is_operator_char(current))
+	{
+		if (add_buffer(store, current) == ERROR)
+			*state = ON_ERROR;
+	}
+	else if (push_token(store) == ERROR)
+		*state = ON_ERROR;
+	else
+	{
+		*state = IN_NORMAL;
+		in_normal(store, state, current);
+	}
+}

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/16 23:14:49 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/16 23:15:06 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
+// macros
+# define SUCCESS 0
+# define ERROR -1
 
 #endif

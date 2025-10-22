@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   is_blank_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 16:15:16 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/13 16:16:46 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+int	is_blank_line(const char *s)
+{
+	if (!s || !*s)
+		return (1);
+	while (*s)
+	{
+		if (!ft_isspace((unsigned char)*s))
+			return (0);
+		s++;
+	}
+	return (1);
+}

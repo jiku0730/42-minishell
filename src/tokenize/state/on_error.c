@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   on_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:35:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/17 22:54:59 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+t_list	*on_error(t_token_store *store, char *input)
+{
+	if (input)
+		free(input);
+	free_store(store);
+	return (NULL);
+}

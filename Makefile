@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/09/29 15:17:10 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/10/10 17:16:16 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,19 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
-				src/prompt/prompt.c
+				src/prompt/prompt.c \
+				src/callback/on_input.c \
+				src/tokenize/tokenize.c \
+				src/tokenize/is_operator.c \
+				src/tokenize/state/in_normal.c \
+				src/tokenize/state/in_double_quote.c \
+				src/tokenize/state/in_single_quote.c \
+				src/tokenize/state/in_operator.c \
+				src/tokenize/state/on_success.c \
+				src/tokenize/state/on_error.c \
+				src/tokenize/store/free_store.c \
+				src/tokenize/store/push_token.c \
+				src/tokenize/store/add_buffer.c \
 
 #bonus sources
 

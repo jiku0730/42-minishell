@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_buffer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/17 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/17 00:46:16 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
+int	add_buffer(t_token_store *store, const char c)
+{
+	char	*char_ptr;
+	t_list	*new_node;
 
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+	if (!store)
+		return (ERROR);
+	char_ptr = (char *)malloc(sizeof(char));
+	if (!char_ptr)
+		return (ERROR);
+	*char_ptr = c;
+	new_node = ft_lstnew(char_ptr);
+	if (!new_node)
+	{
+		free(char_ptr);
+		return (ERROR);
+	}
+	ft_lstadd_back(&(store->buffer), new_node);
+	return (SUCCESS);
+}

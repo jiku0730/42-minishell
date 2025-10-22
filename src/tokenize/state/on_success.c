@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/17 02:36:03 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:35:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/10/22 12:44:01 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "tokenize.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
+t_list	*on_success(t_token_store *store, char *input)
+{
+	t_list	*rtv_tokens;
 
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+	if (!store)
+		return (NULL);
+	if (input)
+		free(input);
+	rtv_tokens = store->tokens;
+	store->tokens = NULL;
+	if (store->buffer)
+		ft_lstclear(&(store->buffer), free);
+	return (rtv_tokens);
+}
