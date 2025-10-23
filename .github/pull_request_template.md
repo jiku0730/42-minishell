@@ -22,7 +22,7 @@
 -->
 - [] norminetteを通過している。
 - [] makeコマンドでビルドできる。
-- [] valgrindでリークチェックをした。(`valgrind --leak-check=full --show-leak-kinds=all -s -q `)
+- [] valgrindでリークチェックをした。(`valgrind --leak-check=full --suppressions=readline.supp --show-leak-kinds=all -s -q ./minishell`)
 - [] ~~~
 - [] ~~~
 - [] ~~~
