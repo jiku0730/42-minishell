@@ -1,0 +1,38 @@
+# Valgrind suppression file for readline library memory leaks
+# Usage: valgrind --leak-check=full --suppressions=readline.supp ./minishell
+
+# readline関数の一般的なメモリ確保を抑制
+# readline()はプログラム終了までメモリを保持する
+{
+   readline_leak_1
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   ...
+   fun:readline
+}
+
+# キーマップ初期化時のメモリ確保を抑制
+# rl_make_bare_keymap: キーバインド設定用の内部データ構造を作成
+# readline初期化時に1度だけ実行され、プログラム終了まで保持される
+{
+   readline_leak_2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:rl_make_bare_keymap
+   ...
+}
+
+# readlineライブラリ全体からのメモリ確保を抑制（最も包括的）
+# libreadline.so由来のあらゆるメモリ確保をカバー
+{
+   readline_leak_3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*alloc
+   ...
+   obj:*/libreadline.so*
+}
