@@ -31,4 +31,5 @@ void	prompt(void (*handler)(char *input))
 		if (handler)
 			handler(input);
 	}
+	rl_clear_history();
 }
