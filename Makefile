@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/10/10 17:16:16 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/03 21:58:35 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,5 +124,13 @@ re: fclean all
 # 	@echo "$(YELLOW)$(BOLD)========================================="
 # 	@echo "  You can use My Bonus_$(NAME)!!"
 # 	@echo "=========================================$(RESET)"
+
+norm:
+	norminette src/* includes/* libft/
+
+valgrind: all
+	valgrind --leak-check=full --suppressions=readline.supp ./$(NAME)
+
+test: norm valgrind
 
 .PHONY: all clean fclean re bonus
