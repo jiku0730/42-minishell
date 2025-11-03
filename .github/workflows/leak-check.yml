@@ -1,0 +1,113 @@
+name: Memory Leak Check
+
+on:
+  pull_request:
+    branches: [ "master", "develop" ]
+  push:
+    branches: [ "master", "develop" ]
+
+jobs:
+  leak-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libreadline-dev valgrind
+    
+    - name: Build project
+      run: |
+        echo "Building minishell..."
+        make
+    
+    - name: Verify binary exists
+      run: |
+        if [ ! -f "./minishell" ]; then
+          echo "❌ ERROR: minishell binary not found"
+          exit 1
+        fi
+        echo "✅ minishell binary found"
+        ls -la ./minishell
+    
+    - name: Create test script
+      run: |
+        cat << 'EOF' > test_input.sh
+        #!/bin/bash
+        
+        # minishellにコマンドを送信してメモリリークをチェック
+        echo "Starting memory leak test..."
+        
+        # expectスタイルでインタラクティブな入力をシミュレート
+        (
+          sleep 0.5
+          echo "ec'c'o \"hello\"&&cat -e"
+          sleep 0.5
+          echo "exit"
+          sleep 0.5
+        ) | valgrind --leak-check=full \
+                     --show-leak-kinds=all \
+                     --track-origins=yes \
+                     --suppressions=./readline.supp \
+                     --error-exitcode=42 \
+                     --log-file=valgrind_output.txt \
+                     ./minishell 2>&1
+        
+        VALGRIND_EXIT=$?
+        
+        echo ""
+        echo "=========================================="
+        echo "Valgrind Output:"
+        echo "=========================================="
+        cat valgrind_output.txt
+        echo "=========================================="
+        
+        # Valgrindの結果を解析
+        if [ $VALGRIND_EXIT -eq 42 ]; then
+          echo ""
+          echo "❌ MEMORY LEAK DETECTED!"
+          echo ""
+          echo "Summary of leaks:"
+          grep "definitely lost" valgrind_output.txt || echo "No definitely lost blocks"
+          grep "indirectly lost" valgrind_output.txt || echo "No indirectly lost blocks"
+          grep "possibly lost" valgrind_output.txt || echo "No possibly lost blocks"
+          exit 1
+        else
+          echo ""
+          echo "✅ NO MEMORY LEAKS DETECTED"
+          
+          # リークサマリーを表示
+          echo ""
+          echo "Leak Summary:"
+          grep "LEAK SUMMARY" valgrind_output.txt -A 5 || true
+          
+          # 全てのヒープブロックが解放されたかチェック
+          if grep -q "All heap blocks were freed -- no leaks are possible" valgrind_output.txt; then
+            echo "✅ All heap blocks were freed"
+          elif grep -q "definitely lost: 0 bytes in 0 blocks" valgrind_output.txt && \
+               grep -q "indirectly lost: 0 bytes in 0 blocks" valgrind_output.txt && \
+               grep -q "possibly lost: 0 bytes in 0 blocks" valgrind_output.txt; then
+            echo "✅ No definite, indirect, or possible leaks"
+          else
+            echo "⚠️  Warning: Some reachable memory detected (this is usually OK for readline)"
+          fi
+          
+          exit 0
+        fi
+        EOF
+        
+        chmod +x test_input.sh
+    
+    - name: Run memory leak test
+      run: |
+        ./test_input.sh
+    
+    - name: Upload valgrind output as artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: valgrind-report
+        path: valgrind_output.txt
+        retention-days: 30
