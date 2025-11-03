@@ -6,23 +6,43 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:58:05 by urassh           ###   ########.fr       */
+/*   Updated: 2025/10/23 01:17:48 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
+static void	by_operator(t_token_store *store, t_token_state *state,
+				const char current);
+static void	by_normal(t_token_store *store, t_token_state *state,
+				const char current);
+
 void	in_operator(t_token_store *store, t_token_state *state,
 		const char current)
 {
-	if (current == '\0')
-		*state = ON_ERROR;
+	if (current == '\0' && push_token(store))
+		*state = ON_SUCCESS;
 	else if (is_operator_char(current))
-	{
-		if (add_buffer(store, current) == ERROR)
-			*state = ON_ERROR;
-	}
+		by_operator(store, state, current);
+	else
+		by_normal(store, state, current);
+}
+
+static void	by_operator(t_token_store *store, t_token_state *state,
+		const char current)
+{
+	if (add_buffer(store, current) == ERROR)
+		*state = ON_ERROR;
 	else if (push_token(store) == ERROR)
+		*state = ON_ERROR;
+	else
+		*state = IN_NORMAL;
+}
+
+static void	by_normal(t_token_store *store, t_token_state *state,
+		const char current)
+{
+	if (push_token(store) == ERROR)
 		*state = ON_ERROR;
 	else
 	{

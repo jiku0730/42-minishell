@@ -19,6 +19,6 @@ void	in_single_quote(t_token_store *store, t_token_state *state,
 		*state = ON_ERROR;
 	else if (current == '\'')
 		*state = IN_NORMAL;
-	else
-		add_buffer(store, current);
+	else if (add_buffer(store, current) == ERROR)
+		*state = ON_ERROR;
 }
