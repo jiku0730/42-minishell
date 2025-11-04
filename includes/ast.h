@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 23:36:33 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/03 23:37:21 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/05 00:42:34 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_redir
 
 typedef struct s_cmd
 {
-	char			**argv;
+	t_list			*argv;
 	t_list			*redirs;
 }					t_cmd;
 
