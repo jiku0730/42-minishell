@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/03 21:58:35 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/04 22:30:29 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,14 @@ re: fclean all
 # 	@echo "  You can use My Bonus_$(NAME)!!"
 # 	@echo "=========================================$(RESET)"
 
+.PHONY: all clean fclean re bonus
+
+#-----------------------------------------------------------------------------
+
+#▸ original rules
+
+#-----------------------------------------------------------------------------
+
 norm:
 	norminette src/* includes/* libft/
 
@@ -133,4 +141,7 @@ valgrind: all
 
 test: norm valgrind
 
-.PHONY: all clean fclean re bonus
+docker:
+	docker compose up -d && docker compose exec minishell bash
+
+.PHONY: norm valgrind test docker
