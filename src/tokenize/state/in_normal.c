@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/23 00:27:32 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:03:56 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	in_normal(t_token_store *store, t_token_state *state,
 		by_space(store, state, current);
 	else if (is_operator_char(current))
 		by_operator(store, state, current);
-	else if (current == '\"' || current == '\'')
+	else if (is_quote_char(current))
 		by_quote(store, state, current);
 	else if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
@@ -56,16 +56,6 @@ static void	by_space(t_token_store *store, t_token_state *state,
 		*state = IN_NORMAL;
 }
 
-static void	by_quote(t_token_store *store, t_token_state *state,
-		const char current)
-{
-	(void)store;
-	if (current == '\"')
-		*state = IN_DOUBLE_QUOTE;
-	else if (current == '\'')
-		*state = IN_SINGLE_QUOTE;
-}
-
 static void	by_operator(t_token_store *store, t_token_state *state,
 		const char current)
 {
@@ -73,4 +63,14 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 		*state = ON_ERROR;
 	else
 		*state = IN_OPERATOR;
+}
+
+static void	by_quote(t_token_store *store, t_token_state *state,
+		const char current)
+{
+	(void)store;
+	if (add_buffer(store, current) == ERROR)
+		*state = ON_ERROR;
+	else
+		*state = IN_QUOTE;
 }

@@ -6,7 +6,7 @@
 #    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/05 13:47:17 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/05 14:02:34 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,10 +60,9 @@ SRCS_MAND	:=	src/main.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
 				src/tokenize/tokenize.c \
-				src/tokenize/is_operator.c \
+				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
-				src/tokenize/state/in_double_quote.c \
-				src/tokenize/state/in_single_quote.c \
+				src/tokenize/state/in_quote.c \
 				src/tokenize/state/in_operator.c \
 				src/tokenize/state/on_success.c \
 				src/tokenize/state/on_error.c \
