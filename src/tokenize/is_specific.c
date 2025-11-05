@@ -6,13 +6,13 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:20:26 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-bool	is_quote_char(const char c)
+bool	is_quote(const char c)
 {
 	if (c == '"')
 		return (true);
@@ -21,7 +21,7 @@ bool	is_quote_char(const char c)
 	return (false);
 }
 
-bool	is_operator_char(const char c)
+bool	is_operator(const char c)
 {
 	if (c == '&')
 		return (true);

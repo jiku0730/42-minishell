@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:54:52 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:02:03 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:21:31 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	in_quote(t_token_store *store, t_token_state *state, const char current)
 		*state = ON_ERROR;
 	else if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else if (is_quote_char(current))
+	else if (is_quote(current))
 		*state = IN_NORMAL;
 }

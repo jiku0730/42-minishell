@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:03:56 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	in_normal(t_token_store *store, t_token_state *state,
 		by_last(store, state, current);
 	else if (ft_isspace(current))
 		by_space(store, state, current);
-	else if (is_operator_char(current))
+	else if (is_operator(current))
 		by_operator(store, state, current);
-	else if (is_quote_char(current))
+	else if (is_quote(current))
 		by_quote(store, state, current);
 	else if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
