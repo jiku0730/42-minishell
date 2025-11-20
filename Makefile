@@ -59,6 +59,7 @@ SRCS_MAND	:=	src/main.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
+				src/checker/heredoc_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -69,6 +70,8 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
+				src/component/heredoc/heredoc.c \
+				src/component/heredoc/heredoc_prompt.c \
 
 #bonus sources
 

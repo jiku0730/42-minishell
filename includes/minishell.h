@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "prompt.h"
 # include "tokenize.h"
+# include "heredoc.h"
 
 // callbacks
 void	on_input(char *input);
