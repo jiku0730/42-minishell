@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_tmpfile.c                                   :+:      :+:    :+:   */
+/*   tmpfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 17:09:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:36:29 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ int	open_tmpfile(char *tmpfile_path)
 
 char	*create_tmpfile(void)
 {
-	const char	*tmp_prefix = "/tmp/minishell_heredoc_";
-	char		*id;
-	char		*path;
-	int			tmp_file_id;
+	char	*id;
+	char	*path;
+	int		tmp_file_id;
 
-	id = get_tmpfile_id(tmp_prefix);
+	id = get_tmpfile_id(HEREDOC_TMP_PREFIX);
 	if (id == NULL)
 		return (NULL);
-	path = ft_strjoin(tmp_prefix, id);
+	path = ft_strjoin(HEREDOC_TMP_PREFIX, id);
 	if (path == NULL)
 	{
 		free(id);

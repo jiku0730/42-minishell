@@ -6,15 +6,17 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:55:55 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 15:56:45 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:40:53 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <stdio.h>
+#include <unistd.h>
 
 static void	on_exit_token(t_list *token_list);
 static void	print_tokens(t_list *token_list);
+static void	unlink_tmpfiles(t_list *token_list);
 
 void	heredoc_checker(char *input)
 {
@@ -37,6 +39,7 @@ void	heredoc_checker(char *input)
 		return ;
 	}
 	print_tokens(heredoced_list);
+	unlink_tmpfiles(heredoced_list);
 	ft_lstclear(&heredoced_list, free);
 }
 
@@ -64,4 +67,18 @@ static void	on_exit_token(t_list *token_list)
 	printf("exit\n");
 	ft_lstclear(&token_list, free);
 	exit(0);
+}
+
+static void	unlink_tmpfiles(t_list *token_list)
+{
+	t_list	*current;
+
+	current = token_list;
+	while (current)
+	{
+		if (current->content && ft_strncmp(current->content, HEREDOC_TMP_PREFIX,
+				ft_strlen(HEREDOC_TMP_PREFIX)) == 0)
+			unlink((char *)current->content);
+		current = current->next;
+	}
 }

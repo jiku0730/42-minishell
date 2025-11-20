@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:12:42 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 17:09:11 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:36:09 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		open_tmpfile(char *tmpfile_path);
 char	*create_tmpfile(void);
 
 # define HEREDOC_PROMPT "heredoc> "
+# define HEREDOC_TMP_PREFIX "/tmp/minishell_heredoc_"
 # define HEREDOC_BUFFER 1024
 
 #endif
