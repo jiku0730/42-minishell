@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/23 01:17:48 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	in_operator(t_token_store *store, t_token_state *state,
 {
 	if (current == '\0' && push_token(store))
 		*state = ON_SUCCESS;
-	else if (is_operator_char(current))
+	else if (is_operator(current))
 		by_operator(store, state, current);
 	else
 		by_normal(store, state, current);

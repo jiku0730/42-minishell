@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:14:04 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 22:55:05 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:06:48 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ t_list	*tokenize(char *input)
 	{
 		if (state == IN_NORMAL)
 			in_normal(&store, &state, *current);
-		else if (state == IN_DOUBLE_QUOTE)
-			in_double_quote(&store, &state, *current);
-		else if (state == IN_SINGLE_QUOTE)
-			in_single_quote(&store, &state, *current);
+		else if (state == IN_QUOTE)
+			in_quote(&store, &state, *current);
 		else if (state == IN_OPERATOR)
 			in_operator(&store, &state, *current);
 		else if (state == ON_SUCCESS)
