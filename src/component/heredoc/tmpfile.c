@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 17:36:29 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:43:47 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	open_tmpfile(char *tmpfile_path)
 	if (fd == -1)
 	{
 		free(tmpfile_path);
-		*tmpfile_path = NULL;
+		tmpfile_path = NULL;
 		return (-1);
 	}
 	return (fd);
