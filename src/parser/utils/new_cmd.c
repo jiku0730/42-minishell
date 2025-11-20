@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   new_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/19 23:53:23 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/14 18:29:38 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/11/19 23:39:34 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "prompt.h"
-# include "tokenize.h"
-# include "parser.h"
+t_cmd	*new_cmd(void)
+{
+	t_cmd	*cmd;
 
-// callbacks
-void	on_input(char *input);
-
-// TEST: callbacks
-void	tokenize_checker(char *input);
-
-#endif
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->argv = NULL;
+	cmd->redirs = NULL;
+	return (cmd);
+}

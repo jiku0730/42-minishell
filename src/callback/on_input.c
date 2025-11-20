@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   on_input.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/15 01:50:30 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 00:07:32 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	on_input(char *input)
 void	tokenize_checker(char *input)
 {
 	t_list	*token_list;
+	t_ast	*ast_root;
 
 	token_list = tokenize(input);
 	if (!token_list)
@@ -33,6 +34,9 @@ void	tokenize_checker(char *input)
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
 	print_tokens(token_list);
+	ast_root = parser(token_list);
+	print_ast(ast_root);
+	free_ast(ast_root);
 	ft_lstclear(&token_list, free);
 }
 

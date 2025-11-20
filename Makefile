@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/04 22:30:29 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/20 11:49:13 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,16 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
+				src/parser/parser.c \
+				src/parser/utils/add_to_cmd.c \
+				src/parser/utils/new_ast_node.c \
+				src/parser/utils/new_cmd.c \
+				src/parser/utils/new_redir.c \
+				src/parser/utils/token_check.c \
+				src/parser/utils/free_ast.c \
+				src/parser/utils/print_ast.c \
+				src/parser/utils/print_ast_utils.c \
+				src/parser/utils/print_ast_utils2.c
 
 #bonus sources
 
@@ -136,7 +146,7 @@ re: fclean all
 norm:
 	norminette src/* includes/* libft/
 
-valgrind: all
+valgrind: re
 	valgrind --leak-check=full --suppressions=readline.supp ./$(NAME)
 
 test: norm valgrind
