@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:12:42 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 16:56:14 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 16:57:26 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 t_list	*heredoc(t_list *tokens);
 char	*heredoc_prompt(const char *delimiter);
-char	*open_tmpfile(void);
+char	*create_tmpfile(void);
 
 # define HEREDOC_PROMPT "heredoc> "
 # define HEREDOC_BUFFER 1024
