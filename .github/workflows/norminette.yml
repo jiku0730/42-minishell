@@ -1,8 +1,10 @@
 name: Norminette Check
 
 on:
+  pull_request:
+    branches: [ "master", "develop" ]
   push:
-    branches: [ "master", "develop", "urassh/*", "jiku/*" ]
+    branches: [ "master", "develop" ]
 
 jobs:
   norminette:
