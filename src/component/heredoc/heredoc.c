@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:13:36 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 15:05:40 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 15:52:41 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <here_doc.h>
+#include <heredoc.h>
 
 static bool	is_heredoc_operator(const char *token);
-static void rebuild_tokens_with_heredoc(t_list *current, t_list *heredoc_node, t_list *eof_node);
+static void	rebuild_tokens(t_list *current, t_list *eof_node,
+				char *heredoc_content);
 
-t_list	*here_doc(t_list *tokens)
+t_list	*heredoc(t_list *tokens)
 {
 	t_list	*current;
 	t_list	*eof_node;
-	t_list	*heredoc_node;
+	char	*heredoc_content;
 
 	current = tokens;
 	while (current != NULL)
@@ -29,10 +30,10 @@ t_list	*here_doc(t_list *tokens)
 			eof_node = current->next;
 			if (eof_node == NULL)
 				return (NULL);
-			heredoc_node = here_doc_prompt((char *)eof_node->content);
-			if (heredoc_node == NULL)
+			heredoc_content = heredoc_prompt((char *)eof_node->content);
+			if (heredoc_content == NULL)
 				return (NULL);
-            rebuild_tokens_with_heredoc(current, heredoc_node, eof_node);
+			rebuild_tokens(current, eof_node, heredoc_content);
 		}
 		current = current->next;
 	}
@@ -46,11 +47,12 @@ static bool	is_heredoc_operator(const char *token)
 	return (ft_strncmp(token, "<<", 3) == 0);
 }
 
-static void rebuild_tokens_with_heredoc(t_list *current, t_list *heredoc_node, t_list *eof_node)
+static void	rebuild_tokens(t_list *current, t_list *eof_node,
+		char *heredoc_content)
 {
-    current->content = heredoc_node->content;
-    current->next = eof_node->next;
-    free(eof_node->content);
-    free(eof_node);
-    free(heredoc_node);
+	free(current->content);
+	current->content = heredoc_content;
+	current->next = eof_node->next;
+	free(eof_node->content);
+	free(eof_node);
 }

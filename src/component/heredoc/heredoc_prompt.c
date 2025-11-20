@@ -6,34 +6,16 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:05:31 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 15:18:27 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 15:52:23 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <here_doc.h>
+#include <heredoc.h>
 #include <readline/readline.h>
 
-static char	*read_heredoc_lines(const char *delimiter);
 static char	*append_line(char *content, char *line);
 
-t_list	*here_doc_prompt(const char *delimiter)
-{
-	char	*content;
-	t_list	*node;
-
-	content = read_heredoc_lines(delimiter);
-	if (content == NULL)
-		return (NULL);
-	node = ft_lstnew(content);
-	if (node == NULL)
-	{
-		free(content);
-		return (NULL);
-	}
-	return (node);
-}
-
-static char	*read_heredoc_lines(const char *delimiter)
+char	*heredoc_prompt(const char *delimiter)
 {
 	char	*line;
 	char	*content;
