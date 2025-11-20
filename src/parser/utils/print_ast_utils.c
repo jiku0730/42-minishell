@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 23:57:42 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/20 11:46:29 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:57:27 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_branch_line(const char *prefix, bool is_last, const char *text)
 }
 
 void	build_child_prefix(const char *prefix, bool is_last,
-        char *buffer, size_t size)
+			char *buffer, size_t size)
 {
 	ft_strlcpy(buffer, prefix, size);
 	if (is_last)
