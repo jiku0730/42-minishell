@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:30:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/19 23:51:59 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:40:01 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ static t_ast	*parse_pipeline(t_list **cursor)
 	return (left);
 }
 
-t_ast	*parser(t_list *head)
+t_ast	*parser(t_list *token_head)
 {
 	t_list	*cursor;
 	t_ast	*root;
 
-	cursor = head;
+	cursor = token_head;
 	root = parse_pipeline(&cursor);
 	return (root);
 }

@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/20 11:57:10 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:35:17 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_ast
 }					t_ast;
 
 /* main function------------------------------------------------------------- */
-t_ast			*parser(t_list *head);
+t_ast			*parser(t_list *token_head);
 
 /* AST's token utils--------------------------------------------------------- */
 bool			is_word(const t_list *node);
