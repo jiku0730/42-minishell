@@ -6,13 +6,27 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 16:57:27 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:09:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <heredoc.h>
 
 static char	*get_tmpfile_id(const char *tmp_prefix);
+
+int	open_tmpfile(char *tmpfile_path)
+{
+	int	fd;
+
+	fd = open(tmpfile_path, O_WRONLY | O_APPEND);
+	if (fd == -1)
+	{
+		free(tmpfile_path);
+		*tmpfile_path = NULL;
+		return (-1);
+	}
+	return (fd);
+}
 
 char	*create_tmpfile(void)
 {

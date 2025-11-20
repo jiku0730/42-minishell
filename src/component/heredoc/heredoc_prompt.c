@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc_prompt.c                                  :+:      :+:    :+:   */
+/*   heredoc_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:05:31 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 15:52:23 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:23:51 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <heredoc.h>
 #include <readline/readline.h>
 
-static char	*append_line(char *content, char *line);
+static int	write_line_to_file(int fd, char *line);
+static char	*by_found_delimiter(char *line, int fd, char *tmpfile_path);
+static void	*by_fail_write_line_to_file(char *line, int fd, char *tmpfile_path);
 
 char	*heredoc_prompt(const char *delimiter)
 {
 	char	*line;
-	char	*content;
+	char	*tmpfile_path;
+	int		fd;
 
-	content = ft_strdup("");
-	if (content == NULL)
+	tmpfile_path = create_tmpfile();
+	if (tmpfile_path == NULL)
+		return (NULL);
+	fd = open_tmpfile(tmpfile_path);
+	if (fd == -1)
 		return (NULL);
 	while (1)
 	{
@@ -29,31 +35,38 @@ char	*heredoc_prompt(const char *delimiter)
 		if (line == NULL)
 			break ;
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1) == 0)
-		{
-			free(line);
-			break ;
-		}
-		content = append_line(content, line);
+			return (by_found_delimiter(line, fd, tmpfile_path));
+		if (write_line_to_file(fd, line) == ERROR)
+			return (by_fail_write_line_to_file(line, fd, tmpfile_path));
 		free(line);
-		if (content == NULL)
-			return (NULL);
 	}
-	return (content);
+	close(fd);
+	return (tmpfile_path);
 }
 
-static char	*append_line(char *content, char *line)
+static int	write_line_to_file(int fd, char *line)
 {
-	char	*line_with_newline;
-	char	*new_content;
+	size_t	len;
 
-	line_with_newline = ft_strjoin(line, "\n");
-	if (line_with_newline == NULL)
-	{
-		free(content);
-		return (NULL);
-	}
-	new_content = ft_strjoin(content, line_with_newline);
-	free(content);
-	free(line_with_newline);
-	return (new_content);
+	len = ft_strlen(line);
+	if (write(fd, line, len) == -1)
+		return (ERROR);
+	if (write(fd, "\n", 1) == -1)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+static char	*by_found_delimiter(char *line, int fd, char *tmpfile_path)
+{
+	free(line);
+	close(fd);
+	return (tmpfile_path);
+}
+
+static void	*by_fail_write_line_to_file(char *line, int fd, char *tmpfile_path)
+{
+	free(line);
+	close(fd);
+	free(tmpfile_path);
+	return (NULL);
 }
