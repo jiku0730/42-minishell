@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/21 16:31:38 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/21 16:57:05 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ char	*create_tmpfile(void)
 	if (id == NULL)
 		return (NULL);
 	path = ft_strjoin(HEREDOC_TMP_PREFIX, id);
-	if (path == NULL)
-	{
-		free(id);
-		return (NULL);
-	}
-	tmp_file_id = open(path, O_CREAT | O_EXCL | O_RDWR, 0600);
 	free(id);
+	if (path == NULL)
+		return (NULL);
+	tmp_file_id = open(path, O_CREAT | O_EXCL | O_RDWR, 0600);
 	if (tmp_file_id == -1)
 		return (NULL);
 	close(tmp_file_id);
