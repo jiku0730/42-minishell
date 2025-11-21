@@ -6,7 +6,7 @@
 #    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/05 14:02:34 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/20 17:42:22 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS_MAND	:=	src/main.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
+				src/checker/heredoc_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -69,6 +70,9 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
+				src/component/heredoc/heredoc.c \
+				src/component/heredoc/heredoc_prompt.c \
+				src/component/heredoc/tmpfile.c \
 
 #bonus sources
 

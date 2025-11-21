@@ -14,6 +14,6 @@
 
 int	main(void)
 {
-	prompt(tokenize_checker);
+	prompt(heredoc_checker);
 	return (0);
 }
