@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/21 16:57:05 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/22 01:08:26 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ static char	*get_tmpfile_id(const char *tmp_prefix)
 	while (id < INT_MAX)
 	{
 		id_str = ft_itoa(id);
+		if (!id_str)
+			return (NULL);
 		filename = ft_strjoin(tmp_prefix, id_str);
-		if (id_str)
-			free(id_str);
+		free(id_str);
 		if (!filename)
 			return (NULL);
 		if (access(filename, F_OK) != 0)
