@@ -16,7 +16,7 @@ static t_hash_node	*create_node(const char *key, const char *value)
 {
 	t_hash_node	*node;
 
-	node = (t_hash_node *)malloc(sizeof(t_hash_node));
+	node = (t_hash_node *)ft_calloc(1, sizeof(t_hash_node));
 	if (!node)
 		return (NULL);
 	node->key = ft_strdup(key);
@@ -32,7 +32,6 @@ static t_hash_node	*create_node(const char *key, const char *value)
 		free(node);
 		return (NULL);
 	}
-	node->next = NULL;
 	return (node);
 }
 
