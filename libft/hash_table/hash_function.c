@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/23 15:09:38 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 size_t	ht_hash(const char *key, size_t table_size)
 {
-	size_t		hash;
-	size_t		i;
+	const size_t	inital_hash = 5381;
+	size_t			hash_num;
+	size_t			i;
 
 	if (!key || table_size == 0)
 		return (0);
-	hash = 5381;
+	hash_num = inital_hash;
 	i = 0;
 	while (key[i])
 	{
-		hash = ((hash << 5) + hash) + (unsigned char)key[i];
+		hash_num = ((hash_num << 5) + hash_num) + (unsigned char)key[i];
 		i++;
 	}
-	return (hash % table_size);
+	return (hash_num % table_size);
 }
