@@ -19,6 +19,12 @@ SRCS	=	conversion/ft_atoi.c \
 			conversion/ft_itoa.c \
 			conversion/ft_tolower.c \
 			conversion/ft_toupper.c \
+			hash_table/hash_table.c \
+			hash_table/hash_function.c \
+			hash_table/hash_insert.c \
+			hash_table/hash_search.c \
+			hash_table/hash_delete.c \
+			hash_table/hash_destroy.c \
 			judge/ft_isalnum.c \
 			judge/ft_isalpha.c \
 			judge/ft_isascii.c \
