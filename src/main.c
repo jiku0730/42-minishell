@@ -6,13 +6,13 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:13:47 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/26 17:03:43 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/26 17:27:11 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main_prod(int argc, char **argv, char **envp)
+int	main_prod(int argc, char **argv, char **envp)
 {
 	t_hash_table	*env_table;
 
@@ -26,7 +26,7 @@ int main_prod(int argc, char **argv, char **envp)
 	return (0);
 }
 
-int main_dev(int argc, char **argv, char **envp)
+int	main_dev(int argc, char **argv, char **envp)
 {
 	t_hash_table	*env_table;
 
