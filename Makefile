@@ -6,7 +6,7 @@
 #    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/26 17:01:03 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/26 17:03:05 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
 				src/component/env_table/build_env_table.c \
-				src/component/env_table/export_env.c \
+				src/component/env_table/export_envp.c \
 
 #bonus sources
 
