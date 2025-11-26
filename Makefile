@@ -60,6 +60,7 @@ SRCS_MAND	:=	src/main.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
+				src/checker/exv_table_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -73,6 +74,8 @@ SRCS_MAND	:=	src/main.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
+				src/component/env_table/build_env_table.c \
+				src/component/env_table/export_env.c \
 
 #bonus sources
 
