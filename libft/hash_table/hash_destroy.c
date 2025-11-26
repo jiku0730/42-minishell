@@ -1,36 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   hash_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:50:17 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "libft.h"
 
-void	prompt(void (*handler)(char *input, t_hash_table *env_table),
-		t_hash_table *env_table)
+static void	free_chain(t_hash_node *node)
 {
-	char	*input;
+	t_hash_node	*next;
 
-	while (1)
+	while (node)
 	{
-		input = readline(PROMPT);
-		if (!input)
-			break ;
-		if (is_blank_line(input))
-		{
-			free(input);
-			continue ;
-		}
-		if (*input)
-			add_history(input);
-		if (handler)
-			handler(input, env_table);
+		next = node->next;
+		free(node->key);
+		free(node->value);
+		free(node);
+		node = next;
 	}
-	rl_clear_history();
+}
+
+void	ht_destroy(t_hash_table *table)
+{
+	size_t	i;
+
+	if (!table)
+		return ;
+	if (table->buckets)
+	{
+		i = 0;
+		while (i < table->size)
+		{
+			free_chain(table->buckets[i]);
+			i++;
+		}
+		free(table->buckets);
+	}
+	free(table);
 }

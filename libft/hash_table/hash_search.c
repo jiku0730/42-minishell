@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   hash_search.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:50:17 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "libft.h"
 
-void	prompt(void (*handler)(char *input, t_hash_table *env_table),
-		t_hash_table *env_table)
+char	*ht_search(t_hash_table *table, const char *key)
 {
-	char	*input;
+	size_t		index;
+	t_hash_node	*node;
 
-	while (1)
+	if (!table || !key)
+		return (NULL);
+	index = ht_hash(key, table->size);
+	node = table->buckets[index];
+	while (node)
 	{
-		input = readline(PROMPT);
-		if (!input)
-			break ;
-		if (is_blank_line(input))
-		{
-			free(input);
-			continue ;
-		}
-		if (*input)
-			add_history(input);
-		if (handler)
-			handler(input, env_table);
+		if (ft_strncmp(node->key, key, ft_strlen(key) + 1) == 0)
+			return (node->value);
+		node = node->next;
 	}
-	rl_clear_history();
+	return (NULL);
 }

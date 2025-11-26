@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/20 11:49:13 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/27 01:32:06 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,11 +58,13 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 SRCS_MAND	:=	src/main.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
+				src/checker/tokenize_checker.c \
+				src/checker/heredoc_checker.c \
+				src/checker/env_table_checker.c \
 				src/tokenize/tokenize.c \
-				src/tokenize/is_operator.c \
+				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
-				src/tokenize/state/in_double_quote.c \
-				src/tokenize/state/in_single_quote.c \
+				src/tokenize/state/in_quote.c \
 				src/tokenize/state/in_operator.c \
 				src/tokenize/state/on_success.c \
 				src/tokenize/state/on_error.c \
@@ -79,6 +81,11 @@ SRCS_MAND	:=	src/main.c \
 				src/parser/utils/print_ast.c \
 				src/parser/utils/print_ast_utils.c \
 				src/parser/utils/print_ast_utils2.c
+				src/component/heredoc/heredoc.c \
+				src/component/heredoc/heredoc_prompt.c \
+				src/component/heredoc/tmpfile.c \
+				src/component/env_table/build_env_table.c \
+				src/component/env_table/export_envp.c \
 
 #bonus sources
 

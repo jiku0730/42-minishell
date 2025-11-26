@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   in_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:50:17 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/05 13:54:52 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/05 14:21:31 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "tokenize.h"
 
-void	prompt(void (*handler)(char *input, t_hash_table *env_table),
-		t_hash_table *env_table)
+void	in_quote(t_token_store *store, t_token_state *state, const char current)
 {
-	char	*input;
-
-	while (1)
-	{
-		input = readline(PROMPT);
-		if (!input)
-			break ;
-		if (is_blank_line(input))
-		{
-			free(input);
-			continue ;
-		}
-		if (*input)
-			add_history(input);
-		if (handler)
-			handler(input, env_table);
-	}
-	rl_clear_history();
+	if (current == '\0')
+		*state = ON_ERROR;
+	else if (add_buffer(store, current) == ERROR)
+		*state = ON_ERROR;
+	else if (is_quote(current))
+		*state = IN_NORMAL;
 }

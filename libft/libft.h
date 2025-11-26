@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/10/15 01:37:33 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/05 14:49:40 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_hash_node
+{
+	char				*key;
+	char				*value;
+	struct s_hash_node	*next;
+}					t_hash_node;
+
+typedef struct s_hash_table
+{
+	t_hash_node	**buckets;
+	size_t		size;
+	size_t		n_nodes;
+}					t_hash_table;
 
 // conversion
 int					ft_atoi(const char *str);
@@ -48,6 +62,15 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+// hash_table
+t_hash_table		*ht_create(size_t size);
+size_t				ht_hash(const char *key, size_t table_size);
+int					ht_insert(t_hash_table *table, const char *key,
+						const char *value);
+char				*ht_search(t_hash_table *table, const char *key);
+int					ht_delete(t_hash_table *table, const char *key);
+void				ht_destroy(t_hash_table *table);
 
 // memory
 void				ft_bzero(void *s, size_t n);

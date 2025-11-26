@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:18 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:48:53 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/20 14:12:42 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/20 17:36:09 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
 # include "constants.h"
 # include "libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
+# include <limits.h>
 # include <stdlib.h>
+# include <sys/fcntl.h>
 # include <unistd.h>
 
-void	prompt(void (*handler)(char *input, t_hash_table *env_table),
-			t_hash_table *env_table);
+t_list	*heredoc(t_list *tokens);
+char	*heredoc_prompt(const char *delimiter);
 
-# define PROMPT "minishell$ "
+// tmpfile
+int		open_tmpfile(char *tmpfile_path);
+char	*create_tmpfile(void);
+
+# define HEREDOC_PROMPT "heredoc> "
+# define HEREDOC_TMP_PREFIX "/tmp/minishell_heredoc_"
+# define HEREDOC_BUFFER 1024
 
 #endif

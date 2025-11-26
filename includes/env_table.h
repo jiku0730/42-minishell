@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_single_quote.c                                  :+:      :+:    :+:   */
+/*   env_table.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 02:27:47 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/26 16:13:33 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/26 16:31:31 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#ifndef ENV_TABLE_H
+# define ENV_TABLE_H
 
-void	in_single_quote(t_token_store *store, t_token_state *state,
-		const char current)
-{
-	if (current == '\0')
-		*state = ON_ERROR;
-	else if (current == '\'')
-		*state = IN_NORMAL;
-	else if (add_buffer(store, current) == ERROR)
-		*state = ON_ERROR;
-}
+# include <constants.h>
+# include <libft.h>
+
+# define ENV_TABLE_INIT_SIZE 256
+
+t_hash_table	*build_env_table(char *const envp[]);
+char			**export_envp(t_hash_table *env_table);
+
+#endif

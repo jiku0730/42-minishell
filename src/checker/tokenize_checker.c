@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_input.c                                         :+:      :+:    :+:   */
+/*   tokenize_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 01:31:37 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/05 13:47:35 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/26 16:49:18 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	on_input(char *input, t_hash_table *env_table)
-{
-	(void)env_table;
-	free(input);
-}
+static void	on_exit_token(t_list *token_list);
+static void	print_tokens(t_list *token_list);
 
-void	tokenize_checker(char *input)
+void	tokenize_checker(char *input, t_hash_table *env_table)
 {
 	t_list	*token_list;
-	t_ast	*ast_root;
 
+	(void)env_table;
 	token_list = tokenize(input);
 	if (!token_list)
 	{
@@ -32,9 +29,6 @@ void	tokenize_checker(char *input)
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
 	print_tokens(token_list);
-	ast_root = parser(token_list);
-	print_ast(ast_root);
-	free_ast(ast_root);
 	ft_lstclear(&token_list, free);
 }
 
