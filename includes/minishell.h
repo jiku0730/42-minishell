@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 01:31:30 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 01:55:10 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	on_input(char *input, t_hash_table *env_table);
 void	tokenize_checker(char *input, t_hash_table *env_table);
 void	heredoc_checker(char *input, t_hash_table *env_table);
 void	env_table_checker(t_hash_table *env_table);
-
+void	parser_checker(char *input, t_hash_table *env_table);
 #endif

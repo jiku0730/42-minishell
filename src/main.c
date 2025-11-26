@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:13:47 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/26 17:27:11 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 01:53:40 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main_dev(int argc, char const **argv, char *const envp[])
 	if (!env_table)
 		return (1);
 	env_table_checker(env_table);
-	prompt(heredoc_checker, env_table);
+	prompt(parser_checker, env_table);
 	ht_destroy(env_table);
 	return (0);
 }

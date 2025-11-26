@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 01:32:06 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/27 01:57:08 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/env_table_checker.c \
+				src/checker/parser_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -80,12 +81,12 @@ SRCS_MAND	:=	src/main.c \
 				src/parser/utils/free_ast.c \
 				src/parser/utils/print_ast.c \
 				src/parser/utils/print_ast_utils.c \
-				src/parser/utils/print_ast_utils2.c
+				src/parser/utils/print_ast_utils2.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
 				src/component/env_table/build_env_table.c \
-				src/component/env_table/export_envp.c \
+				src/component/env_table/export_envp.c
 
 #bonus sources
 
@@ -154,7 +155,7 @@ norm:
 	norminette src/* includes/* libft/
 
 valgrind: re
-	valgrind --leak-check=full --suppressions=readline.supp ./$(NAME)
+	valgrind --leak-check=full --suppressions=readline.supp ./$(NAME) --dev
 
 test: norm valgrind
 
