@@ -82,6 +82,7 @@ static void	free_envp_array(char **envp, size_t count)
 	while (i < count)
 	{
 		free(envp[i]);
+		envp[i] = NULL;
 		i++;
 	}
 	free(envp);
