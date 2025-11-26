@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   env_table.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:50:17 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/26 16:13:33 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/26 16:31:31 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#ifndef ENV_TABLE_H
+# define ENV_TABLE_H
 
-void	prompt(void (*handler)(char *input, t_hash_table *env_table),
-		t_hash_table *env_table)
-{
-	char	*input;
+# include <constants.h>
+# include <libft.h>
 
-	while (1)
-	{
-		input = readline(PROMPT);
-		if (!input)
-			break ;
-		if (is_blank_line(input))
-		{
-			free(input);
-			continue ;
-		}
-		if (*input)
-			add_history(input);
-		if (handler)
-			handler(input, env_table);
-	}
-	rl_clear_history();
-}
+# define ENV_TABLE_INIT_SIZE 256
+
+t_hash_table	*build_env_table(char *const envp[]);
+char			**export_envp(t_hash_table *env_table);
+
+#endif

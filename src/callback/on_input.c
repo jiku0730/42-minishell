@@ -6,13 +6,14 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 13:48:51 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/26 16:50:02 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	on_input(char *input)
+void	on_input(char *input, t_hash_table *env_table)
 {
+	(void)env_table;
 	free(input);
 }

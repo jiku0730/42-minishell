@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:47:35 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 13:48:56 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/26 16:49:18 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static void	on_exit_token(t_list *token_list);
 static void	print_tokens(t_list *token_list);
 
-void	tokenize_checker(char *input)
+void	tokenize_checker(char *input, t_hash_table *env_table)
 {
 	t_list	*token_list;
 
+	(void)env_table;
 	token_list = tokenize(input);
 	if (!token_list)
 	{
