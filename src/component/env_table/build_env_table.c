@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:23 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:31:37 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/26 17:01:50 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	insert_env_entries(char **envp, t_hash_table *table)
 			free(key_tmp);
 			free(value_tmp);
 			ht_destroy(table);
-			return (NULL);
+			return (ERROR);
 		}
 		free(key_tmp);
 		free(value_tmp);
