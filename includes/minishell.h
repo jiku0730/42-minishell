@@ -26,6 +26,6 @@ void	on_input(char *input, t_hash_table *env_table);
 // checkers
 void	tokenize_checker(char *input, t_hash_table *env_table);
 void	heredoc_checker(char *input, t_hash_table *env_table);
-void	env_table_checker(char *input, t_hash_table *env_table);
+void	env_table_checker(t_hash_table *env_table);
 
 #endif

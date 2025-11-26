@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:53:40 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 17:00:37 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/26 17:04:38 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 static void	print_env_table_entries(t_hash_table *env_table);
 static void	print_exported_envp(t_hash_table *env_table);
 
-void	env_table_checker(char *input, t_hash_table *env_table)
+void	env_table_checker(t_hash_table *env_table)
 {
-	(void)input;
 	printf("\n========== ENV TABLE ENTRIES ==========\n");
 	print_env_table_entries(env_table);
 	printf("\n========== EXPORTED ENVP ==========\n");

@@ -35,6 +35,7 @@ static int	insert_env_entries(char **envp, t_hash_table *table)
 	char	*key_tmp;
 	char	*value_tmp;
 
+	i = 0;
 	while (envp[i])
 	{
 		if (parse_env_entry(envp[i], &key_tmp, &value_tmp) == ERROR)
