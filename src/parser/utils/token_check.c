@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:29:48 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/19 23:39:47 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:37:36 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,4 @@ bool	is_redir(const t_list *node)
 	return (is_symbol(node, "<") || \
 			is_symbol(node, ">") || \
 			is_symbol(node, ">>"));
-}
-
-const char	*get_content(const t_list *node)
-{
-	if (!node)
-		return (NULL);
-	return ((const char *)node->content);
 }

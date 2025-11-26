@@ -6,42 +6,40 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:30:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/20 23:40:01 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:38:07 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static bool	parse_redir(t_list **cursor, t_cmd *cmd)
+static t_redir_kind	find_redir_kind(t_list *current)
 {
-	if (is_symbol(*cursor, "<"))
-	{
-		*cursor = (*cursor)->next;
-		if (!*cursor || !add_redir_to_cmd(cmd, R_IN, get_content(*cursor)))
-			return (false);
-	}
-	else if (is_symbol(*cursor, ">"))
-	{
-		*cursor = (*cursor)->next;
-		if (!*cursor)
-			return (false);
-		if (!add_redir_to_cmd(cmd, R_OUT_TRUNC, get_content(*cursor)))
-			return (false);
-	}
-	else if (is_symbol(*cursor, ">>"))
-	{
-		*cursor = (*cursor)->next;
-		if (!*cursor)
-			return (false);
-		if (!add_redir_to_cmd(cmd, R_OUT_APPEND, get_content(*cursor)))
-			return (false);
-	}
+	if (is_symbol(current, "<"))
+		return (R_IN);
+	else if (is_symbol(current, ">"))
+		return (R_OUT_TRUNC);
+	else if (is_symbol(current, ">>"))
+		return (R_OUT_APPEND);
 	else
+		return (R_NOT_FOUND);
+}
+
+static bool	parse_redir(t_list **current, t_cmd *cmd)
+{
+	t_redir_kind	kind;
+
+	kind = find_redir_kind(*current);
+	if (kind == R_NOT_FOUND)
+		return (false);
+	*current = (*current)->next;
+	if (!*current)
+		return (false);
+	if (!add_redir_to_cmd(cmd, kind, (*current)->content))
 		return (false);
 	return (true);
 }
 
-static t_ast	*parse_cmd(t_list **cursor)
+static t_ast	*parse_cmd(t_list **current)
 {
 	t_ast	*ast;
 	t_cmd	*cmd;
@@ -49,19 +47,19 @@ static t_ast	*parse_cmd(t_list **cursor)
 	cmd = new_cmd();
 	if (!cmd)
 		return (NULL);
-	while (*cursor && !is_symbol(*cursor, "|") && !is_eof(*cursor))
+	while (*current && !is_symbol(*current, "|") && !is_eof(*current))
 	{
-		if (is_redir(*cursor))
+		if (is_redir(*current))
 		{
-			if (!parse_redir(cursor, cmd))
+			if (!parse_redir(current, cmd))
 				return (free_cmd(cmd), NULL);
 		}
-		else if (is_word(*cursor))
+		else if (is_word(*current))
 		{
-			if (!add_argv_to_cmd(cmd, get_content(*cursor)))
+			if (!add_argv_to_cmd(cmd, (*current)->content))
 				return (free_cmd(cmd), NULL);
 		}
-		*cursor = (*cursor)->next;
+		*current = (*current)->next;
 	}
 	ast = new_ast_node(CMD);
 	if (!ast)
@@ -70,22 +68,22 @@ static t_ast	*parse_cmd(t_list **cursor)
 	return (ast);
 }
 
-static t_ast	*parse_pipeline(t_list **cursor)
+static t_ast	*parse_pipeline(t_list **current)
 {
 	t_ast	*left;
 	t_ast	*pipe_node;
 
-	left = parse_cmd(cursor);
+	left = parse_cmd(current);
 	if (!left)
 		return (NULL);
-	if (*cursor && is_symbol(*cursor, "|"))
+	if (*current && is_symbol(*current, "|"))
 	{
-		*cursor = (*cursor)->next;
+		*current = (*current)->next;
 		pipe_node = new_ast_node(PIPE);
 		if (!pipe_node)
 			return (free_ast(left), NULL);
 		pipe_node->left = left;
-		pipe_node->right = parse_pipeline(cursor);
+		pipe_node->right = parse_pipeline(current);
 		if (!pipe_node->right)
 			return (free_ast(pipe_node), NULL);
 		return (pipe_node);
@@ -95,10 +93,10 @@ static t_ast	*parse_pipeline(t_list **cursor)
 
 t_ast	*parser(t_list *token_head)
 {
-	t_list	*cursor;
+	t_list	*current;
 	t_ast	*root;
 
-	cursor = token_head;
-	root = parse_pipeline(&cursor);
+	current = token_head;
+	root = parse_pipeline(&current);
 	return (root);
 }

@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/20 23:35:17 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:38:13 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef enum e_redir_kind
 	R_IN,
 	R_IN_HEREDOC,
 	R_OUT_TRUNC,
-	R_OUT_APPEND
+	R_OUT_APPEND,
+	R_NOT_FOUND
 }					t_redir_kind;
 
 typedef struct s_redir
@@ -65,7 +66,6 @@ bool			is_word(const t_list *node);
 bool			is_symbol(const t_list *node, const char *literal);
 bool			is_eof(const t_list *node);
 bool			is_redir(const t_list *node);
-const char		*get_content(const t_list *node);
 
 /* AST's Utils--------------------------------------------------------------- */
 t_ast			*new_ast_node(t_ast_type type);
