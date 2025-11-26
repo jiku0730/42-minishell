@@ -20,7 +20,7 @@
 # include "heredoc.h"
 
 // callbacks
-void	on_input(char *input);
+void	on_input(char *input, t_hash_table *env);
 
 // checkers
 void	tokenize_checker(char *input);

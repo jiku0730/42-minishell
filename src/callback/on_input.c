@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-void	on_input(char *input)
+void	on_input(char *input, t_hash_table *env)
 {
+	(void)env;
 	free(input);
 }
