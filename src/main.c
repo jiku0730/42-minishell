@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	main_prod(int argc, char **argv, char **envp)
+int	main_prod(int argc, char const **argv, char *const envp[])
 {
 	t_hash_table	*env_table;
 
@@ -26,7 +26,7 @@ int	main_prod(int argc, char **argv, char **envp)
 	return (0);
 }
 
-int	main_dev(int argc, char **argv, char **envp)
+int	main_dev(int argc, char const **argv, char *const envp[])
 {
 	t_hash_table	*env_table;
 
@@ -41,7 +41,7 @@ int	main_dev(int argc, char **argv, char **envp)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char const **argv, char *const envp[])
 {
 	if (argc > 1 && ft_strncmp(argv[1], "--dev", 6) == 0)
 		return (main_dev(argc, argv, envp));

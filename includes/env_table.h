@@ -18,7 +18,7 @@
 
 # define ENV_TABLE_INIT_SIZE 256
 
-t_hash_table	*build_env_table(char **envp);
+t_hash_table	*build_env_table(char *const envp[]);
 char			**export_envp(t_hash_table *env_table);
 
 #endif

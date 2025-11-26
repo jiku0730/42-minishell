@@ -12,10 +12,10 @@
 
 #include <env_table.h>
 
-static int		insert_env_entries(char **envp, t_hash_table *table);
+static int		insert_env_entries(char *const envp[], t_hash_table *table);
 static int		parse_env_entry(char *env, char **key, char **value);
 
-t_hash_table	*build_env_table(char **envp)
+t_hash_table	*build_env_table(char *const envp[])
 {
 	t_hash_table	*table;
 
@@ -29,7 +29,7 @@ t_hash_table	*build_env_table(char **envp)
 	return (table);
 }
 
-static int	insert_env_entries(char **envp, t_hash_table *table)
+static int	insert_env_entries(char *const envp[], t_hash_table *table)
 {
 	size_t	i;
 	char	*key_tmp;
