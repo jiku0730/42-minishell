@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:10:35 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/27 16:16:25 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:40:38 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	test_all_entries(const char *input);
 void	directory_checker(char *input, t_shell_table *shell_table)
 {
 	(void)shell_table;
-
 	if (ft_strncmp(input, "exit", 5) == 0)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);
