@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_input.c                                         :+:      :+:    :+:   */
+/*   new_ast_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 01:46:34 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/14 18:29:33 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/11/19 23:39:24 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-void	on_input(char *input, t_hash_table *env_table)
+t_ast	*new_ast_node(t_ast_type type)
 {
-	(void)env_table;
-	free(input);
+	t_ast	*node;
+
+	node = malloc(sizeof(t_ast));
+	if (!node)
+		return (NULL);
+	node->type = type;
+	node->cmd = NULL;
+	node->left = NULL;
+	node->right = NULL;
+	return (node);
 }

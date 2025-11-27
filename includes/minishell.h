@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/26 16:51:25 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 01:55:10 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 # include "prompt.h"
 # include "tokenize.h"
+# include "parser.h"
 
 // callbacks
 void	on_input(char *input, t_hash_table *env_table);
@@ -27,5 +28,5 @@ void	on_input(char *input, t_hash_table *env_table);
 void	tokenize_checker(char *input, t_hash_table *env_table);
 void	heredoc_checker(char *input, t_hash_table *env_table);
 void	env_table_checker(t_hash_table *env_table);
-
+void	parser_checker(char *input, t_hash_table *env_table);
 #endif

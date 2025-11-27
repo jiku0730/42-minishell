@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_input.c                                         :+:      :+:    :+:   */
+/*   new_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 01:46:34 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/14 18:29:38 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/11/19 23:39:34 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-void	on_input(char *input, t_hash_table *env_table)
+t_cmd	*new_cmd(void)
 {
-	(void)env_table;
-	free(input);
+	t_cmd	*cmd;
+
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->argv = NULL;
+	cmd->redirs = NULL;
+	return (cmd);
 }

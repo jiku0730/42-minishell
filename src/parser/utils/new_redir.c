@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_input.c                                         :+:      :+:    :+:   */
+/*   new_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 17:04:25 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 01:46:34 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/14 17:40:45 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/11/19 23:39:39 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-void	on_input(char *input, t_hash_table *env_table)
+t_redir	*new_redir(t_redir_kind kind, const char *filename)
 {
-	(void)env_table;
-	free(input);
+	t_redir	*redir;
+
+	redir = malloc(sizeof(t_redir));
+	if (!redir)
+		return (NULL);
+	redir->kind = kind;
+	redir->filename = ft_strdup(filename);
+	if (!redir->filename)
+	{
+		free(redir);
+		return (NULL);
+	}
+	return (redir);
 }
