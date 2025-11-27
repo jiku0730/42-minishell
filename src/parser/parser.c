@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:30:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 02:38:07 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:46:57 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static t_redir_kind	find_redir_kind(t_list *current)
 		return (R_NOT_FOUND);
 }
 
-static bool	parse_redir(t_list **current, t_cmd *cmd)
+static int	parse_redir(t_list **current, t_cmd *cmd)
 {
 	t_redir_kind	kind;
 
 	kind = find_redir_kind(*current);
 	if (kind == R_NOT_FOUND)
-		return (false);
+		return (ERROR);
 	*current = (*current)->next;
 	if (!*current)
-		return (false);
+		return (ERROR);
 	if (!add_redir_to_cmd(cmd, kind, (*current)->content))
-		return (false);
-	return (true);
+		return (ERROR);
+	return (SUCCESS);
 }
 
 static t_ast	*parse_cmd(t_list **current)
