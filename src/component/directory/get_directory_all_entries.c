@@ -94,6 +94,11 @@ static char	*join_path(const char *dir, const char *name)
 	if (!temp)
 		return (NULL);
 	result = ft_strjoin(temp, name);
+	if (!result)
+	{
+		free(temp);
+		return (NULL);
+	}
 	free(temp);
 	return (result);
 }
