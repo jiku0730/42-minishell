@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 11:48:59 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:51:05 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef enum e_ast_type
 typedef enum e_redir_kind
 {
 	R_IN,
-	R_IN_HEREDOC,
 	R_OUT_TRUNC,
+	R_OUT_APPEND,
 	R_NOT_FOUND
 }					t_redir_kind;
 
@@ -64,7 +64,6 @@ t_ast			*parser(t_list *token_head);
 /* AST's token utils--------------------------------------------------------- */
 bool			is_word(const t_list *node);
 bool			is_symbol(const t_list *node, const char *literal);
-bool			is_eof(const t_list *node);
 bool			is_redir(const t_list *node);
 
 /* AST's Utils--------------------------------------------------------------- */

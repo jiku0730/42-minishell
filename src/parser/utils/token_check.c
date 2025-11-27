@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:29:48 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 02:37:36 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:51:11 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ bool	is_symbol(const t_list *node, const char *literal)
 		return (false);
 	len = ft_strlen(literal);
 	return (ft_strncmp((const char *)node->content, literal, len + 1) == 0);
-}
-
-bool	is_eof(const t_list *node)
-{
-	if (!node || !node->content)
-		return (true);
-	return (ft_strncmp((const char *)node->content, "EOF", 4) == 0);
 }
 
 bool	is_redir(const t_list *node)
