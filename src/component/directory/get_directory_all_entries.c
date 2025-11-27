@@ -67,7 +67,7 @@ static int	process_entry(const char *path, const char *name,
 	full_path = join_path(path, name);
 	if (!full_path)
 		return (ERROR);
-	ft_lstadd_back(entries, ft_lstnew(ft_strdup(name)));
+	ft_lstadd_back(entries, ft_lstnew(ft_strdup(full_path)));
 	if (stat(full_path, &st) != 0 || !S_ISDIR(st.st_mode))
 	{
 		free(full_path);
@@ -78,7 +78,7 @@ static int	process_entry(const char *path, const char *name,
 		free(full_path);
 		return (SUCCESS);
 	}
-	result = get_directory_entries(full_path, include_hidden, &sub_entries);
+	result = get_directory_all_entries(full_path, include_hidden, &sub_entries);
 	if (result == SUCCESS && sub_entries)
 		ft_lstadd_back(entries, sub_entries);
 	free(full_path);
