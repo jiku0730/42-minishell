@@ -93,6 +93,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
 				src/component/pattern/filter_pattern.c \
+				src/component/directory/get_directory_entries.c \
 
 SRCS_BONUS	:=
 

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   directory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 23:14:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 15:26:31 by surayama         ###   ########.fr       */
+/*   Created: 2025/11/27 15:25:07 by surayama          #+#    #+#             */
+/*   Updated: 2025/11/27 15:30:16 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#ifndef DIRECTORY_H
+# define DIRECTORY_H
 
-// macros
-# define SUCCESS 0
-# define ERROR -1
-# define NOT_FOUND -2
-# define NO_PERMISSION -3
-# define NOT_A_DIRECTORY -4
+# include <libft.h>
+# include <stdbool.h>
+
+int		get_directory_entries(const char *path, bool include_hidden,
+			t_list **entries);
 
 #endif
