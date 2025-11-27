@@ -22,6 +22,12 @@ static void	test_all_entries(const char *input);
 void	directory_checker(char *input, t_shell_table *shell_table)
 {
 	(void)shell_table;
+
+	if (ft_strncmp(input, "exit", 5) == 0)
+	{
+		write(STDOUT_FILENO, "exit\n", 5);
+		exit(0);
+	}
 	test_entries(input);
 	test_all_entries(input);
 }
