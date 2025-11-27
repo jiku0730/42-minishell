@@ -25,12 +25,13 @@ void	directory_checker(char *input, t_shell_table *shell_table)
 	if (ft_strncmp(input, "exit", 5) == 0)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);
+		rl_clear_history();
 		free(input);
-		st_destroy(shell_table);
 		exit(0);
 	}
 	test_entries(input);
 	test_all_entries(input);
+	free(input);
 }
 
 static void	test_entries(const char *input)
