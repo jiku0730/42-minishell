@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:30:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 11:46:57 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:55:22 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_ast	*parse_cmd(t_list **current)
 	cmd = new_cmd();
 	if (!cmd)
 		return (NULL);
-	while (*current && !is_symbol(*current, "|") && !is_eof(*current))
+	while (*current && !is_symbol(*current, "|"))
 	{
 		if (is_redir(*current))
 		{
