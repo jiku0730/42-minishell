@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 01:57:08 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/27 14:54:44 by urassh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ SRCS_MAND	:=	src/main.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
-				src/checker/env_table_checker.c \
+				src/checker/shell_table_checker.c \
 				src/checker/parser_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
@@ -85,11 +85,14 @@ SRCS_MAND	:=	src/main.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
-				src/component/env_table/build_env_table.c \
-				src/component/env_table/export_envp.c \
+				src/component/shell_table/shell_hash.c \
+				src/component/shell_table/shell_insert.c \
+				src/component/shell_table/shell_search.c \
+				src/component/shell_table/shell_delete.c \
+				src/component/shell_table/shell_destroy.c \
+				src/component/shell_table/build_shell_table.c \
+				src/component/shell_table/export_envp.c \
 				src/component/pattern/filter_pattern.c \
-
-#bonus sources
 
 SRCS_BONUS	:=
 

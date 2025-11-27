@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_search.c                                      :+:      :+:    :+:   */
+/*   shell_hash.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <shell_table.h>
 
-char	*ht_search(t_hash_table *table, const char *key)
+size_t	st_hash(const char *key, size_t table_size)
 {
-	size_t		index;
-	t_hash_node	*node;
+	const size_t	inital_hash = 5381;
+	size_t			hash_num;
+	size_t			i;
 
-	if (!table || !key)
-		return (NULL);
-	index = ht_hash(key, table->size);
-	node = table->buckets[index];
-	while (node)
+	if (!key || table_size == 0)
+		return (0);
+	hash_num = inital_hash;
+	i = 0;
+	while (key[i])
 	{
-		if (ft_strncmp(node->key, key, ft_strlen(key) + 1) == 0)
-			return (node->value);
-		node = node->next;
+		hash_num = ((hash_num << 5) + hash_num) + (unsigned char)key[i];
+		i++;
 	}
-	return (NULL);
+	return (hash_num % table_size);
 }

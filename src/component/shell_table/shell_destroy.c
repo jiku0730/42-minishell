@@ -1,33 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_table.c                                       :+:      :+:    :+:   */
+/*   shell_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include <shell_table.h>
 
-t_hash_table	*ht_create(size_t size)
+static void	free_chain(t_shell_node *node)
 {
-	t_hash_table	*table;
+	t_shell_node	*next;
 
-	if (size == 0)
-		return (NULL);
-	table = (t_hash_table *)ft_calloc(1, sizeof(t_hash_table));
-	if (!table)
-		return (NULL);
-	table->buckets = (t_hash_node **)ft_calloc(size, sizeof(t_hash_node *));
-	if (!table->buckets)
+	while (node)
 	{
-		free(table);
-		return (NULL);
+		next = node->next;
+		free(node->key);
+		free(node->value);
+		free(node);
+		node = next;
 	}
-	table->size = size;
-	table->n_nodes = 0;
-	return (table);
+}
+
+void	st_destroy(t_shell_table *table)
+{
+	size_t	i;
+
+	if (!table)
+		return ;
+	if (table->buckets)
+	{
+		i = 0;
+		while (i < table->size)
+		{
+			free_chain(table->buckets[i]);
+			i++;
+		}
+		free(table->buckets);
+	}
+	free(table);
 }

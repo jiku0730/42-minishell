@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_insert.c                                      :+:      :+:    :+:   */
+/*   shell_insert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <shell_table.h>
 
-static t_hash_node	*create_node(const char *key, const char *value)
+static t_shell_node	*create_node(const char *key, const char *value,
+		bool exported)
 {
-	t_hash_node	*node;
+	t_shell_node	*node;
 
-	node = (t_hash_node *)ft_calloc(1, sizeof(t_hash_node));
+	node = (t_shell_node *)ft_calloc(1, sizeof(t_shell_node));
 	if (!node)
 		return (NULL);
 	node->key = ft_strdup(key);
@@ -32,10 +33,11 @@ static t_hash_node	*create_node(const char *key, const char *value)
 		free(node);
 		return (NULL);
 	}
+	node->exported = exported;
 	return (node);
 }
 
-static int	update_existing_node(t_hash_node *node, const char *value)
+static int	update_existing_node(t_shell_node *node, const char *value)
 {
 	char	*new_value;
 
@@ -47,15 +49,16 @@ static int	update_existing_node(t_hash_node *node, const char *value)
 	return (1);
 }
 
-int	ht_insert(t_hash_table *table, const char *key, const char *value)
+int	st_insert(t_shell_table *table, const char *key, const char *value,
+		bool exported)
 {
-	size_t		index;
-	t_hash_node	*node;
-	t_hash_node	*new_node;
+	size_t			index;
+	t_shell_node	*node;
+	t_shell_node	*new_node;
 
 	if (!table || !key || !value)
 		return (0);
-	index = ht_hash(key, table->size);
+	index = st_hash(key, table->size);
 	node = table->buckets[index];
 	while (node)
 	{
@@ -63,7 +66,7 @@ int	ht_insert(t_hash_table *table, const char *key, const char *value)
 			return (update_existing_node(node, value));
 		node = node->next;
 	}
-	new_node = create_node(key, value);
+	new_node = create_node(key, value, exported);
 	if (!new_node)
 		return (0);
 	new_node->next = table->buckets[index];

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_table_checker.c                                :+:      :+:    :+:   */
+/*   shell_table_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:53:40 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 17:29:16 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 14:55:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,37 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static void	print_env_table_entries(t_hash_table *env_table);
-static void	print_exported_envp(t_hash_table *env_table);
-static void	test_execve_with_envp(t_hash_table *env_table);
+static void	print_shell_table_entries(t_shell_table *shell_table);
+static void	print_exported_envp(t_shell_table *shell_table);
+static void	test_execve_with_envp(t_shell_table *shell_table);
 
-void	env_table_checker(t_hash_table *env_table)
+void	shell_table_checker(t_shell_table *shell_table)
 {
 	printf("\n========== ENV TABLE ENTRIES ==========\n");
-	print_env_table_entries(env_table);
+	print_shell_table_entries(shell_table);
 	printf("\n========== EXPORTED ENVP ==========\n");
-	print_exported_envp(env_table);
+	print_exported_envp(shell_table);
 	printf("\n========== EXECVE TEST ==========\n");
-	test_execve_with_envp(env_table);
+	test_execve_with_envp(shell_table);
 	printf("=======================================\n\n");
 }
 
-static void	print_env_table_entries(t_hash_table *env_table)
+static void	print_shell_table_entries(t_shell_table *shell_table)
 {
-	size_t		i;
-	t_hash_node	*node;
+	size_t			i;
+	t_shell_node	*node;
 
-	if (!env_table)
+	if (!shell_table)
 	{
-		printf("env_table is NULL\n");
+		printf("shell_table is NULL\n");
 		return ;
 	}
-	printf("Total entries: %zu\n", env_table->n_nodes);
-	printf("Table size: %zu\n\n", env_table->size);
+	printf("Total entries: %zu\n", shell_table->n_nodes);
+	printf("Table size: %zu\n\n", shell_table->size);
 	i = 0;
-	while (i < env_table->size)
+	while (i < shell_table->size)
 	{
-		node = env_table->buckets[i];
+		node = shell_table->buckets[i];
 		while (node)
 		{
 			printf("[%zu] %s = %s\n", i, node->key, node->value);
@@ -55,17 +55,17 @@ static void	print_env_table_entries(t_hash_table *env_table)
 	}
 }
 
-static void	print_exported_envp(t_hash_table *env_table)
+static void	print_exported_envp(t_shell_table *shell_table)
 {
 	char	**envp;
 	size_t	i;
 
-	if (!env_table)
+	if (!shell_table)
 	{
-		printf("env_table is NULL\n");
+		printf("shell_table is NULL\n");
 		return ;
 	}
-	envp = export_envp(env_table);
+	envp = export_envp(shell_table);
 	if (!envp)
 	{
 		printf("Failed to export envp\n");
@@ -91,17 +91,17 @@ static void	free_envp(char **envp)
 	free(envp);
 }
 
-static void	test_execve_with_envp(t_hash_table *env_table)
+static void	test_execve_with_envp(t_shell_table *shell_table)
 {
 	char	**envp;
 	pid_t	pid;
 	int		status;
 	char	*argv[2];
 
-	envp = export_envp(env_table);
-	if (!env_table || !envp)
+	envp = export_envp(shell_table);
+	if (!shell_table || !envp)
 	{
-		printf("env_table is NULL or failed to export envp\n");
+		printf("shell_table is NULL or failed to export envp\n");
 		return ;
 	}
 	pid = fork();

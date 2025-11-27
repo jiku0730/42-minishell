@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_delete.c                                      :+:      :+:    :+:   */
+/*   shell_delete.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 00:00:00 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <shell_table.h>
 
-static void	free_node(t_hash_node *node)
+static void	free_node(t_shell_node *node)
 {
 	if (!node)
 		return ;
@@ -21,15 +21,15 @@ static void	free_node(t_hash_node *node)
 	free(node);
 }
 
-int	ht_delete(t_hash_table *table, const char *key)
+int	st_delete(t_shell_table *table, const char *key)
 {
-	size_t		index;
-	t_hash_node	*node;
-	t_hash_node	*prev;
+	size_t			index;
+	t_shell_node	*node;
+	t_shell_node	*prev;
 
 	if (!table || !key)
 		return (0);
-	index = ht_hash(key, table->size);
+	index = st_hash(key, table->size);
 	node = table->buckets[index];
 	prev = NULL;
 	while (node)

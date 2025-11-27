@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_env_table.c                                  :+:      :+:    :+:   */
+/*   build_shell_table.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:23 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 17:01:50 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 14:53:48 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env_table.h>
+#include <shell_table.h>
 
-static int		insert_env_entries(char *const envp[], t_hash_table *table);
-static int		parse_env_entry(char *env, char **key, char **value);
+static t_shell_table	*st_create(size_t size);
+static int				insert_env_entries(char *const envp[],
+							t_shell_table *table);
+static int				parse_env_entry(char *env, char **key, char **value);
 
-t_hash_table	*build_env_table(char *const envp[])
+t_shell_table	*build_shell_table(char *const envp[])
 {
-	t_hash_table	*table;
+	t_shell_table	*table;
 
 	if (!envp)
 		return (NULL);
-	table = ht_create(ENV_TABLE_INIT_SIZE);
+	table = st_create(SHELL_TABLE_INIT_SIZE);
 	if (!table)
 		return (NULL);
 	if (insert_env_entries(envp, table) == ERROR)
@@ -29,7 +31,7 @@ t_hash_table	*build_env_table(char *const envp[])
 	return (table);
 }
 
-static int	insert_env_entries(char *const envp[], t_hash_table *table)
+static int	insert_env_entries(char *const envp[], t_shell_table *table)
 {
 	size_t	i;
 	char	*key_tmp;
@@ -40,11 +42,11 @@ static int	insert_env_entries(char *const envp[], t_hash_table *table)
 	{
 		if (parse_env_entry(envp[i], &key_tmp, &value_tmp) == ERROR)
 			return (ERROR);
-		if (!ht_insert(table, key_tmp, value_tmp))
+		if (!st_insert(table, key_tmp, value_tmp, true))
 		{
 			free(key_tmp);
 			free(value_tmp);
-			ht_destroy(table);
+			st_destroy(table);
 			return (ERROR);
 		}
 		free(key_tmp);
@@ -74,4 +76,24 @@ static int	parse_env_entry(char *env, char **key, char **value)
 		return (ERROR);
 	}
 	return (SUCCESS);
+}
+
+static t_shell_table	*st_create(size_t size)
+{
+	t_shell_table	*table;
+
+	if (size == 0)
+		return (NULL);
+	table = (t_shell_table *)ft_calloc(1, sizeof(t_shell_table));
+	if (!table)
+		return (NULL);
+	table->buckets = (t_shell_node **)ft_calloc(size, sizeof(t_shell_node *));
+	if (!table->buckets)
+	{
+		free(table);
+		return (NULL);
+	}
+	table->size = size;
+	table->n_nodes = 0;
+	return (table);
 }

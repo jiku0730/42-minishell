@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:13:47 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 01:53:40 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 int	main_prod(int argc, char const **argv, char *const envp[])
 {
-	t_hash_table	*env_table;
+	t_shell_table	*shell_table;
 
 	(void)argc;
 	(void)argv;
-	env_table = build_env_table(envp);
-	if (!env_table)
+	shell_table = build_shell_table(envp);
+	if (!shell_table)
 		return (1);
-	prompt(on_input, env_table);
-	ht_destroy(env_table);
+	prompt(on_input, shell_table);
+	st_destroy(shell_table);
 	return (0);
 }
 
 int	main_dev(int argc, char const **argv, char *const envp[])
 {
-	t_hash_table	*env_table;
+	t_shell_table	*shell_table;
 
 	(void)argc;
 	(void)argv;
-	env_table = build_env_table(envp);
-	if (!env_table)
+	shell_table = build_shell_table(envp);
+	if (!shell_table)
 		return (1);
-	env_table_checker(env_table);
-	prompt(parser_checker, env_table);
-	ht_destroy(env_table);
+	shell_table_checker(shell_table);
+	prompt(parser_checker, shell_table);
+	st_destroy(shell_table);
 	return (0);
 }
 
