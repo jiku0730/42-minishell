@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_table.h                                        :+:      :+:    :+:   */
+/*   shell_search.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 16:13:33 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:31:31 by urassh           ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_TABLE_H
-# define ENV_TABLE_H
+#include <shell_table.h>
 
-# include <constants.h>
-# include <libft.h>
+char	*st_search(t_shell_table *table, const char *key)
+{
+	size_t			index;
+	t_shell_node	*node;
 
-# define ENV_TABLE_INIT_SIZE 256
-
-t_hash_table	*build_env_table(char *const envp[]);
-char			**export_envp(t_hash_table *env_table);
-
-#endif
+	if (!table || !key)
+		return (NULL);
+	index = st_hash(key, table->size);
+	node = table->buckets[index];
+	while (node)
+	{
+		if (ft_strncmp(node->key, key, ft_strlen(key) + 1) == 0)
+			return (node->value);
+		node = node->next;
+	}
+	return (NULL);
+}

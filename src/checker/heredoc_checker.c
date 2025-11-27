@@ -6,7 +6,7 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:55:55 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:49:25 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	on_exit_token(t_list *token_list);
 static void	print_tokens(t_list *token_list);
 static void	unlink_tmpfiles(t_list *token_list);
 
-void	heredoc_checker(char *input, t_hash_table *env_table)
+void	heredoc_checker(char *input, t_shell_table *shell_table)
 {
 	t_list	*token_list;
 	t_list	*heredoced_list;
 
-	(void)env_table;
+	(void)shell_table;
 	token_list = tokenize(input);
 	if (!token_list)
 	{

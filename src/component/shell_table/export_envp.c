@@ -6,50 +6,75 @@
 /*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:41 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/26 16:45:48 by urassh           ###   ########.fr       */
+/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <env_table.h>
+#include <shell_table.h>
 
-static int	export_envp_entries(char **envp, t_hash_table *env_table);
-static char	*export_envp_str(t_hash_node *node);
-static void	free_envp_array(char **envp, size_t count);
+static int	count_exported_nodes(t_shell_table *shell_table);
+static int	export_envp_entries(char **envp, t_shell_table *shell_table);
+static char	*export_envp_str(t_shell_node *node);
+static int	throw_export_envp(char **envp, size_t count);
 
-char	**export_envp(t_hash_table *env_table)
+char	**export_envp(t_shell_table *shell_table)
 {
 	char	**envp;
+	int		count;
 
-	if (!env_table)
+	if (!shell_table)
 		return (NULL);
-	envp = (char **)ft_calloc(env_table->n_nodes + 1, sizeof(char *));
+	count = count_exported_nodes(shell_table);
+	envp = (char **)ft_calloc(count + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
-	if (export_envp_entries(envp, env_table) == ERROR)
+	if (export_envp_entries(envp, shell_table) == ERROR)
 		return (NULL);
 	return (envp);
 }
 
-static int	export_envp_entries(char **envp, t_hash_table *env_table)
+static int	count_exported_nodes(t_shell_table *shell_table)
 {
-	size_t		index;
-	size_t		env_index;
-	t_hash_node	*node;
+	size_t			index;
+	t_shell_node	*node;
+	int				count;
+
+	count = 0;
+	index = 0;
+	while (index < shell_table->size)
+	{
+		node = shell_table->buckets[index];
+		while (node)
+		{
+			if (node->exported)
+				count++;
+			node = node->next;
+		}
+		index++;
+	}
+	return (count);
+}
+
+static int	export_envp_entries(char **envp, t_shell_table *shell_table)
+{
+	size_t			index;
+	size_t			env_index;
+	t_shell_node	*node;
 
 	env_index = 0;
 	index = 0;
-	while (index < env_table->size)
+	while (index < shell_table->size)
 	{
-		node = env_table->buckets[index];
+		node = shell_table->buckets[index];
 		while (node)
 		{
-			envp[env_index] = export_envp_str(node);
-			if (!envp[env_index])
+			if (node->exported)
 			{
-				free_envp_array(envp, env_index);
-				return (ERROR);
+				envp[env_index] = export_envp_str(node);
+				if (!envp[env_index])
+					return (throw_export_envp(envp, env_index));
+				env_index++;
 			}
-			env_index++;
 			node = node->next;
 		}
 		index++;
@@ -57,7 +82,7 @@ static int	export_envp_entries(char **envp, t_hash_table *env_table)
 	return (SUCCESS);
 }
 
-static char	*export_envp_str(t_hash_node *node)
+static char	*export_envp_str(t_shell_node *node)
 {
 	char	*result;
 	size_t	key_len;
@@ -74,7 +99,7 @@ static char	*export_envp_str(t_hash_node *node)
 	return (result);
 }
 
-static void	free_envp_array(char **envp, size_t count)
+static int	throw_export_envp(char **envp, size_t count)
 {
 	size_t	i;
 
@@ -86,4 +111,5 @@ static void	free_envp_array(char **envp, size_t count)
 		i++;
 	}
 	free(envp);
+	return (ERROR);
 }
