@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 11:46:40 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:48:59 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef enum e_redir_kind
 	R_IN,
 	R_IN_HEREDOC,
 	R_OUT_TRUNC,
-	R_OUT_APPEND,
 	R_NOT_FOUND
 }					t_redir_kind;
 
