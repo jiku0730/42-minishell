@@ -86,7 +86,8 @@ SRCS_MAND	:=	src/main.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
 				src/component/env_table/build_env_table.c \
-				src/component/env_table/export_envp.c
+				src/component/env_table/export_envp.c \
+				src/component/pattern/filter_pattern.c \
 
 #bonus sources
 
