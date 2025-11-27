@@ -44,8 +44,8 @@ t_list	*filter_pattern(t_list *source, const char *pattern)
 
 static bool	match_pattern(const char *str, const char *pattern)
 {
-	if (!*pattern)
-		return (!*str);
+	if (*pattern == '\0')
+		return (*str == '\0');
 	if (*pattern == WILDCARD)
 	{
 		while (*str)
