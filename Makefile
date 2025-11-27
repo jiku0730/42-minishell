@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 14:58:00 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/27 16:46:49 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,16 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
 				src/component/pattern/filter_pattern.c \
+				src/execute/exec_ast.c \
+				src/execute/exec_cmd.c \
+				src/execute/exec_pipe.c \
+				src/execute/utils/ft_wexitstatus.c \
+				src/execute/utils/ft_wifexited.c \
+				src/execute/utils/exec_cmd_core.c \
+				src/execute/utils/exec_pipe_child.c \
+				src/execute/utils/exec_redirs.c \
+				src/execute/utils/list_to_argv.c \
+				src/execute/utils/get_env_path.c \
 
 SRCS_BONUS	:=
 
