@@ -6,13 +6,14 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:30:40 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/27 16:08:26 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:05:20 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <directory.h>
 
 static int	throw_error(void);
+static int	append_entry(t_list **entries, const char *entry_name);
 
 int	get_directory_entries(const char *path, bool include_hidden,
 		t_list **entries)
@@ -33,7 +34,11 @@ int	get_directory_entries(const char *path, bool include_hidden,
 			break ;
 		if (!include_hidden && entry->d_name[0] == '.')
 			continue ;
-		ft_lstadd_back(entries, ft_lstnew(ft_strdup(entry->d_name)));
+		if (append_entry(entries, entry->d_name) == ERROR)
+		{
+			closedir(dir);
+			return (ERROR);
+		}
 	}
 	closedir(dir);
 	return (SUCCESS);
@@ -48,4 +53,15 @@ static int	throw_error(void)
 	else if (errno == ENOTDIR)
 		return (NOT_A_DIRECTORY);
 	return (ERROR);
+}
+
+static int	append_entry(t_list **entries, const char *entry_name)
+{
+	t_list	*entry_node;
+
+	entry_node = ft_lstnew(ft_strdup(entry_name));
+	if (!entry_node)
+		return (ERROR);
+	ft_lstadd_back(entries, entry_node);
+	return (SUCCESS);
 }
