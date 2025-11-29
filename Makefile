@@ -57,6 +57,7 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
 				src/builtin/echo.c \
+				src/builtin/export.c \
 				src/builtin/pwd.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
