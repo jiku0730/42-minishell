@@ -38,6 +38,7 @@ typedef struct s_shell_table
 size_t					st_hash(const char *key, size_t table_size);
 int						st_insert(t_shell_table *table, const char *key,
 							const char *value, bool exported);
+int						st_set_exported(t_shell_table *table, const char *key);
 char					*st_search(t_shell_table *table, const char *key);
 int						st_delete(t_shell_table *table, const char *key);
 void					st_destroy(t_shell_table *table);

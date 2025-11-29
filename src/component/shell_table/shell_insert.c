@@ -74,3 +74,31 @@ int	st_insert(t_shell_table *table, const char *key, const char *value,
 	table->n_nodes++;
 	return (1);
 }
+
+int	st_set_exported(t_shell_table *table, const char *key)
+{
+	size_t			index;
+	t_shell_node	*node;
+	t_shell_node	*new_node;
+
+	if (!table || !key)
+		return (0);
+	index = st_hash(key, table->size);
+	node = table->buckets[index];
+	while (node)
+	{
+		if (ft_strncmp(node->key, key, ft_strlen(key) + 1) == 0)
+		{
+			node->exported = true;
+			return (1);
+		}
+		node = node->next;
+	}
+	new_node = create_node(key, "", true);
+	if (!new_node)
+		return (0);
+	new_node->next = table->buckets[index];
+	table->buckets[index] = new_node;
+	table->n_nodes++;
+	return (1);
+}

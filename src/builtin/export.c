@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:29:03 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 20:55:44 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:32:55 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	insert_assignment(t_shell_table *shell_table,
 {
 	char	*key;
 	char	*value;
+	int		result;
 
 	if (!shell_table || !assignment)
 		return (ERROR);
@@ -56,14 +57,14 @@ static int	insert_assignment(t_shell_table *shell_table,
 		free(key);
 		return (ERROR);
 	}
-	if (!st_insert(shell_table, key, value, true))
-	{
-		free(key);
-		free(value);
-		return (ERROR);
-	}
+	if (value[0] == '\0')
+		result = st_set_exported(shell_table, key);
+	else
+		result = st_insert(shell_table, key, value, true);
 	free(key);
 	free(value);
+	if (!result)
+		return (ERROR);
 	return (SUCCESS);
 }
 
