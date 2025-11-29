@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:16:37 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 17:38:25 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:07:31 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	consume_head_node(t_list **argv);
 static bool	check_n_option(t_list *argv);
 static void	print_argv(t_list *to_print_argv, bool with_newline);
-
 
 int	echo(t_list *argv, t_shell_table *shell_table)
 {
