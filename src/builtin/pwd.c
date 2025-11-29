@@ -6,13 +6,11 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:16:00 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 20:16:00 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:29:40 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtin.h>
-#include <unistd.h>
-#include <limits.h>
 
 int	pwd(t_list *argv, t_shell_table *shell_table)
 {
