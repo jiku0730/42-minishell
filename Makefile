@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: urassh <urassh@student.42.fr>              +#+  +:+       +#+         #
+#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 14:58:00 by urassh           ###   ########.fr        #
+#    Updated: 2025/11/29 22:33:45 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/echo.c \
 				src/builtin/export.c \
 				src/builtin/pwd.c \
+				src/builtin/set.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
