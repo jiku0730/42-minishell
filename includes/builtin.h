@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 17:17:38 by surayama         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:09:29 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTIN_H
 
 # include <shell_table.h>
+# include <stdio.h>
 
 int	echo(t_list *argv, t_shell_table *shell_table);
 
