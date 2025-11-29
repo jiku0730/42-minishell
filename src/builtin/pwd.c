@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 20:15:56 by surayama         ###   ########.fr       */
+/*   Created: 2025/11/29 20:16:00 by surayama          #+#    #+#             */
+/*   Updated: 2025/11/29 20:16:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include <builtin.h>
+#include <unistd.h>
+#include <limits.h>
 
-# include <shell_table.h>
-# include <stdio.h>
+int	pwd(t_list *argv, t_shell_table *shell_table)
+{
+	char	*pwd_path;
 
-int	echo(t_list *argv, t_shell_table *shell_table);
-int	pwd(t_list *argv, t_shell_table *shell_table);
-
-#endif
+	(void)argv;
+	pwd_path = st_search(shell_table, "PWD");
+	if (pwd_path)
+	{
+		printf("%s\n", pwd_path);
+		return (SUCCESS);
+	}
+	pwd_path = getcwd(NULL, 0);
+	if (!pwd_path)
+	{
+		perror("pwd");
+		return (ERROR);
+	}
+	printf("%s\n", pwd_path);
+	free(pwd_path);
+	return (SUCCESS);
+}
