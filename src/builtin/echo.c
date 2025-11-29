@@ -12,7 +12,7 @@
 
 #include <builtin.h>
 
-static void	consume_head_node(t_list **argv);
+static void	skip_head_node(t_list **argv);
 static bool	check_n_option(t_list *argv);
 static void	print_argv(t_list *to_print_argv, bool with_newline);
 
@@ -25,18 +25,18 @@ int	echo(t_list *argv, t_shell_table *shell_table)
 	(void)shell_table;
 	echo_argv = argv;
 	with_newline = true;
-	consume_head_node(&echo_argv);
+	skip_head_node(&echo_argv);
 	use_n_option = check_n_option(echo_argv);
 	if (use_n_option)
 	{
 		with_newline = false;
-		consume_head_node(&echo_argv);
+		skip_head_node(&echo_argv);
 	}
 	print_argv(echo_argv, with_newline);
 	return (0);
 }
 
-static void	consume_head_node(t_list **argv)
+static void	skip_head_node(t_list **argv)
 {
 	if (argv && *argv)
 		*argv = (*argv)->next;
