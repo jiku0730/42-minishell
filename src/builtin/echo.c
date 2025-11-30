@@ -6,43 +6,41 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:16:37 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 18:08:49 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:10:08 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtin.h>
 
-static void	consume_head_node(t_list **argv);
-static bool	check_n_option(t_list *argv);
+static void	skip_head_node(t_list **argv);
+static bool	is_n_option(t_list *argv);
 static void	print_argv(t_list *to_print_argv, bool with_newline);
 
 int	echo(t_list *argv, t_shell_table *shell_table)
 {
 	t_list	*echo_argv;
-	bool	use_n_option;
 	bool	with_newline;
 
 	(void)shell_table;
 	echo_argv = argv;
 	with_newline = true;
-	consume_head_node(&echo_argv);
-	use_n_option = check_n_option(echo_argv);
-	if (use_n_option)
+	skip_head_node(&echo_argv);
+	while (is_n_option(echo_argv))
 	{
 		with_newline = false;
-		consume_head_node(&echo_argv);
+		skip_head_node(&echo_argv);
 	}
 	print_argv(echo_argv, with_newline);
 	return (0);
 }
 
-static void	consume_head_node(t_list **argv)
+static void	skip_head_node(t_list **argv)
 {
 	if (argv && *argv)
 		*argv = (*argv)->next;
 }
 
-static bool	check_n_option(t_list *argv)
+static bool	is_n_option(t_list *argv)
 {
 	t_list	*option_node;
 	char	*str;
