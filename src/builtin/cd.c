@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 02:30:14 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 02:58:37 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	move_to_path(const char *path, t_shell_table *shell_table);
 
 int	cd(t_list *argv, t_shell_table *shell_table)
 {
-	int		argc;
-	char	*path;
+	int	argc;
 
 	argc = ft_lstsize(argv);
 	if (argc > 2)
@@ -44,8 +43,6 @@ static int	by_too_many_arguments_error(void)
 static int	by_move_to_home(t_shell_table *shell_table)
 {
 	char	*home;
-	char	*old_pwd;
-	char	*new_pwd;
 
 	home = st_search(shell_table, "HOME");
 	if (!home)
@@ -59,7 +56,6 @@ static int	by_move_to_home(t_shell_table *shell_table)
 static int	by_move_to_oldpwd(t_shell_table *shell_table)
 {
 	char	*oldpwd;
-	char	*current_pwd;
 
 	oldpwd = st_search(shell_table, "OLDPWD");
 	if (!oldpwd)
