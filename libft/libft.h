@@ -74,9 +74,9 @@ size_t				ft_min_size_t(size_t a, size_t b);
 
 // output
 void				ft_putchar_fd(char c, int fd);
-void				ft_putendl_fd(char *s, int fd);
+void				ft_putendl_fd(const char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putstr_fd(char *s, int fd);
+void				ft_putstr_fd(const char *s, int fd);
 
 // string
 void				ft_free_split(char **arr);

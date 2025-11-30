@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 16:46:49 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/11/27 16:17:13 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,12 +56,14 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
+				src/builtin/echo.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \
 				src/checker/parser_checker.c \
+				src/checker/directory_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -103,6 +105,8 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/utils/exec_redirs.c \
 				src/execute/utils/list_to_argv.c \
 				src/execute/utils/get_env_path.c \
+				src/component/directory/get_directory_entries.c \
+				src/component/directory/get_directory_all_entries.c \
 
 SRCS_BONUS	:=
 

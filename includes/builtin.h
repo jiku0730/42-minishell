@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 14:29:52 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/09/29 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
+/*   Updated: 2025/11/29 18:09:29 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-void	ft_putendl_fd(const char *s, int fd)
-{
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
-	return ;
-}
+# include <shell_table.h>
+# include <stdio.h>
+
+int	echo(t_list *argv, t_shell_table *shell_table);
+
+#endif
