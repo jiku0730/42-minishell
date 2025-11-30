@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   prompt_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:35:18 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 01:49:05 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/12/01 01:45:50 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/12/01 01:47:33 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include <constants.h>
+#include <stdio.h>
 
-# include "constants.h"
-# include "shell_table.h"
-# include "libft.h"
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
-			t_shell_table *shell_table);
-
-#endif
+int	main(void)
+{
+	printf("SHELL_NAME = %s\n", SHELL_NAME);
+	printf("PROMPT = %s\n", PROMPT);
+	return (0);
+}

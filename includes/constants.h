@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 23:14:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 15:26:31 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:48:39 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@
 # define NOT_FOUND -2
 # define NO_PERMISSION -3
 # define NOT_A_DIRECTORY -4
+# define SHELL_NAME "jikussh"
+# define PROMPT SHELL_NAME "$ "
 
 #endif
