@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   directory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 00:23:25 by surayama         ###   ########.fr       */
+/*   Created: 2025/11/27 15:25:07 by surayama          #+#    #+#             */
+/*   Updated: 2025/11/27 16:08:52 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef DIRECTORY_H
+# define DIRECTORY_H
 
-# include <limits.h>
-# include <shell_table.h>
-# include <stdio.h>
-# include <unistd.h>
+# include <constants.h>
+# include <dirent.h>
+# include <errno.h>
+# include <libft.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <sys/stat.h>
 
-int	echo(t_list *argv, t_shell_table *shell_table);
-int	pwd(t_list *argv, t_shell_table *shell_table);
+int	get_directory_entries(const char *path, bool include_hidden,
+		t_list **entries);
+int	get_directory_all_entries(const char *path, bool include_hidden,
+		t_list **entries);
 
 #endif
