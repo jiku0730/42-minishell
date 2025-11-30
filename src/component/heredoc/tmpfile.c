@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tmpfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:28:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/22 01:08:26 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:28 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <heredoc.h>
+#include "heredoc.h"
 
 static char	*get_tmpfile_id(const char *tmp_prefix);
 

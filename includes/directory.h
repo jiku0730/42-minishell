@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   directory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:25:07 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/27 16:08:52 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 03:18:39 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DIRECTORY_H
 # define DIRECTORY_H
 
-# include <constants.h>
+# include "constants.h"
 # include <dirent.h>
 # include <errno.h>
 # include <libft.h>

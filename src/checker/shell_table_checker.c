@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_table_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:53:40 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:55:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:46 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:16:37 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 00:10:08 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 03:17:35 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#include "builtin.h"
 
 static void	skip_head_node(t_list **argv);
 static bool	is_n_option(t_list *argv);
