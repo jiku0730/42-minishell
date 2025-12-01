@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_search.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 00:00:00 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:23:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell_table.h>
+#include "shell_table.h"
 
 char	*st_search(t_shell_table *table, const char *key)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:35:18 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 01:49:05 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@
 
 void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
 			t_shell_table *shell_table);
-
-# define PROMPT "minishell$ "
 
 #endif

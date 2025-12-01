@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filter_by_pattern.c                                :+:      :+:    :+:   */
+/*   filter_pattern.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:40:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 12:10:33 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:22:08 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pattern.h>
+#include "pattern.h"
 #include <stdlib.h>
 
 static bool	match_pattern(const char *str, const char *pattern);

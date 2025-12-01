@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   directory_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:10:35 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/27 16:45:10 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:46 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <directory.h>
-#include <minishell.h>
+#include "directory.h"
+#include "minishell.h"
 
 static void	print_entries(t_list *entries, const char *title);
 static void	test_function(const char *input, bool include_hidden,

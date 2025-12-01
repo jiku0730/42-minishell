@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_directory_entries.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:30:40 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 20:05:20 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:12 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <directory.h>
+#include "directory.h"
 
 static int	throw_error(void);
 static int	append_entry(t_list **entries, const char *entry_name);
