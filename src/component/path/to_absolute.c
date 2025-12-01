@@ -108,7 +108,8 @@ static t_list	*append_path(char *segment, t_list *resolved_path)
 	}
 	else if (ft_strncmp(segment, ".", 2) == 0)
 		return (resolved_path);
-	ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
+	else
+		ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
 	return (resolved_path);
 }
 
