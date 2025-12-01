@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/11/27 16:17:13 by surayama         ###   ########.fr        #
+#    Updated: 2025/12/01 00:22:27 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
 				src/builtin/echo.c \
+				src/builtin/pwd.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/tokenize_checker.c \
