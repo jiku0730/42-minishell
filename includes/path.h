@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 23:14:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 01:54:44 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/12/01 12:00:34 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#ifndef PATH_H
+# define PATH_H
 
-// macros
-# define SUCCESS 0
-# define ERROR -1
-# define NOT_FOUND -2
-# define NO_PERMISSION -3
-# define NOT_A_DIRECTORY -4
-# define SHELL_NAME "jikussh"
-# define PROMPT "jikussh$ "
+char	*to_absolute(const char *path);
 
 #endif

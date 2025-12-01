@@ -67,6 +67,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \
 				src/checker/parser_checker.c \
+				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
@@ -101,6 +102,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/pattern/filter_pattern.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
+				src/component/path/to_absolute.c \
 
 SRCS_BONUS	:=
 
