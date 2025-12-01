@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   shell_table.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:28:22 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_TABLE_H
 # define SHELL_TABLE_H
 
-# include <constants.h>
-# include <libft.h>
+# include "constants.h"
+# include "libft.h"
 # include <stdbool.h>
 
 # define SHELL_TABLE_INIT_SIZE 256

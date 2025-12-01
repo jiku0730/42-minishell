@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:13:36 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/21 16:16:47 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:28 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <heredoc.h>
+#include "heredoc.h"
 
 static bool	is_heredoc_operator(const char *token);
 static int	rebuild_tokens(t_list *current, t_list *eof_node,
