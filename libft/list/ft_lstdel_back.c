@@ -25,10 +25,10 @@ void	ft_lstdel_back(t_list **lst, void (*del)(void *))
 		*lst = NULL;
 		return ;
 	}
+	last = ft_lstlast(*lst);
 	current = *lst;
-	while (current->next && current->next->next)
+	while (current->next != last)
 		current = current->next;
-	last = current->next;
 	current->next = NULL;
 	ft_lstdelone(last, del);
 }
