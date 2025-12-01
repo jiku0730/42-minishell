@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 13:30:14 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 14:26:11 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ static char	*list_to_path(t_list *resolved_path)
 	while (current)
 	{
 		temp = ft_strjoin(result, (char *)current->content);
-		free(result);
+		if (result)
+			free(result);
+		if (!temp)
+			return (NULL);
 		result = temp;
 		if (current->next)
 		{
