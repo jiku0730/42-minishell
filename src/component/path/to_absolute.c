@@ -28,11 +28,13 @@ char	*to_absolute(const char *path)
 	t_list	*current;
 	char	*result;
 
-	if (!path)
+	if (!path || !*path)
 		return (NULL);
+	if (ft_strncmp(path, "/", 2) == 0)
+		return (ft_strdup("/"));
 	path_list = split_path_to_list(path);
-	if (!path_list)
-		return (NULL);
+	if (!path_list && path[0] == '/')
+		return (ft_strdup("/"));
 	resolved_path = init_resolved_path(path[0] == '/', &path_list);
 	current = path_list;
 	while (current)
