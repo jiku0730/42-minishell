@@ -1,0 +1,133 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   to_absolute.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/12/01 13:30:14 by surayama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+#include <limits.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+static t_list	*init_resolved_path(bool is_head_absolute, t_list **path_list);
+static t_list	*split_path_to_list(const char *path);
+static t_list	*append_path(char *segment, t_list *resolved_path);
+static char		*list_to_path(t_list *resolved_path);
+
+char	*to_absolute(const char *path)
+{
+	t_list	*path_list;
+	t_list	*resolved_path;
+	t_list	*current;
+	char	*result;
+
+	if (!path)
+		return (NULL);
+	path_list = split_path_to_list(path);
+	if (!path_list)
+		return (NULL);
+	resolved_path = init_resolved_path(path[0] == '/', &path_list);
+	current = path_list;
+	while (current)
+	{
+		resolved_path = append_path((char *)current->content, resolved_path);
+		current = current->next;
+	}
+	ft_lstclear(&path_list, free);
+	result = list_to_path(resolved_path);
+	ft_lstclear(&resolved_path, free);
+	return (result);
+}
+
+static t_list	*init_resolved_path(bool is_head_absolute, t_list **path_list)
+{
+	char	*cwd;
+	t_list	*resolved_path;
+	t_list	*temp;
+
+	resolved_path = NULL;
+	if (is_head_absolute)
+	{
+		while (*path_list)
+		{
+			if (ft_strncmp((char *)(*path_list)->content, ".", 2) == 0
+				|| ft_strncmp((char *)(*path_list)->content, "..", 3) == 0)
+				break ;
+			ft_lstadd_back(&resolved_path, ft_lstnew((*path_list)->content));
+			temp = *path_list;
+			*path_list = (*path_list)->next;
+			free(temp);
+		}
+		return (resolved_path);
+	}
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (NULL);
+	resolved_path = split_path_to_list(cwd);
+	free(cwd);
+	return (resolved_path);
+}
+
+static t_list	*split_path_to_list(const char *path)
+{
+	char	**segments;
+	t_list	*list;
+	int		i;
+
+	if (!path)
+		return (NULL);
+	segments = ft_split(path, '/');
+	if (!segments)
+		return (NULL);
+	list = NULL;
+	i = 0;
+	while (segments[i])
+	{
+		ft_lstadd_back(&list, ft_lstnew(segments[i]));
+		i++;
+	}
+	free(segments);
+	return (list);
+}
+
+static t_list	*append_path(char *segment, t_list *resolved_path)
+{
+	if (ft_strncmp(segment, "..", 3) == 0 && resolved_path)
+		ft_lstdel_back(&resolved_path, free);
+	else if (ft_strncmp(segment, ".", 2) != 0)
+		ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
+	return (resolved_path);
+}
+
+static char	*list_to_path(t_list *resolved_path)
+{
+	t_list	*current;
+	char	*result;
+	char	*temp;
+
+	if (!resolved_path)
+		return (ft_strdup("/"));
+	result = ft_strdup("/");
+	current = resolved_path;
+	while (current)
+	{
+		temp = ft_strjoin(result, (char *)current->content);
+		free(result);
+		result = temp;
+		if (current->next)
+		{
+			temp = ft_strjoin(result, "/");
+			free(result);
+			result = temp;
+		}
+		current = current->next;
+	}
+	return (result);
+}
