@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 14:31:58 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 14:33:49 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,9 @@ static t_list	*append_path(char *segment, t_list *resolved_path)
 		if (resolved_path)
 			ft_lstdel_back(&resolved_path, free);
 	}
-	else if (ft_strncmp(segment, ".", 2) != 0)
-		ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
+	else if (ft_strncmp(segment, ".", 2) == 0)
+		return (resolved_path);
+	ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
 	return (resolved_path);
 }
 
