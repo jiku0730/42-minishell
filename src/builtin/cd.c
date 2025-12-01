@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 11:38:28 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:04:18 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	by_too_many_arguments_error(void);
 static int	by_move_to_home(t_shell_table *shell_table);
 static int	by_move_to_oldpwd(t_shell_table *shell_table);
-static int	move_to_path(const char *path, t_shell_table *shell_table);
+static int	move_to_path(const char *absolute_path, t_shell_table *shell_table);
 
 int	cd(t_list *argv, t_shell_table *shell_table)
 {
@@ -32,7 +32,8 @@ int	cd(t_list *argv, t_shell_table *shell_table)
 			return (by_move_to_home(shell_table));
 		if (ft_strncmp((char *)argv->next->content, "-", 2) == 0)
 			return (by_move_to_oldpwd(shell_table));
-		return (move_to_path((char *)argv->next->content, shell_table));
+		return (move_to_path(to_absolute((char *)argv->next->content),
+				shell_table));
 	}
 	return (SUCCESS);
 }
@@ -69,7 +70,7 @@ static int	by_move_to_oldpwd(t_shell_table *shell_table)
 	return (move_to_path(oldpwd, shell_table));
 }
 
-static int	move_to_path(const char *path, t_shell_table *shell_table)
+static int	move_to_path(const char *absolute_path, t_shell_table *shell_table)
 {
 	char	*old_pwd;
 	char	*new_pwd;
@@ -78,7 +79,7 @@ static int	move_to_path(const char *path, t_shell_table *shell_table)
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		return (ERROR);
-	if (chdir(path) == -1)
+	if (chdir(absolute_path) == -1)
 	{
 		perror("cd");
 		free(old_pwd);

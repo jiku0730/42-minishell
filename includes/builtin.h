@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 03:23:00 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:03:36 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# include "path.h"
+# include "shell_table.h"
 # include <limits.h>
-# include <shell_table.h>
 # include <stdio.h>
 # include <unistd.h>
 
