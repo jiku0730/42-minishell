@@ -101,8 +101,11 @@ static t_list	*split_path_to_list(const char *path)
 
 static t_list	*append_path(char *segment, t_list *resolved_path)
 {
-	if (ft_strncmp(segment, "..", 3) == 0 && resolved_path)
-		ft_lstdel_back(&resolved_path, free);
+	if (ft_strncmp(segment, "..", 3) == 0)
+	{
+		if (resolved_path)
+			ft_lstdel_back(&resolved_path, free);
+	}
 	else if (ft_strncmp(segment, ".", 2) != 0)
 		ft_lstadd_back(&resolved_path, ft_lstnew(ft_strdup(segment)));
 	return (resolved_path);
