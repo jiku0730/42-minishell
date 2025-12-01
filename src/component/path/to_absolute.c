@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 14:26:11 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/01 14:31:58 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_list	*init_resolved_path(bool is_head_absolute, t_list **path_list)
 			ft_lstadd_back(&resolved_path, ft_lstnew((*path_list)->content));
 			temp = *path_list;
 			*path_list = (*path_list)->next;
-			free(temp);
+			ft_lstdelone(temp, free);
 		}
 		return (resolved_path);
 	}
