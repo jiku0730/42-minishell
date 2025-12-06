@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:32:40 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/06 15:49:36 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:19:06 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	builtin_checker(char *input, t_shell_table *shell_table)
 	tokens = tokenize(input);
 	if (!tokens)
 		return ;
-	if (ft_strncmp((char *)tokens->content, "export", 7) == 0)
-	{
-		builtin_func(tokens, shell_table);
-		shell_table_checker(shell_table);
-	}
-	else if (builtin_func)
+	if (builtin_func)
 		builtin_func(tokens, shell_table);
 	ft_lstclear(&tokens, free);
 }
