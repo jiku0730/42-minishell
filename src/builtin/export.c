@@ -6,12 +6,11 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:29:03 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/06 15:46:52 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/06 15:48:41 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include "minishell.h"
 
 static void	skip_head_node(t_list **argv);
 static int	insert_assignment(t_shell_table *shell_table,
@@ -31,7 +30,6 @@ int	export(t_list *argv, t_shell_table *shell_table)
 			return (ERROR);
 		skip_head_node(&argv);
 	}
-	shell_table_checker(shell_table);
 	return (SUCCESS);
 }
 
