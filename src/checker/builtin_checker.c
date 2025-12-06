@@ -18,7 +18,7 @@ void	builtin_checker(char *input, t_shell_table *shell_table)
 	t_list	*tokens;
 	int		(*builtin_func)(t_list *, t_shell_table *);
 
-	builtin_func = echo;
+	builtin_func = export;
 	tokens = tokenize(input);
 	if (!tokens)
 		return ;
