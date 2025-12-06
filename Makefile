@@ -61,6 +61,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/pwd.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
+				src/checker/builtin_checker.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \

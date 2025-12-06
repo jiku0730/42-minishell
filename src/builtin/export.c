@@ -70,17 +70,14 @@ static int	insert_assignment(t_shell_table *shell_table,
 
 static char	*get_key_from_assignment(const char *assignment)
 {
-	size_t	i;
-	char	*key;
+	char	*equal_sign_pos;
+	size_t	key_len;
 
-	i = 0;
-	while (assignment[i] && assignment[i] != '=')
-		i++;
-	key = (char *)ft_calloc(i + 1, sizeof(char));
-	if (!key)
-		return (NULL);
-	ft_strlcpy(key, assignment, i + 1);
-	return (key);
+	equal_sign_pos = ft_strchr(assignment, '=');
+	if (!equal_sign_pos)
+		return (ft_strdup(assignment));
+	key_len = equal_sign_pos - assignment;
+	return (ft_substr(assignment, 0, key_len));
 }
 
 static char	*get_value_from_assignment(const char *assignment)
