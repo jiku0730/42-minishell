@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/12/01 13:57:20 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/06 15:51:28 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	shell_table_checker(t_shell_table *shell_table);
 void	parser_checker(char *input, t_shell_table *shell_table);
 void	directory_checker(char *input, t_shell_table *shell_table);
 void	path_checker(char *input, t_shell_table *shell_table);
-void    builtin_checker(char *input, t_shell_table *shell_table);
+void	builtin_checker(char *input, t_shell_table *shell_table);
 
 #endif
