@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/12/01 00:22:27 by surayama         ###   ########.fr        #
+#    Updated: 2025/12/06 16:18:10 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,8 +96,10 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_search.c \
 				src/component/shell_table/shell_delete.c \
 				src/component/shell_table/shell_destroy.c \
+				src/component/shell_table/shell_print.c
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
+				src/component/shell_table/shell_print.c
 				src/component/pattern/filter_pattern.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
