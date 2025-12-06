@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   build_shell_table.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:23 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:53:48 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:23:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell_table.h>
+#include "shell_table.h"
 
 static t_shell_table	*st_create(size_t size);
 static int				insert_env_entries(char *const envp[],

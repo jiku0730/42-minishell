@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:41 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:23:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell_table.h>
+#include "shell_table.h"
 
 static int	count_exported_nodes(t_shell_table *shell_table);
 static int	export_envp_entries(char **envp, t_shell_table *shell_table);

@@ -13,8 +13,8 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# include "shell_table.h"
 # include <limits.h>
-# include <shell_table.h>
 # include <stdio.h>
 # include <unistd.h>
 

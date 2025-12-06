@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 14:29:52 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/09/29 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/12/01 00:00:00 by urassh            #+#    #+#             */
+/*   Updated: 2025/12/01 12:00:34 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PATH_H
+# define PATH_H
 
-void	ft_putendl_fd(const char *s, int fd)
-{
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
-	return ;
-}
+char	*to_absolute(const char *path);
+
+#endif
