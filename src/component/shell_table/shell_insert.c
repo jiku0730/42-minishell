@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   shell_insert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/01 03:23:00 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:05:07 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_table.h"
+
+static bool	is_valid_key(const char *key)
+{
+	size_t	i;
+
+	if (!key || !*key)
+		return (false);
+	if (!ft_isalpha(key[0]) && key[0] != '_')
+		return (false);
+	i = 1;
+	while (key[i])
+	{
+		if (!ft_isalnum(key[i]) && key[i] != '_')
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 static t_shell_node	*create_node(const char *key, const char *value,
 		bool exported)
@@ -56,7 +74,7 @@ int	st_insert(t_shell_table *table, const char *key, const char *value,
 	t_shell_node	*node;
 	t_shell_node	*new_node;
 
-	if (!table || !key || !value)
+	if (!table || !key || !value || !is_valid_key(key))
 		return (0);
 	index = st_hash(key, table->size);
 	node = table->buckets[index];
@@ -81,7 +99,7 @@ int	st_set_exported(t_shell_table *table, const char *key)
 	t_shell_node	*node;
 	t_shell_node	*new_node;
 
-	if (!table || !key)
+	if (!table || !key || !is_valid_key(key))
 		return (0);
 	index = st_hash(key, table->size);
 	node = table->buckets[index];
