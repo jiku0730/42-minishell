@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/06 16:13:15 by surayama         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:22:11 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "constants.h"
 # include "libft.h"
 # include <stdbool.h>
+# include <stdio.h>
 
 # define SHELL_TABLE_INIT_SIZE 256
 

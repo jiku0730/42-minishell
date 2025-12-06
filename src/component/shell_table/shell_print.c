@@ -17,6 +17,7 @@ void	st_print_env(t_shell_table *table)
 	size_t			i;
 	t_shell_node	*node;
 
+	i = 0;
 	while (i < table->size)
 	{
 		node = table->buckets[i];
