@@ -68,9 +68,10 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 static void	by_quote(t_token_store *store, t_token_state *state,
 		const char current)
 {
-	(void)store;
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else
-		*state = IN_QUOTE;
+	else if (current == '"')
+		*state = IN_DOUBLE_QUOTE;
+	else if (current == '\'')
+		*state = IN_SINGLE_QUOTE;
 }
