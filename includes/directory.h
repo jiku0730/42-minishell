@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   directory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 14:29:52 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/09/29 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/27 15:25:07 by surayama          #+#    #+#             */
+/*   Updated: 2025/12/01 03:28:22 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DIRECTORY_H
+# define DIRECTORY_H
 
-void	ft_putendl_fd(const char *s, int fd)
-{
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
-	return ;
-}
+# include "constants.h"
+# include <dirent.h>
+# include <errno.h>
+# include "libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+
+int	get_directory_entries(const char *path, bool include_hidden,
+		t_list **entries);
+int	get_directory_all_entries(const char *path, bool include_hidden,
+		t_list **entries);
+
+#endif

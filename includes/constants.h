@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 23:14:49 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:15:06 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 01:54:44 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,10 @@
 // macros
 # define SUCCESS 0
 # define ERROR -1
+# define NOT_FOUND -2
+# define NO_PERMISSION -3
+# define NOT_A_DIRECTORY -4
+# define SHELL_NAME "jikussh"
+# define PROMPT "jikussh$ "
 
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:05:31 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/20 17:23:51 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:28 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <heredoc.h>
+#include "heredoc.h"
 #include <readline/readline.h>
 
 static int	write_line_to_file(int fd, char *line);
