@@ -21,5 +21,6 @@
 int	echo(t_list *argv, t_shell_table *shell_table);
 int	pwd(t_list *argv, t_shell_table *shell_table);
 int	export(t_list *argv, t_shell_table *shell_table);
+int	unset(t_list *argv, t_shell_table *shell_table);
 
 #endif
