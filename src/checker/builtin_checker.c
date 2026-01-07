@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   builtin_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2025/11/29 20:31:07 by surayama         ###   ########.fr       */
+/*   Created: 2025/12/06 15:32:40 by surayama          #+#    #+#             */
+/*   Updated: 2025/12/06 16:19:06 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "builtin.h"
+#include "minishell.h"
 
-# include "shell_table.h"
-# include <limits.h>
-# include <stdio.h>
-# include <unistd.h>
+void	builtin_checker(char *input, t_shell_table *shell_table)
+{
+	t_list	*tokens;
+	int		(*builtin_func)(t_list *, t_shell_table *);
 
-int	echo(t_list *argv, t_shell_table *shell_table);
-int	pwd(t_list *argv, t_shell_table *shell_table);
-int	export(t_list *argv, t_shell_table *shell_table);
-
-#endif
+	builtin_func = export;
+	tokens = tokenize(input);
+	if (!tokens)
+		return ;
+	if (builtin_func)
+		builtin_func(tokens, shell_table);
+	ft_lstclear(&tokens, free);
+}
