@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/12/04 17:34:15 by surayama         ###   ########.fr        #
+#    Updated: 2025/12/06 16:21:35 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/cd.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
+				src/checker/builtin_checker.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \
@@ -97,6 +98,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_search.c \
 				src/component/shell_table/shell_delete.c \
 				src/component/shell_table/shell_destroy.c \
+				src/component/shell_table/shell_print.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
 				src/component/pattern/filter_pattern.c \
