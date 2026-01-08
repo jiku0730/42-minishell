@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:55:55 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
+/*   Updated: 2025/12/01 03:20:46 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 #include <stdio.h>
 #include <unistd.h>
 

@@ -20,7 +20,8 @@
 typedef enum e_token_state
 {
 	IN_NORMAL,
-	IN_QUOTE,
+	IN_DOUBLE_QUOTE,
+	IN_SINGLE_QUOTE,
 	IN_OPERATOR,
 	ON_SUCCESS,
 	ON_ERROR,
@@ -46,7 +47,9 @@ void		free_store(t_token_store *store);
 // state handler
 void		in_normal(t_token_store *store, t_token_state *state,
 				const char current);
-void		in_quote(t_token_store *store, t_token_state *state,
+void		in_double_quote(t_token_store *store, t_token_state *state,
+				const char current);
+void		in_single_quote(t_token_store *store, t_token_state *state,
 				const char current);
 void		in_operator(t_token_store *store, t_token_state *state,
 				const char current);

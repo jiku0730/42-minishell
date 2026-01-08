@@ -27,6 +27,7 @@ SRCS	=	conversion/ft_atoi.c \
 			list/ft_lstadd_back.c \
 			list/ft_lstadd_front.c \
 			list/ft_lstclear.c \
+			list/ft_lstdel_back.c \
 			list/ft_lstdelone.c \
 			list/ft_lstiter.c \
 			list/ft_lstlast.c \
