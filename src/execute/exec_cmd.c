@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 16:39:17 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:27:52 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static char	*join_path(const char *s1, const char *s2, const char *s3)
 	return (s1_s2_s3);
 }
 
-static char	*find_in_path(const char *cmd, char *const envp[])
+static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 {
 	char	**paths;
 	char	*path_env;
 	char	*full_path;
 	int		i;
 
-	path_env = get_env_path(envp);
+	path_env = get_env_path(shell_table);
 	if (!path_env)
 		return (NULL);
 	paths = ft_split(path_env, ':');
@@ -66,7 +66,7 @@ static char	*find_absolute_or_relative(const char *cmd)
 	return (NULL);
 }
 
-char	*find_command(const char *cmd, char *const envp[])
+char	*find_command(const char *cmd, t_shell_table *shell_table)
 {
 	char	*result;
 
@@ -75,11 +75,11 @@ char	*find_command(const char *cmd, char *const envp[])
 	if (ft_strchr(cmd, '/'))
 		result = find_absolute_or_relative(cmd);
 	else
-		result = find_in_path(cmd, envp);
+		result = find_in_path(cmd, shell_table);
 	return (result);
 }
 
-int	exec_cmd(t_ast *node, char *const envp[])
+int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
 	char	**argv;
 
@@ -95,5 +95,5 @@ int	exec_cmd(t_ast *node, char *const envp[])
 			ft_free_split(argv);
 		return (127);
 	}
-	return (exec_cmd_core(argv, envp));
+	return (exec_cmd_core(argv, shell_table));
 }
