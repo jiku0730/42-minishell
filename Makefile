@@ -72,7 +72,8 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
-				src/tokenize/state/in_quote.c \
+				src/tokenize/state/in_double_quote.c \
+				src/tokenize/state/in_single_quote.c \
 				src/tokenize/state/in_operator.c \
 				src/tokenize/state/on_success.c \
 				src/tokenize/state/on_error.c \
