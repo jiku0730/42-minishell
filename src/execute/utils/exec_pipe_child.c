@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 23:08:24 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 16:24:51 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:22:17 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	fatal_child(int fd0, int fd1, int code)
 	exit(code);
 }
 
-void	exec_left_child(t_ast *node, char *const envp[], int fd[2])
+void	exec_left_child(t_ast *node, t_shell_table *shell_table, int fd[2])
 {
 	int		status;
 	t_ast	*left_node;
@@ -34,13 +34,13 @@ void	exec_left_child(t_ast *node, char *const envp[], int fd[2])
 	left_node = node->left;
 	right_node = node->right;
 	free(node);
-	status = exec_ast(left_node, envp);
+	status = exec_ast(left_node, shell_table);
 	free_ast(left_node);
 	free_ast(right_node);
 	exit(status);
 }
 
-void	exec_right_child(t_ast *node, char *const envp[], int fd[2])
+void	exec_right_child(t_ast *node, t_shell_table *shell_table, int fd[2])
 {
 	int		status;
 	t_ast	*left_node;
@@ -53,7 +53,7 @@ void	exec_right_child(t_ast *node, char *const envp[], int fd[2])
 	left_node = node->left;
 	right_node = node->right;
 	free(node);
-	status = exec_ast(right_node, envp);
+	status = exec_ast(right_node, shell_table);
 	free_ast(left_node);
 	free_ast(right_node);
 	exit(status);

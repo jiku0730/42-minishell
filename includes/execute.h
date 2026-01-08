@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:09:08 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:23:47 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int					exec_cmd(t_ast *node, char *const envp[]);
 int					exec_cmd_core(char **argv, char *const envp[]);
 char				*find_command(const char *cmd, char *const envp[]);
 int					exec_pipe(t_ast *node, t_shell_table *shell_table);
-void				exec_left_child(t_ast *node, char *const envp[], int fd[2]);
-void				exec_right_child(t_ast *node, char *const envp[], \
-						int fd[2]);
+void				exec_left_child(t_ast *node, \
+						t_shell_table *shell_table, int fd[2]);
+void				exec_right_child(t_ast *node, \
+						t_shell_table *shell_table, int fd[2]);
 int					exec_redirs(t_list *redirs);
 char				**list_to_argv(t_list *lst);
 int					ft_wifexited(int exit_status);
