@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_table.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/06 16:22:11 by surayama         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:55:16 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void					st_print_env(t_shell_table *table);
 
 // shell_table specific operations
 t_shell_table			*build_shell_table(char *const envp[]);
-char					**export_envp(t_shell_table *shell_table);
+char *const				*export_envp(t_shell_table *shell_table);
 
 #endif
