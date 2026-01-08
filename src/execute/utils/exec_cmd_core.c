@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_core.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 23:08:19 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:55:48 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 21:19:58 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exec_cmd_core(char **argv, t_shell_table *shell_table)
 {
 	char		*cmd_path;
-	char *const	*new_envp;
+	char		**new_envp;
 
 	cmd_path = find_command(argv[0], shell_table);
 	if (!cmd_path)
@@ -33,6 +33,7 @@ int	exec_cmd_core(char **argv, t_shell_table *shell_table)
 	execve(cmd_path, argv, new_envp);
 	perror(cmd_path);
 	free(cmd_path);
+	st_destroy(shell_table);
 	ft_free_split(new_envp);
 	ft_free_split(argv);
 	return (127);

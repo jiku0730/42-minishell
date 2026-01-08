@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:15:41 by urassh            #+#    #+#             */
-/*   Updated: 2026/01/08 10:54:50 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 21:17:35 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	export_envp_entries(char **envp, t_shell_table *shell_table);
 static char	*export_envp_str(t_shell_node *node);
 static int	throw_export_envp(char **envp, size_t count);
 
-char *const	*export_envp(t_shell_table *shell_table)
+char	**export_envp(t_shell_table *shell_table)
 {
 	char	**envp;
 	int		count;
