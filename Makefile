@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/12/06 16:21:35 by surayama         ###   ########.fr        #
+#    Updated: 2026/01/08 10:31:56 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,7 +111,6 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/utils/exec_pipe_child.c \
 				src/execute/utils/exec_redirs.c \
 				src/execute/utils/list_to_argv.c \
-				src/execute/utils/get_env_path.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \

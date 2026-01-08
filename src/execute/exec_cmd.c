@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:27:52 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:31:26 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 	char	*full_path;
 	int		i;
 
-	path_env = get_env_path(shell_table);
+	path_env = st_search(shell_table, "PATH");
 	if (!path_env)
 		return (NULL);
 	paths = ft_split(path_env, ':');

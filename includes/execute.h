@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:38:39 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:29:03 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:32:02 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int					exec_redirs(t_list *redirs);
 char				**list_to_argv(t_list *lst);
 int					ft_wifexited(int exit_status);
 int					ft_wexitstatus(int exit_status);
-char				*get_env_path(char *const envp[]);
 
 #endif
