@@ -6,29 +6,27 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:31:26 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/08 10:36:05 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-static char	*join_path(const char *s1, const char *s2, const char *s3)
+static char	*join_path(const char *path, const char *cmd)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	s3_len;
-	char	*s1_s2_s3;
+	size_t	path_len;
+	size_t	cmd_len;
+	char	*joined;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	s3_len = ft_strlen(s3);
-	s1_s2_s3 = malloc(sizeof(char) * (s1_len + s2_len + s3_len + 1));
-	if (!s1_s2_s3)
+	path_len = ft_strlen(path);
+	cmd_len = ft_strlen(cmd);
+	joined = malloc(sizeof(char) * (path_len + 1 + cmd_len + 1));
+	if (!joined)
 		return (NULL);
-	ft_strlcpy(s1_s2_s3, s1, s1_len + 1);
-	ft_strlcpy(s1_s2_s3 + s1_len, s2, s2_len + 1);
-	ft_strlcpy(s1_s2_s3 + s1_len + s2_len, s3, s3_len + 1);
-	return (s1_s2_s3);
+	ft_strlcpy(joined, path, path_len + 1);
+	joined[path_len] = '/';
+	ft_strlcpy(joined + path_len + 1, cmd, cmd_len + 1);
+	return (joined);
 }
 
 static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
@@ -47,7 +45,7 @@ static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 	i = 0;
 	while (paths[i])
 	{
-		full_path = join_path(paths[i], "/", cmd);
+		full_path = join_path(paths[i], cmd);
 		if (!full_path)
 			return (ft_free_split(paths), NULL);
 		if (access(full_path, X_OK) == 0)
