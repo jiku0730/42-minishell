@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   in_normal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:30:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static void	by_last(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_space(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_quote(t_token_store *store, t_token_state *state,
-				const char current);
+static void	by_last(t_token_store *store, t_token_state *state, char current);
+static void	by_space(t_token_store *store, t_token_state *state, char current);
+static void	by_quote(t_token_store *store, t_token_state *state, char current);
 static void	by_operator(t_token_store *store, t_token_state *state,
-				const char current);
+				char current);
 
-void	in_normal(t_token_store *store, t_token_state *state,
-		const char current)
+void	in_normal(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0')
 		by_last(store, state, current);
@@ -36,8 +32,7 @@ void	in_normal(t_token_store *store, t_token_state *state,
 		*state = ON_ERROR;
 }
 
-static void	by_last(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_last(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -46,8 +41,7 @@ static void	by_last(t_token_store *store, t_token_state *state,
 		*state = ON_SUCCESS;
 }
 
-static void	by_space(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_space(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -57,7 +51,7 @@ static void	by_space(t_token_store *store, t_token_state *state,
 }
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (push_token(store) == ERROR || add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
@@ -65,12 +59,12 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 		*state = IN_OPERATOR;
 }
 
-static void	by_quote(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_quote(t_token_store *store, t_token_state *state, char current)
 {
-	(void)store;
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else
-		*state = IN_QUOTE;
+	else if (current == '"')
+		*state = IN_DOUBLE_QUOTE;
+	else if (current == '\'')
+		*state = IN_SINGLE_QUOTE;
 }

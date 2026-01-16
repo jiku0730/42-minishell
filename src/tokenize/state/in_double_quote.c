@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_quote.c                                         :+:      :+:    :+:   */
+/*   in_double_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 13:54:52 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:21:31 by urassh           ###   ########.fr       */
+/*   Created: 2025/12/06 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-void	in_quote(t_token_store *store, t_token_state *state, const char current)
+void	in_double_quote(t_token_store *store, t_token_state *state,
+		char current)
 {
 	if (current == '\0')
 		*state = ON_ERROR;
 	else if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else if (is_quote(current))
+	else if (current == '"')
 		*state = IN_NORMAL;
 }
