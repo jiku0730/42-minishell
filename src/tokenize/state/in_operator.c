@@ -20,6 +20,8 @@ void	in_operator(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0' && push_token(store))
 		*state = ON_SUCCESS;
+	else if (is_parenthesis(current))
+		by_normal(store, state, current);
 	else if (is_operator(current))
 		by_operator(store, state, current);
 	else

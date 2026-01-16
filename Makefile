@@ -71,7 +71,12 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/directory_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
-				src/tokenize/state/in_normal.c \
+				src/tokenize/state/in_normal/in_normal.c \
+				src/tokenize/state/in_normal/by_last.c \
+				src/tokenize/state/in_normal/by_space.c \
+				src/tokenize/state/in_normal/by_operator.c \
+				src/tokenize/state/in_normal/by_quote.c \
+				src/tokenize/state/in_normal/by_parenthesis.c \
 				src/tokenize/state/in_double_quote.c \
 				src/tokenize/state/in_single_quote.c \
 				src/tokenize/state/in_operator.c \

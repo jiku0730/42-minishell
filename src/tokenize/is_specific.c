@@ -31,6 +31,11 @@ bool	is_operator(char c)
 		return (true);
 	if (c == '>')
 		return (true);
+	return (false);
+}
+
+bool	is_parenthesis(char c)
+{
 	if (c == '(')
 		return (true);
 	if (c == ')')

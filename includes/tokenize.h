@@ -38,6 +38,7 @@ t_list		*tokenize(char *input);
 // is specific
 bool		is_quote(char c);
 bool		is_operator(char c);
+bool		is_parenthesis(char c);
 
 // store
 int			push_token(t_token_store *store);
