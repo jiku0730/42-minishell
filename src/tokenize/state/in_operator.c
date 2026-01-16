@@ -13,12 +13,10 @@
 #include "tokenize.h"
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_normal(t_token_store *store, t_token_state *state,
-				const char current);
+				char current);
+static void	by_normal(t_token_store *store, t_token_state *state, char current);
 
-void	in_operator(t_token_store *store, t_token_state *state,
-		const char current)
+void	in_operator(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0' && push_token(store))
 		*state = ON_SUCCESS;
@@ -29,7 +27,7 @@ void	in_operator(t_token_store *store, t_token_state *state,
 }
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
@@ -39,8 +37,7 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 		*state = IN_NORMAL;
 }
 
-static void	by_normal(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_normal(t_token_store *store, t_token_state *state, char current)
 {
 	if (push_token(store) == ERROR)
 		*state = ON_ERROR;

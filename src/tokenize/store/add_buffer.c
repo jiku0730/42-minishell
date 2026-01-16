@@ -12,7 +12,7 @@
 
 #include "tokenize.h"
 
-int	add_buffer(t_token_store *store, const char c)
+int	add_buffer(t_token_store *store, char c)
 {
 	char	*char_ptr;
 	t_list	*new_node;

@@ -16,8 +16,6 @@ void	free_store(t_token_store *store)
 {
 	if (!store)
 		return ;
-	if (store->buffer)
-		ft_lstclear(&(store->buffer), free);
-	if (store->tokens)
-		ft_lstclear(&(store->tokens), free);
+	ft_lstclear(&(store->buffer), free);
+	ft_lstclear(&(store->tokens), free);
 }

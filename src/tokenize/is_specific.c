@@ -12,7 +12,7 @@
 
 #include "tokenize.h"
 
-bool	is_quote(const char c)
+bool	is_quote(char c)
 {
 	if (c == '"')
 		return (true);
@@ -21,7 +21,7 @@ bool	is_quote(const char c)
 	return (false);
 }
 
-bool	is_operator(const char c)
+bool	is_operator(char c)
 {
 	if (c == '&')
 		return (true);

@@ -22,7 +22,6 @@ t_list	*on_success(t_token_store *store, char *input)
 		free(input);
 	rtv_tokens = store->tokens;
 	store->tokens = NULL;
-	if (store->buffer)
-		ft_lstclear(&(store->buffer), free);
+	ft_lstclear(&(store->buffer), free);
 	return (rtv_tokens);
 }

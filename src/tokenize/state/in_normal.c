@@ -12,17 +12,13 @@
 
 #include "tokenize.h"
 
-static void	by_last(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_space(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_quote(t_token_store *store, t_token_state *state,
-				const char current);
+static void	by_last(t_token_store *store, t_token_state *state, char current);
+static void	by_space(t_token_store *store, t_token_state *state, char current);
+static void	by_quote(t_token_store *store, t_token_state *state, char current);
 static void	by_operator(t_token_store *store, t_token_state *state,
-				const char current);
+				char current);
 
-void	in_normal(t_token_store *store, t_token_state *state,
-		const char current)
+void	in_normal(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0')
 		by_last(store, state, current);
@@ -36,8 +32,7 @@ void	in_normal(t_token_store *store, t_token_state *state,
 		*state = ON_ERROR;
 }
 
-static void	by_last(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_last(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -46,8 +41,7 @@ static void	by_last(t_token_store *store, t_token_state *state,
 		*state = ON_SUCCESS;
 }
 
-static void	by_space(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_space(t_token_store *store, t_token_state *state, char current)
 {
 	(void)current;
 	if (push_token(store) == ERROR)
@@ -57,7 +51,7 @@ static void	by_space(t_token_store *store, t_token_state *state,
 }
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (push_token(store) == ERROR || add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
@@ -65,8 +59,7 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 		*state = IN_OPERATOR;
 }
 
-static void	by_quote(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_quote(t_token_store *store, t_token_state *state, char current)
 {
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
