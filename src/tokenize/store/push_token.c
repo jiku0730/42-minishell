@@ -81,7 +81,6 @@ static int	add_back_token(char *token, t_token_store *store)
 static int	push_operator_tokens(t_token_store *store, char *token)
 {
 	char	*operator_token;
-	int		result;
 
 	while (token)
 	{
@@ -91,8 +90,7 @@ static int	push_operator_tokens(t_token_store *store, char *token)
 			free(token);
 			return (ERROR);
 		}
-		result = add_back_token(operator_token, store);
-		if (result == ERROR)
+		if (add_back_token(operator_token, store) == ERROR)
 		{
 			free(token);
 			return (ERROR);
