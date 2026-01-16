@@ -6,11 +6,10 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:47:35 by urassh            #+#    #+#             */
-/*   Updated: 2026/01/16 13:41:23 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/16 13:50:46 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "minishell.h"
 
 static void	on_exit_token(t_list *token_list);
