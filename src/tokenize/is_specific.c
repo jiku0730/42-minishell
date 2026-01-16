@@ -34,21 +34,26 @@ bool	is_operator_char(char c)
 	return (false);
 }
 
-size_t	operator_length(char *str)
+size_t	operator_length(const char *str)
 {
-	if (ft_strncmp(str, "<<<", 3) == 0 || ft_strncmp(str, "<<-", 3) == 0)
+	if (ft_strncmp(str, "<<<", 3) == 0 || \
+		ft_strncmp(str, "<<-", 3) == 0)
 		return (3);
-	if (ft_strncmp(str, "&&", 2) == 0 || ft_strncmp(str, "||", 2) == 0
-		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
-		|| ft_strncmp(str, ">&", 2) == 0 || ft_strncmp(str, "<&", 2) == 0
-		|| ft_strncmp(str, ">|", 2) == 0 || ft_strncmp(str, "<>", 2) == 0)
+	if (ft_strncmp(str, "&&", 2) == 0 || \
+		ft_strncmp(str, "||", 2) == 0 || \
+		ft_strncmp(str, "<<", 2) == 0 || \
+		ft_strncmp(str, ">>", 2) == 0 || \
+		ft_strncmp(str, ">&", 2) == 0 || \
+		ft_strncmp(str, "<&", 2) == 0 || \
+		ft_strncmp(str, ">|", 2) == 0 || \
+		ft_strncmp(str, "<>", 2) == 0)
 		return (2);
 	if (is_operator_char(str[0]))
 		return (1);
 	return (0);
 }
 
-bool	is_operator(char *str)
+bool	is_operator(const char *str)
 {
 	if (operator_length(str) > 0)
 		return (true);

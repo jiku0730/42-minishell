@@ -38,8 +38,8 @@ t_list		*tokenize(char *input);
 // is specific
 bool		is_quote(char c);
 bool		is_operator_char(char c);
-bool		is_operator(char *str);
-size_t		operator_length(char *str);
+bool		is_operator(const char *str);
+size_t		operator_length(const char *str);
 bool		is_parenthesis(char c);
 
 // store
