@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:47:35 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/27 14:54:45 by urassh           ###   ########.fr       */
+/*   Updated: 2026/01/16 13:41:23 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "minishell.h"
 
 static void	on_exit_token(t_list *token_list);
@@ -23,7 +24,7 @@ void	tokenize_checker(char *input, t_shell_table *shell_table)
 	token_list = tokenize(input);
 	if (!token_list)
 	{
-		write(STDOUT_FILENO, "Error: tokenize failed\n", 23);
+		ft_putstr_fd("Error: tokenize failed\n", STDOUT_FILENO);
 		return ;
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
@@ -36,18 +37,15 @@ static void	print_tokens(t_list *token_list)
 {
 	t_list	*current;
 	int		index;
+	char	*content;
 
 	index = 0;
 	current = token_list;
-	write(STDOUT_FILENO, "Tokens:\n", 8);
+	printf("Tokens:\n");
 	while (current)
 	{
-		write(STDOUT_FILENO, "[", 1);
-		ft_putnbr_fd(index, STDOUT_FILENO);
-		write(STDOUT_FILENO, "] \"", 3);
-		if (current->content)
-			write(STDOUT_FILENO, current->content, ft_strlen(current->content));
-		write(STDOUT_FILENO, "\"\n", 2);
+		content = current->content;
+		printf("[%d] \"%s\"\n", index, content);
 		current = current->next;
 		index++;
 	}
@@ -55,7 +53,7 @@ static void	print_tokens(t_list *token_list)
 
 static void	on_exit_token(t_list *token_list)
 {
-	write(STDOUT_FILENO, "exit\n", 5);
+	printf("exit\n");
 	ft_lstclear(&token_list, free);
 	exit(0);
 }
