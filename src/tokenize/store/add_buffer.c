@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_buffer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/17 00:46:16 by urassh           ###   ########.fr       */
+/*   Updated: 2026/01/16 14:33:33 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-int	add_buffer(t_token_store *store, const char c)
+int	add_buffer(t_token_store *store, char c)
 {
 	char	*char_ptr;
 	t_list	*new_node;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_specific.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
+/*   Updated: 2026/01/16 14:33:34 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-bool	is_quote(const char c)
+bool	is_quote(char c)
 {
 	if (c == '"')
 		return (true);
@@ -21,7 +21,7 @@ bool	is_quote(const char c)
 	return (false);
 }
 
-bool	is_operator(const char c)
+bool	is_operator(char c)
 {
 	if (c == '&')
 		return (true);

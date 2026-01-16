@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   in_double_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/06 00:00:00 by urassh           ###   ########.fr       */
+/*   Updated: 2026/01/16 14:33:30 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
 void	in_double_quote(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (current == '\0')
 		*state = ON_ERROR;
