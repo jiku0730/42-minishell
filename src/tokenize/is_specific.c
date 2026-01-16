@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_specific.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/17 02:32:39 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_quote(char c)
 	return (false);
 }
 
-bool	is_operator(char c)
+bool	is_operator_char(char c)
 {
 	if (c == '&')
 		return (true);
@@ -30,6 +30,27 @@ bool	is_operator(char c)
 	if (c == '<')
 		return (true);
 	if (c == '>')
+		return (true);
+	return (false);
+}
+
+size_t	operator_length(char *str)
+{
+	if (ft_strncmp(str, "<<<", 3) == 0 || ft_strncmp(str, "<<-", 3) == 0)
+		return (3);
+	if (ft_strncmp(str, "&&", 2) == 0 || ft_strncmp(str, "||", 2) == 0
+		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
+		|| ft_strncmp(str, ">&", 2) == 0 || ft_strncmp(str, "<&", 2) == 0
+		|| ft_strncmp(str, ">|", 2) == 0)
+		return (2);
+	if (is_operator_char(str[0]))
+		return (1);
+	return (0);
+}
+
+bool	is_operator(char *str)
+{
+	if (operator_length(str) > 0)
 		return (true);
 	return (false);
 }

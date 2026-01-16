@@ -21,7 +21,7 @@ void	in_normal(t_token_store *store, t_token_state *state, char current)
 		by_space(store, state, current);
 	else if (is_parenthesis(current))
 		by_parenthesis(store, state, current);
-	else if (is_operator(current))
+	else if (is_operator_char(current))
 		by_operator(store, state, current);
 	else if (is_quote(current))
 		by_quote(store, state, current);

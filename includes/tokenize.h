@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:09:25 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:51 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/17 02:18:22 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ t_list		*tokenize(char *input);
 
 // is specific
 bool		is_quote(char c);
-bool		is_operator(char c);
+bool		is_operator_char(char c);
+bool		is_operator(char *str);
+size_t		operator_length(char *str);
 bool		is_parenthesis(char c);
 
 // store

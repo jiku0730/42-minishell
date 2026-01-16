@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:13:34 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/01/17 02:33:02 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,37 @@ static char	*build_token_from_buffer(t_list *buffer)
 	return (token);
 }
 
-static bool	is_buffer_empty(const t_list *buffer)
+static char	*consume_operator_token(char **token_ptr)
 {
-	return (!buffer);
+	char	*initial_token;
+	char	*operator_token;
+	char	*remained_token;
+	size_t	operator_token_length;
+
+	initial_token = *token_ptr;
+	operator_token_length = operator_length(initial_token);
+	operator_token = ft_substr(initial_token, 0, operator_token_length);
+	remained_token = NULL;
+	if (!operator_token)
+		return (NULL);
+	if (operator_token_length != ft_strlen(initial_token))
+	{
+		remained_token = ft_strdup(initial_token + operator_token_length);
+		if (!remained_token)
+		{
+			free(operator_token);
+			operator_token = NULL;
+		}
+	}
+	free(initial_token);
+	*token_ptr = remained_token;
+	return (operator_token);
 }
 
-int	push_token(t_token_store *store)
+static int	add_back_token(char *token, t_token_store *store)
 {
-	char	*token;
 	t_list	*new_node;
 
-	if (!store)
-		return (ERROR);
-	if (is_buffer_empty(store->buffer))
-		return (SUCCESS);
-	token = build_token_from_buffer(store->buffer);
-	if (!token)
-		return (ERROR);
 	new_node = ft_lstnew(token);
 	if (!new_node)
 	{
@@ -61,7 +75,49 @@ int	push_token(t_token_store *store)
 		return (ERROR);
 	}
 	ft_lstadd_back(&(store->tokens), new_node);
+	return (SUCCESS);
+}
+
+static int	push_operator_tokens(t_token_store *store, char *token)
+{
+	char	*operator_token;
+	int		result;
+
+	while (token)
+	{
+		operator_token = consume_operator_token(&token);
+		if (!operator_token)
+		{
+			free(token);
+			return (ERROR);
+		}
+		result = add_back_token(operator_token, store);
+		if (result == ERROR)
+		{
+			free(token);
+			return (ERROR);
+		}
+	}
+	return (SUCCESS);
+}
+
+int	push_token(t_token_store *store)
+{
+	char	*token;
+	int		result;
+
+	if (!store)
+		return (ERROR);
+	if (!store->buffer)
+		return (SUCCESS);
+	token = build_token_from_buffer(store->buffer);
+	if (!token)
+		return (ERROR);
+	if (is_operator(token))
+		result = push_operator_tokens(store, token);
+	else
+		result = add_back_token(token, store);
 	ft_lstclear(&(store->buffer), free);
 	store->buffer = NULL;
-	return (SUCCESS);
+	return (result);
 }
