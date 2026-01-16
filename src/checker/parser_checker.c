@@ -14,7 +14,7 @@
 
 static void	on_exit_token(t_list *token_list)
 {
-	write(STDOUT_FILENO, "exit\n", 5);
+	printf("exit\n");
 	ft_lstclear(&token_list, free);
 	exit(0);
 }
@@ -28,7 +28,7 @@ void	parser_checker(char *input, t_shell_table *shell_table)
 	token_list = tokenize(input);
 	if (!token_list)
 	{
-		write(STDOUT_FILENO, "Error: tokenize failed\n", 23);
+		printf("Error: tokenize failed\n");
 		return ;
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
