@@ -41,7 +41,7 @@ size_t	operator_length(char *str)
 	if (ft_strncmp(str, "&&", 2) == 0 || ft_strncmp(str, "||", 2) == 0
 		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
 		|| ft_strncmp(str, ">&", 2) == 0 || ft_strncmp(str, "<&", 2) == 0
-		|| ft_strncmp(str, ">|", 2) == 0)
+		|| ft_strncmp(str, ">|", 2) == 0 || ft_strncmp(str, "<>", 2) == 0)
 		return (2);
 	if (is_operator_char(str[0]))
 		return (1);
