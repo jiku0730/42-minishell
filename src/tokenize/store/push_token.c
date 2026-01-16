@@ -50,7 +50,7 @@ static char	*consume_operator_token(char **token_ptr)
 	remained_token = NULL;
 	if (!operator_token)
 		return (NULL);
-	if (operator_token_length != ft_strlen(initial_token))
+	if (ft_strlen(initial_token) - operator_token_length > 0)
 	{
 		remained_token = ft_strdup(initial_token + operator_token_length);
 		if (!remained_token)
