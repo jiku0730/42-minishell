@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_insert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/27 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/06 16:05:07 by surayama         ###   ########.fr       */
+/*   Created: 2025/11/27 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/01/16 14:00:43 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
