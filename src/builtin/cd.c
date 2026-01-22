@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 15:04:18 by surayama         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:50:36 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	cd(t_list *argv, t_shell_table *shell_table)
 static int	by_too_many_arguments_error(void)
 {
 	ft_putstr_fd("Error: cd too many arguments\n", STDERR_FILENO);
-	return (ERROR);
+	return (1);
 }
 
 static int	by_move_to_home(t_shell_table *shell_table)
@@ -52,7 +52,7 @@ static int	by_move_to_home(t_shell_table *shell_table)
 	if (!home)
 	{
 		ft_putstr_fd("Error: cd HOME not set\n", STDERR_FILENO);
-		return (ERROR);
+		return (1);
 	}
 	return (move_to_path(home, shell_table));
 }
@@ -65,7 +65,7 @@ static int	by_move_to_oldpwd(t_shell_table *shell_table)
 	if (!oldpwd)
 	{
 		ft_putstr_fd("Error: cd OLDPWD not set\n", STDERR_FILENO);
-		return (ERROR);
+		return (1);
 	}
 	return (move_to_path(oldpwd, shell_table));
 }
@@ -78,18 +78,18 @@ static int	move_to_path(const char *absolute_path, t_shell_table *shell_table)
 
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		return (ERROR);
+		return (1);
 	if (chdir(absolute_path) == -1)
 	{
 		perror("cd");
 		free(old_pwd);
-		return (ERROR);
+		return (1);
 	}
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 	{
 		free(old_pwd);
-		return (ERROR);
+		return (1);
 	}
 	has_insert_error = st_insert(shell_table, "OLDPWD", old_pwd, true) == 0
 		|| st_insert(shell_table, "PWD", new_pwd, true) == 0;
