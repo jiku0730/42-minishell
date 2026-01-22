@@ -60,6 +60,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/export.c \
 				src/builtin/pwd.c \
 				src/builtin/unset.c \
+				src/builtin/cd.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/builtin_checker.c \
@@ -105,6 +106,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
+				src/component/path/append_path.c \
 
 SRCS_BONUS	:=
 

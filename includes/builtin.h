@@ -13,6 +13,7 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# include "path.h"
 # include "shell_table.h"
 # include <limits.h>
 # include <stdio.h>
@@ -22,5 +23,6 @@ int	echo(t_list *argv, t_shell_table *shell_table);
 int	pwd(t_list *argv, t_shell_table *shell_table);
 int	export(t_list *argv, t_shell_table *shell_table);
 int	unset(t_list *argv, t_shell_table *shell_table);
+int	cd(t_list *argv, t_shell_table *shell_table);
 
 #endif

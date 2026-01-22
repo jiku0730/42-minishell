@@ -13,6 +13,14 @@
 #ifndef PATH_H
 # define PATH_H
 
+# include "libft.h"
+# include <limits.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
+
 char	*to_absolute(const char *path);
+t_list	*append_path(t_list **dest, const char *content);
+t_list	*append_path_list(t_list **dest, const char *content);
 
 #endif
