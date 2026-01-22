@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void				ft_lstswap(t_list *prev, t_list *target, t_list *new)
+void	ft_lstswap(t_list *prev, t_list *target, t_list *new)
 {
 	t_list	*next_node;
 	t_list	*last_new;
