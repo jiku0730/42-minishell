@@ -34,6 +34,7 @@ SRCS	=	conversion/ft_atoi.c \
 			list/ft_lstmap.c \
 			list/ft_lstnew.c \
 			list/ft_lstsize.c \
+			list/ft_lstswap.c \
 			memory/ft_bzero.c \
 			memory/ft_calloc.c \
 			memory/ft_memchr.c \
