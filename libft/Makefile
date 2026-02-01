@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/01/16 13:59:51 by kjikuhar         ###   ########.fr        #
+#    Updated: 2026/02/01 21:36:07 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCS	=	conversion/ft_atoi.c \
 			list/ft_lstmap.c \
 			list/ft_lstnew.c \
 			list/ft_lstsize.c \
-			list/ft_lstswap.c \
+			list/ft_lstreplace.c \
 			memory/ft_bzero.c \
 			memory/ft_calloc.c \
 			memory/ft_memchr.c \
