@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/12/06 16:21:35 by surayama         ###   ########.fr        #
+#    Updated: 2026/02/01 22:48:13 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,15 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
 				src/component/path/append_path.c \
+				src/component/variable_expand/variable_expand.c \
+				src/component/variable_expand/state/in_normal.c \
+				src/component/variable_expand/state/in_double_quote.c \
+				src/component/variable_expand/state/in_single_quote.c \
+				src/component/variable_expand/state/on_success.c \
+				src/component/variable_expand/state/on_error.c \
+				src/component/variable_expand/store/free_store.c \
+				src/component/variable_expand/store/push_token.c \
+				src/component/variable_expand/store/add_buffer.c \
 
 SRCS_BONUS	:=
 

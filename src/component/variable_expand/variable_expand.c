@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:55:17 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 22:23:05 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 22:49:31 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ char	*expand_token(char *token, t_shell_table *shell_table)
 			in_double_quote(shell_table, &store, &state, *current);
 		else if (state == IN_SINGLE_QUOTE)
 			in_single_quote(shell_table, &store, &state, *current);
+		else if (state == ON_SUCCESS)
+			return (on_success(&store, token));
+		else if (state == ON_ERROR)
+			return (on_error(&store, token));
 		current++;
 	}
 }
