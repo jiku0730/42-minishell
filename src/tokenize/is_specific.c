@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/17 02:32:39 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 21:29:08 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ bool	is_quote(char c)
 
 bool	is_operator_char(char c)
 {
-	if (c == '&')
-		return (true);
-	if (c == '|')
-		return (true);
-	if (c == '<')
-		return (true);
-	if (c == '>')
+	if (c == '&' || c == '|' || c == '<' || c == '>')
 		return (true);
 	return (false);
 }
@@ -60,9 +54,7 @@ bool	is_operator(const char *str)
 
 bool	is_parenthesis(char c)
 {
-	if (c == '(')
-		return (true);
-	if (c == ')')
+	if (c == '(' || c == ')')
 		return (true);
 	return (false);
 }
