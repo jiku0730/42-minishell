@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:37:05 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 21:18:40 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 21:55:11 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef enum e_expand_state
 	IN_NORMAL,
 	IN_DOUBLE_QUOTE,
 	IN_SINGLE_QUOTE,
+	ON_ERROR,
+	ON_SUCCESS,
 }			t_expand_state;
 
 typedef struct s_expand_store
