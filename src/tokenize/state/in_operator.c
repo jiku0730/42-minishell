@@ -20,7 +20,9 @@ void	in_operator(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0' && push_token(store))
 		*state = ON_SUCCESS;
-	else if (is_operator(current))
+	else if (is_parenthesis(current))
+		by_normal(store, state, current);
+	else if (is_operator_char(current))
 		by_operator(store, state, current);
 	else
 		by_normal(store, state, current);
@@ -31,10 +33,8 @@ static void	by_operator(t_token_store *store, t_token_state *state,
 {
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else if (push_token(store) == ERROR)
-		*state = ON_ERROR;
 	else
-		*state = IN_NORMAL;
+		*state = IN_OPERATOR;
 }
 
 static void	by_normal(t_token_store *store, t_token_state *state, char current)
