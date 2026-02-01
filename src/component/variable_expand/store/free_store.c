@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
-void	free_store(t_expand_store *store)
+void	expand_free_store(t_expand_store *store)
 {
 	if (!store)
 		return ;

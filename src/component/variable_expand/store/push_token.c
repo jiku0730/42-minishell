@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
 static char	*build_token_from_buffer(t_list *buffer)
 {
@@ -58,7 +59,7 @@ static t_list *new_expanded_node(char *str, t_shell_table *shell_table)
 	return (ft_lstnew(str));
 }
 
-int	push_token(t_expand_store *store, t_shell_table *shell_table)
+int	expand_push_token(t_expand_store *store, t_shell_table *shell_table)
 {
 	char	*token;
 	t_list	*new_node;

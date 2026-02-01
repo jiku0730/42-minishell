@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
-t_list		*on_error(t_expand_store *store, char *token)
+t_list		*expand_on_error(t_expand_store *store, char *token)
 {
 	if (token)
 		free(token);
 	if (store)
-		free_store(store);
+		expand_free_store(store);
 	return (NULL);
 }

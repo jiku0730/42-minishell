@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "tokenize_internal.h"
 
 static char	*build_token_from_buffer(t_list *buffer)
 {

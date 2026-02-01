@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "tokenize_internal.h"
 
 int	add_buffer(t_token_store *store, char c)
 {

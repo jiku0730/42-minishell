@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "tokenize_internal.h"
 
 void	free_store(t_token_store *store)
 {

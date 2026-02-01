@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "tokenize_internal.h"
 
 t_list	*on_success(t_token_store *store, char *input)
 {

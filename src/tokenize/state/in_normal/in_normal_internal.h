@@ -14,6 +14,7 @@
 # define IN_NORMAL_INTERNAL_H
 
 # include "tokenize.h"
+# include "tokenize_internal.h"
 
 void	by_last(t_token_store *store, t_token_state *state, char current);
 void	by_space(t_token_store *store, t_token_state *state, char current);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
 static t_list	*expand_token(char *token, t_shell_table *shell_table);
 
@@ -42,7 +43,7 @@ static void	initialize(t_expand_store *store, t_expand_state *state,
 	store->tokens = NULL;
 	store->buffer = NULL;
 	*current = token;
-	*state = IN_NORMAL;
+	*state = EXPAND_IN_NORMAL;
 }
 
 static t_list	*expand_token(char *token, t_shell_table *shell_table)
@@ -56,16 +57,16 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 	initialize(&store, &state, &current, token);
 	while (true)
 	{
-		if (state == IN_NORMAL)
-			in_normal(shell_table, &store, &state, *current);
-		else if (state == IN_DOUBLE_QUOTE)
-			in_double_quote(shell_table, &store, &state, *current);
-		else if (state == IN_SINGLE_QUOTE)
-			in_single_quote(shell_table, &store, &state, *current);
-		else if (state == ON_SUCCESS)
-			return (on_success(&store, token));
-		else if (state == ON_ERROR)
-			return (on_error(&store, token));
+		if (state == EXPAND_IN_NORMAL)
+			expand_in_normal(shell_table, &store, &state, *current);
+		else if (state == EXPAND_IN_DOUBLE_QUOTE)
+			expand_in_double_quote(shell_table, &store, &state, *current);
+		else if (state == EXPAND_IN_SINGLE_QUOTE)
+			expand_in_single_quote(shell_table, &store, &state, *current);
+		else if (state == EXPAND_ON_SUCCESS)
+			return (expand_on_success(&store, token));
+		else if (state == EXPAND_ON_ERROR)
+			return (expand_on_error(&store, token));
 		current++;
 	}
 }

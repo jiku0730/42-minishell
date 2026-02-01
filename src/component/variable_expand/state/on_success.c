@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
-t_list	*on_success(t_expand_store *store, char *token)
+t_list	*expand_on_success(t_expand_store *store, char *token)
 {
 	t_list	*expanded_tokens;
 

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "tokenize_internal.h"
 
 static void	initialize(t_token_store *store, t_token_state *state,
 				char **current, char *input);

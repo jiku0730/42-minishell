@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+#include "variable_expand_internal.h"
 
-int	add_buffer(t_expand_store *store, char c)
+int	expand_add_buffer(t_expand_store *store, char c)
 {
 	char	*char_ptr;
 	t_list	*new_node;
