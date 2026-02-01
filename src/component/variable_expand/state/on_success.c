@@ -17,10 +17,9 @@ t_list	*expand_on_success(t_expand_store *store, char *token)
 {
 	t_list	*expanded_tokens;
 
+	(void)token;
 	if (!store)
 		return (NULL);
-	if (token)
-		free(token);
 	expanded_tokens = store->tokens;
 	store->tokens = NULL;
 	ft_lstclear(&(store->buffer), free);

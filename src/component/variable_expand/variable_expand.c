@@ -19,12 +19,14 @@ t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
 {
 	t_list	*prev_token;
 	t_list	*current_token;
+	t_list	*next_token;
 	t_list	*expanded_token;
 
 	current_token = tokens;
 	prev_token = NULL;
 	while (current_token)
 	{
+		next_token = current_token->next;
 		expanded_token = expand_token(current_token->content, shell_table);
 		if (!expanded_token)
 			return (NULL);
@@ -32,7 +34,7 @@ t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
 		if (!prev_token)
 			tokens = expanded_token;
 		prev_token = expanded_token;
-		current_token = current_token->next;
+		current_token = next_token;
 	}
 	return (tokens);
 }

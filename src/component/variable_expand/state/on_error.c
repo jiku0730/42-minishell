@@ -15,8 +15,7 @@
 
 t_list		*expand_on_error(t_expand_store *store, char *token)
 {
-	if (token)
-		free(token);
+	(void)token;
 	if (store)
 		expand_free_store(store);
 	return (NULL);
