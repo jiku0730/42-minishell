@@ -34,13 +34,24 @@ t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
 	return (tokens);
 }
 
+static void	initialize(t_expand_store *store, t_expand_state *state,
+		char **current, char *token)
+{
+	store->tokens = NULL;
+	store->buffer = NULL;
+	*current = token;
+	*state = IN_NORMAL;
+}
+
 char	*expand_token(char *token, t_shell_table *shell_table)
 {
 	t_expand_store	store;
 	t_expand_state	state;
-	char	*current;
+	char			*current;
 
-	state = IN_NORMAL;
+	if (!token)
+		return (NULL);
+	initialize(&store, &state, &current, token);
 	while (true)
 	{
 		if (state == IN_NORMAL)
