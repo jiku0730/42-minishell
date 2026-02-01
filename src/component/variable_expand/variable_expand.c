@@ -6,11 +6,13 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:55:17 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 22:49:31 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 22:53:58 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "variable_expand.h"
+
+static t_list	*expand_token(char *token, t_shell_table *shell_table);
 
 t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
 {
@@ -43,7 +45,7 @@ static void	initialize(t_expand_store *store, t_expand_state *state,
 	*state = IN_NORMAL;
 }
 
-char	*expand_token(char *token, t_shell_table *shell_table)
+static t_list	*expand_token(char *token, t_shell_table *shell_table)
 {
 	t_expand_store	store;
 	t_expand_state	state;

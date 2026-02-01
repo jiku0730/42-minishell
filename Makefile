@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/02/01 22:48:13 by surayama         ###   ########.fr        #
+#    Updated: 2026/02/01 22:56:44 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/parser_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
+				src/checker/expand_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \

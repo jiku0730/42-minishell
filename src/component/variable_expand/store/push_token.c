@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 21:12:08 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 21:23:21 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 22:55:53 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static bool	is_buffer_empty(const t_list *buffer)
 
 static t_list *new_expanded_node(char *str, t_shell_table *shell_table)
 {
-	t_list	*new_node;
 	char *expanded_str;
 
 	if (!str)

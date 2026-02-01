@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:37:05 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 22:40:46 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/01 22:55:01 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_list *variable_expand(t_list *tokens, t_shell_table *shell_table);
 
 // store
 int			push_token(t_expand_store *store, t_shell_table *shell_table);
+void		free_store(t_expand_store *store);
 int			add_buffer(t_expand_store *store, char c);
 
 void		in_normal(t_shell_table *shell_table, t_expand_store *store, t_expand_state *state, char current);
