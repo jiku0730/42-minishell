@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:55:17 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/05 16:27:22 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:52:29 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 static t_list	*expand_token(char *token, t_shell_table *shell_table);
 static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
 					t_list *current_token, t_list *next_token);
+static t_list	*insert_expanded_token(t_list **tokens, t_list *prev_token,
+					t_list *current_token, t_list *expanded_token);
 
 t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table)
 {
@@ -31,12 +33,8 @@ t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table)
 		next_token = current_token->next;
 		expanded_token = expand_token(current_token->content, shell_table);
 		if (expanded_token)
-		{
-			ft_lstreplace(prev_token, current_token, expanded_token);
-			if (!prev_token)
-				tokens = expanded_token;
-			prev_token = ft_lstlast(expanded_token);
-		}
+			prev_token = insert_expanded_token(&tokens, prev_token, current_token,
+					expanded_token);
 		else
 			tokens = remove_current_token(tokens, prev_token, current_token,
 					next_token);
@@ -81,6 +79,18 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 			store.skip_count = 0;
 		}
 	}
+}
+
+static t_list	*insert_expanded_token(t_list **tokens, t_list *prev_token,
+		t_list *current_token, t_list *expanded_token)
+{
+	t_list	*replaced_prev;
+
+	replaced_prev = ft_lstlast(expanded_token);
+	ft_lstreplace(prev_token, current_token, expanded_token);
+	if (!prev_token)
+		*tokens = expanded_token;
+	return (replaced_prev);
 }
 
 static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
