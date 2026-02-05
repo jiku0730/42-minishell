@@ -37,7 +37,6 @@ void	expand_checker(char *input, t_shell_table *shell_table)
 		return ;
 	}
 	print_expanded_tokens(expanded_tokens);
-	ft_lstclear(&token_list, free);
 	ft_lstclear(&expanded_tokens, free);
 }
 
@@ -53,7 +52,10 @@ static void	print_expanded_tokens(t_list *token_list)
 	while (current)
 	{
 		content = current->content;
-		printf("[%d] \"%s\"\n", index, content);
+		if (content)
+			printf("[%d] \"%s\"\n", index, content);
+		else
+			printf("[%d] (null)\n", index);
 		current = current->next;
 		index++;
 	}

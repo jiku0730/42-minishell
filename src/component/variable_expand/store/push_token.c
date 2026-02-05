@@ -49,6 +49,12 @@ int	expand_push_token(t_expand_store *store, t_shell_table *shell_table)
 	if (!store->buffer)
 		return (SUCCESS);
 	token = build_token_from_buffer(store->buffer);
+	if (!token)
+	{
+		ft_lstclear(&(store->buffer), free);
+		store->buffer = NULL;
+		return (SUCCESS);
+	}
 	new_node = ft_lstnew((void *)token);
 	if (!new_node)
 	{
