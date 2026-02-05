@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "in_normal_internal.h"
+#include "../../tokenize_private.h"
 
 void	by_quote(t_token_store *store, t_token_state *state, char current)
 {
