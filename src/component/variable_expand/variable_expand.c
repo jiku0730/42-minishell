@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:55:17 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/05 17:52:29 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:58:51 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table)
 		next_token = current_token->next;
 		expanded_token = expand_token(current_token->content, shell_table);
 		if (expanded_token)
-			prev_token = insert_expanded_token(&tokens, prev_token, current_token,
-					expanded_token);
+			prev_token = insert_expanded_token(&tokens, prev_token,
+					current_token, expanded_token);
 		else
 			tokens = remove_current_token(tokens, prev_token, current_token,
 					next_token);
