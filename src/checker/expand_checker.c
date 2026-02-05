@@ -37,6 +37,7 @@ void	expand_checker(char *input, t_shell_table *shell_table)
 		return ;
 	}
 	print_expanded_tokens(expanded_tokens);
+	ft_lstclear(&token_list, free);
 	ft_lstclear(&expanded_tokens, free);
 }
 
