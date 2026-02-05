@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/12/06 16:21:35 by surayama         ###   ########.fr        #
+#    Updated: 2026/01/17 02:33:17 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,11 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
+				src/tokenize/state/in_normal/by_last.c \
+				src/tokenize/state/in_normal/by_space.c \
+				src/tokenize/state/in_normal/by_operator.c \
+				src/tokenize/state/in_normal/by_quote.c \
+				src/tokenize/state/in_normal/by_parenthesis.c \
 				src/tokenize/state/in_double_quote.c \
 				src/tokenize/state/in_single_quote.c \
 				src/tokenize/state/in_operator.c \

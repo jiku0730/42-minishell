@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_double_quote.c                                  :+:      :+:    :+:   */
+/*   by_parenthesis.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
+/*   Created: 2026/01/17 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tokenize_private.h"
+#include "../../tokenize_private.h"
 
-void	in_double_quote(t_token_store *store, t_token_state *state,
+void	by_parenthesis(t_token_store *store, t_token_state *state,
 		char current)
 {
-	if (current == '\0')
+	if (push_token(store) == ERROR || add_buffer(store, current) == ERROR
+		|| push_token(store) == ERROR)
 		*state = ON_ERROR;
-	else if (add_buffer(store, current) == ERROR)
-		*state = ON_ERROR;
-	else if (current == '"')
+	else
 		*state = IN_NORMAL;
 }
