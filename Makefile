@@ -69,6 +69,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/parser_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
+				src/checker/expand_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal/in_normal.c \
@@ -110,6 +111,16 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
+				src/component/variable_expand/variable_expand.c \
+				src/component/variable_expand/state/in_normal.c \
+				src/component/variable_expand/state/in_double_quote.c \
+				src/component/variable_expand/state/in_single_quote.c \
+				src/component/variable_expand/state/on_success.c \
+				src/component/variable_expand/state/on_error.c \
+				src/component/variable_expand/store/free_store.c \
+				src/component/variable_expand/store/push_token.c \
+				src/component/variable_expand/store/add_buffer.c \
+				src/component/variable_expand/store/get_key_length.c \
 
 SRCS_BONUS	:=
 
