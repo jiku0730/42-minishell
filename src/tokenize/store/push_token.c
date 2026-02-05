@@ -6,11 +6,11 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 22:13:34 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/17 02:33:02 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 static char	*build_token_from_buffer(t_list *buffer)
 {

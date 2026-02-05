@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/17 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/17 00:00:00 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/05 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IN_NORMAL_INTERNAL_H
 # define IN_NORMAL_INTERNAL_H
 
-# include "tokenize.h"
+# include "../../tokenize_private.h"
 
 void	by_last(t_token_store *store, t_token_state *state, char current);
 void	by_space(t_token_store *store, t_token_state *state, char current);

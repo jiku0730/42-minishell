@@ -6,11 +6,11 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 00:30:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 static void	by_operator(t_token_store *store, t_token_state *state,
 				char current);

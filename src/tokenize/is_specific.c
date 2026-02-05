@@ -6,11 +6,11 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 21:29:08 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "tokenize_private.h"
 
 bool	is_quote(char c)
 {
