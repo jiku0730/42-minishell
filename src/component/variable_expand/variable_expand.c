@@ -44,6 +44,7 @@ static void	initialize(t_expand_store *store, t_expand_state *state,
 {
 	store->tokens = NULL;
 	store->buffer = NULL;
+	store->skip_count = 0;
 	*current = token;
 	*state = EXPAND_IN_NORMAL;
 }
@@ -60,15 +61,20 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 	while (true)
 	{
 		if (state == EXPAND_IN_NORMAL)
-			expand_in_normal(shell_table, &store, &state, *current);
+			expand_in_normal(shell_table, &store, &state, &current);
 		else if (state == EXPAND_IN_DOUBLE_QUOTE)
-			expand_in_double_quote(shell_table, &store, &state, *current);
+			expand_in_double_quote(shell_table, &store, &state, &current);
 		else if (state == EXPAND_IN_SINGLE_QUOTE)
-			expand_in_single_quote(shell_table, &store, &state, *current);
+			expand_in_single_quote(shell_table, &store, &state, &current);
 		else if (state == EXPAND_ON_SUCCESS)
 			return (expand_on_success(&store, token));
 		else if (state == EXPAND_ON_ERROR)
 			return (expand_on_error(&store, token));
 		current++;
+		if (store.skip_count > 0)
+		{
+			current += store.skip_count;
+			store.skip_count = 0;
+		}
 	}
 }

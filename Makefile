@@ -122,6 +122,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/variable_expand/store/free_store.c \
 				src/component/variable_expand/store/push_token.c \
 				src/component/variable_expand/store/add_buffer.c \
+				src/component/variable_expand/store/get_key_length.c \
 
 SRCS_BONUS	:=
 
