@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 21:12:08 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/04 23:26:57 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:28:28 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	expand_push_token(t_expand_store *store, t_shell_table *shell_table)
 {
 	char	*token;
 	t_list	*new_node;
-	(void)shell_table;
 
+	(void)shell_table;
 	if (!store)
 		return (ERROR);
 	if (!store->buffer)

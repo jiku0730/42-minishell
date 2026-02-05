@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 01:15:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 21:29:08 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:27:55 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ bool	is_operator_char(char c)
 
 size_t	operator_length(const char *str)
 {
-	if (ft_strncmp(str, "<<<", 3) == 0 || \
-		ft_strncmp(str, "<<-", 3) == 0)
+	if (ft_strncmp(str, "<<<", 3) == 0 || ft_strncmp(str, "<<-", 3) == 0)
 		return (3);
-	if (ft_strncmp(str, "&&", 2) == 0 || \
-		ft_strncmp(str, "||", 2) == 0 || \
-		ft_strncmp(str, "<<", 2) == 0 || \
-		ft_strncmp(str, ">>", 2) == 0 || \
-		ft_strncmp(str, ">&", 2) == 0 || \
-		ft_strncmp(str, "<&", 2) == 0 || \
-		ft_strncmp(str, ">|", 2) == 0 || \
-		ft_strncmp(str, "<>", 2) == 0)
+	if (ft_strncmp(str, "&&", 2) == 0 || ft_strncmp(str, "||", 2) == 0
+		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, ">>", 2) == 0
+		|| ft_strncmp(str, ">&", 2) == 0 || ft_strncmp(str, "<&", 2) == 0
+		|| ft_strncmp(str, ">|", 2) == 0 || ft_strncmp(str, "<>", 2) == 0)
 		return (2);
 	if (is_operator_char(str[0]))
 		return (1);

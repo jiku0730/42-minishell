@@ -6,15 +6,15 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 22:44:15 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/05 15:03:28 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:28:26 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "variable_expand.h"
 
-static bool support_special_char(const char c);
+static bool	support_special_char(const char c);
 
-size_t					get_key_length(const char *from)
+size_t	get_key_length(const char *from)
 {
 	size_t	i;
 
@@ -33,9 +33,10 @@ size_t					get_key_length(const char *from)
 	return (i);
 }
 
-static bool support_special_char(const char c)
+static bool	support_special_char(const char c)
 {
-	if (c == '?' || c == '$' || c == '#' || c == '*' || c == '@' || c == '-' || c == '!')
+	if (c == '?' || c == '$' || c == '#' || c == '*' || c == '@' || c == '-'
+		|| c == '!')
 		return (true);
 	return (false);
 }

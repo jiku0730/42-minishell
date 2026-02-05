@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 21:55:17 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/01 22:53:58 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:27:22 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "variable_expand_internal.h"
 
 static t_list	*expand_token(char *token, t_shell_table *shell_table);
+static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
+					t_list *current_token, t_list *next_token);
 
-t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
+t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table)
 {
 	t_list	*prev_token;
 	t_list	*current_token;
@@ -24,16 +26,20 @@ t_list *variable_expand(t_list *tokens, t_shell_table *shell_table)
 
 	current_token = tokens;
 	prev_token = NULL;
-	while (current_token)
+	while (current_token && current_token->content)
 	{
 		next_token = current_token->next;
 		expanded_token = expand_token(current_token->content, shell_table);
-		if (!expanded_token)
-			return (NULL);
-		ft_lstreplace(prev_token, current_token, expanded_token);
-		if (!prev_token)
-			tokens = expanded_token;
-		prev_token = expanded_token;
+		if (expanded_token)
+		{
+			ft_lstreplace(prev_token, current_token, expanded_token);
+			if (!prev_token)
+				tokens = expanded_token;
+			prev_token = ft_lstlast(expanded_token);
+		}
+		else
+			tokens = remove_current_token(tokens, prev_token, current_token,
+					next_token);
 		current_token = next_token;
 	}
 	return (tokens);
@@ -55,8 +61,6 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 	t_expand_state	state;
 	char			*current;
 
-	if (!token)
-		return (NULL);
 	initialize(&store, &state, &current, token);
 	while (true)
 	{
@@ -77,4 +81,16 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 			store.skip_count = 0;
 		}
 	}
+}
+
+static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
+		t_list *current_token, t_list *next_token)
+{
+	if (prev_token)
+		prev_token->next = next_token;
+	else
+		tokens = next_token;
+	free(current_token->content);
+	free(current_token);
+	return (tokens);
 }
