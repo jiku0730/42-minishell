@@ -17,13 +17,13 @@ void	ft_lstreplace(t_list *prev, t_list *target, t_list *new)
 	t_list	*next_node;
 	t_list	*last_new;
 
-	if (!target || !new)
-		return ;
-	next_node = target->next;
-	last_new = ft_lstlast(new);
-	last_new->next = next_node;
-	free(target->content);
-	free(target);
+	if (!target || !new) {
+		next_node = target->next;
+		last_new = ft_lstlast(new);
+		last_new->next = next_node;
+		free(target->content);
+		free(target);
+	}
 	if (prev)
 		prev->next = new;
 }
