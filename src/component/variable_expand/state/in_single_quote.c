@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 22:22:34 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:07 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/07 00:46:06 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	expand_in_single_quote(t_shell_table *shell_table,
 static void	by_single_quote_end(t_shell_table *shell_table,
 		t_expand_store *store, t_expand_state *state, char **current)
 {
-	if (expand_push_token(store, shell_table) == ERROR
-		|| expand_add_buffer(store, **current) == ERROR)
+	if (expand_add_buffer(store, **current) == ERROR || expand_push_token(store,
+			shell_table) == ERROR)
 		*state = EXPAND_ON_ERROR;
 	else
 		*state = EXPAND_IN_NORMAL;
