@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   free_store.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 23:57:51 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/16 23:58:16 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/16 23:57:51 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 void	free_store(t_token_store *store)
 {
 	if (!store)
 		return ;
-	if (store->buffer)
-		ft_lstclear(&(store->buffer), free);
-	if (store->tokens)
-		ft_lstclear(&(store->tokens), free);
+	ft_lstclear(&(store->buffer), free);
+	ft_lstclear(&(store->tokens), free);
 }

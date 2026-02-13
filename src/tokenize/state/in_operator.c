@@ -3,44 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   in_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 00:30:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:21:43 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:30:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-				const char current);
-static void	by_normal(t_token_store *store, t_token_state *state,
-				const char current);
+				char current);
+static void	by_normal(t_token_store *store, t_token_state *state, char current);
 
-void	in_operator(t_token_store *store, t_token_state *state,
-		const char current)
+void	in_operator(t_token_store *store, t_token_state *state, char current)
 {
 	if (current == '\0' && push_token(store))
 		*state = ON_SUCCESS;
-	else if (is_operator(current))
+	else if (is_parenthesis(current))
+		by_normal(store, state, current);
+	else if (is_operator_char(current))
 		by_operator(store, state, current);
 	else
 		by_normal(store, state, current);
 }
 
 static void	by_operator(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
-	else if (push_token(store) == ERROR)
-		*state = ON_ERROR;
 	else
-		*state = IN_NORMAL;
+		*state = IN_OPERATOR;
 }
 
-static void	by_normal(t_token_store *store, t_token_state *state,
-		const char current)
+static void	by_normal(t_token_store *store, t_token_state *state, char current)
 {
 	if (push_token(store) == ERROR)
 		*state = ON_ERROR;

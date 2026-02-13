@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   in_single_quote.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 00:00:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/12/06 00:00:00 by urassh           ###   ########.fr       */
+/*   Created: 2025/12/06 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 void	in_single_quote(t_token_store *store, t_token_state *state,
-		const char current)
+		char current)
 {
 	if (current == '\0')
 		*state = ON_ERROR;

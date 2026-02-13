@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 00:35:00 by urassh            #+#    #+#             */
-/*   Updated: 2025/10/22 12:44:01 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/13 00:35:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 00:00:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "../tokenize_private.h"
 
 t_list	*on_success(t_token_store *store, char *input)
 {
@@ -22,7 +22,6 @@ t_list	*on_success(t_token_store *store, char *input)
 		free(input);
 	rtv_tokens = store->tokens;
 	store->tokens = NULL;
-	if (store->buffer)
-		ft_lstclear(&(store->buffer), free);
+	ft_lstclear(&(store->buffer), free);
 	return (rtv_tokens);
 }

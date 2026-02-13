@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: urassh <urassh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 17:14:04 by urassh            #+#    #+#             */
-/*   Updated: 2025/11/05 14:06:48 by urassh           ###   ########.fr       */
+/*   Created: 2025/10/10 17:14:04 by surayama          #+#    #+#             */
+/*   Updated: 2026/01/16 13:59:52 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
+#include "tokenize_private.h"
 
 static void	initialize(t_token_store *store, t_token_state *state,
 				char **current, char *input);
