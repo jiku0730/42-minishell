@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:51:36 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/13 23:26:09 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/13 23:29:35 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static bool	is_quote(char c);
 static char	*remove_quotes_from_string(const char *str);
-static int	removed_str_length(const char *str);
+static int	excluded_quote_length(const char *str);
 
 t_list	*remove_quotes(t_list *tokens)
 {
@@ -42,7 +42,7 @@ t_list	*remove_quotes(t_list *tokens)
 	return (tokens);
 }
 
-static int	removed_str_length(const char *str)
+static int	excluded_quote_length(const char *str)
 {
 	size_t	len;
 	size_t	quote_count;
@@ -66,7 +66,7 @@ static char	*remove_quotes_from_string(const char *str)
 
 	i = 0;
 	j = 0;
-	removed_str = malloc(sizeof(char) * (removed_str_length(str) + 1));
+	removed_str = malloc(sizeof(char) * (excluded_quote_length(str) + 1));
 	if (!removed_str)
 		return (NULL);
 	while (str[i])
