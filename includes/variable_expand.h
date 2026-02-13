@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreplace.c                                    :+:      :+:    :+:   */
+/*   variable_expand.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 21:36:30 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:40 by surayama         ###   ########.fr       */
+/*   Created: 2026/01/22 21:37:05 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/05 16:29:26 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef VARIABLE_EXPAND_H
+# define VARIABLE_EXPAND_H
 
-void	ft_lstreplace(t_list *prev, t_list *target, t_list *new)
-{
-	t_list	*next_node;
-	t_list	*last_new;
+# include "constants.h"
+# include "libft.h"
+# include "shell_table.h"
 
-	if (!target || !new)
-		return ;
-	next_node = target->next;
-	last_new = ft_lstlast(new);
-	last_new->next = next_node;
-	free(target->content);
-	free(target);
-	if (prev)
-		prev->next = new;
-}
+t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table);
+
+#endif

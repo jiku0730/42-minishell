@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/01/17 02:33:17 by surayama         ###   ########.fr        #
+#    Updated: 2026/02/13 23:37:21 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/parser_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
+				src/checker/expand_checker.c \
 				src/checker/remove_quotes_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
@@ -113,6 +114,16 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
 				src/component/path/append_path.c \
+				src/component/variable_expand/variable_expand.c \
+				src/component/variable_expand/state/in_normal_expand.c \
+				src/component/variable_expand/state/in_double_quote_expand.c \
+				src/component/variable_expand/state/in_single_quote_expand.c \
+				src/component/variable_expand/state/on_success_expand.c \
+				src/component/variable_expand/state/on_error_expand.c \
+				src/component/variable_expand/store/push_token_expand.c \
+				src/component/variable_expand/store/add_buffer_expand.c \
+				src/component/variable_expand/store/get_key_length_expand.c \
+				src/component/variable_expand/store/free_store_expand.c \
 				src/component/remove_quotes/remove_quotes.c \
 
 SRCS_BONUS	:=
