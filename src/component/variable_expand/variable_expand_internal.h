@@ -33,20 +33,20 @@ typedef struct s_expand_store
 }			t_expand_store;
 
 // store
-int			expand_push_token(t_expand_store *store,
+int			push_token_expand(t_expand_store *store,
 				t_shell_table *shell_table);
-void		expand_free_store(t_expand_store *store);
-int			expand_add_buffer(t_expand_store *store, char c);
+void		free_store_expand(t_expand_store *store);
+int			add_buffer_expand(t_expand_store *store, char c);
 size_t		get_key_length(const char *from);
 
 // state handler
-void		expand_in_normal(t_shell_table *shell_table, t_expand_store *store,
+void		in_normal_expand(t_shell_table *shell_table, t_expand_store *store,
 				t_expand_state *state, char **current);
-void		expand_in_double_quote(t_shell_table *shell_table,
+void		in_double_quote_expand(t_shell_table *shell_table,
 				t_expand_store *store, t_expand_state *state, char **current);
-void		expand_in_single_quote(t_shell_table *shell_table,
+void		in_single_quote_expand(t_shell_table *shell_table,
 				t_expand_store *store, t_expand_state *state, char **current);
-t_list		*expand_on_success(t_expand_store *store, char *token);
-t_list		*expand_on_error(t_expand_store *store, char *token);
+t_list		*on_success_expand(t_expand_store *store, char *token);
+t_list		*on_error_expand(t_expand_store *store, char *token);
 
 #endif

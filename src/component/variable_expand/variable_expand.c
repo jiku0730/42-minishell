@@ -63,15 +63,15 @@ static t_list	*expand_token(char *token, t_shell_table *shell_table)
 	while (true)
 	{
 		if (state == EXPAND_IN_NORMAL)
-			expand_in_normal(shell_table, &store, &state, &current);
+			in_normal_expand(shell_table, &store, &state, &current);
 		else if (state == EXPAND_IN_DOUBLE_QUOTE)
-			expand_in_double_quote(shell_table, &store, &state, &current);
+			in_double_quote_expand(shell_table, &store, &state, &current);
 		else if (state == EXPAND_IN_SINGLE_QUOTE)
-			expand_in_single_quote(shell_table, &store, &state, &current);
+			in_single_quote_expand(shell_table, &store, &state, &current);
 		else if (state == EXPAND_ON_SUCCESS)
-			return (expand_on_success(&store, token));
+			return (on_success_expand(&store, token));
 		else if (state == EXPAND_ON_ERROR)
-			return (expand_on_error(&store, token));
+			return (on_error_expand(&store, token));
 		current++;
 		if (store.skip_count > 0)
 		{

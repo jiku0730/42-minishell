@@ -115,15 +115,15 @@ SRCS_MAND	:=	src/main.c \
 				src/component/path/to_absolute.c \
 				src/component/path/append_path.c \
 				src/component/variable_expand/variable_expand.c \
-				src/component/variable_expand/state/in_normal.c \
-				src/component/variable_expand/state/in_double_quote.c \
-				src/component/variable_expand/state/in_single_quote.c \
-				src/component/variable_expand/state/on_success.c \
-				src/component/variable_expand/state/on_error.c \
-				src/component/variable_expand/store/push_token.c \
-				src/component/variable_expand/store/add_buffer.c \
-				src/component/variable_expand/store/get_key_length.c \
-				src/component/variable_expand/store/free_store.c \
+				src/component/variable_expand/state/in_normal_expand.c \
+				src/component/variable_expand/state/in_double_quote_expand.c \
+				src/component/variable_expand/state/in_single_quote_expand.c \
+				src/component/variable_expand/state/on_success_expand.c \
+				src/component/variable_expand/state/on_error_expand.c \
+				src/component/variable_expand/store/push_token_expand.c \
+				src/component/variable_expand/store/add_buffer_expand.c \
+				src/component/variable_expand/store/get_key_length_expand.c \
+				src/component/variable_expand/store/free_store_expand.c \
 				src/component/remove_quotes/remove_quotes.c \
 
 SRCS_BONUS	:=

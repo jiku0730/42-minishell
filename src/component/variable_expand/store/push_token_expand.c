@@ -38,7 +38,7 @@ static char	*build_token_from_buffer(t_list *buffer)
 	return (token);
 }
 
-int	expand_push_token(t_expand_store *store, t_shell_table *shell_table)
+int	push_token_expand(t_expand_store *store, t_shell_table *shell_table)
 {
 	char	*token;
 	t_list	*new_node;

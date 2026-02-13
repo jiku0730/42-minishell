@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_success.c                                       :+:      :+:    :+:   */
+/*   add_buffer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 22:38:01 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:14 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/01 21:10:42 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:14:41 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../variable_expand_internal.h"
 #include "variable_expand.h"
 
-t_list	*expand_on_success(t_expand_store *store, char *token)
+int	add_buffer_expand(t_expand_store *store, char c)
 {
-	t_list	*expanded_tokens;
+	char	*char_ptr;
+	t_list	*new_node;
 
-	(void)token;
 	if (!store)
-		return (NULL);
-	expanded_tokens = store->tokens;
-	store->tokens = NULL;
-	ft_lstclear(&(store->buffer), free);
-	return (expanded_tokens);
+		return (ERROR);
+	char_ptr = (char *)malloc(sizeof(char));
+	if (!char_ptr)
+		return (ERROR);
+	*char_ptr = c;
+	new_node = ft_lstnew(char_ptr);
+	if (!new_node)
+	{
+		free(char_ptr);
+		return (ERROR);
+	}
+	ft_lstadd_back(&(store->buffer), new_node);
+	return (SUCCESS);
 }

@@ -1,36 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_double_quote.c                                  :+:      :+:    :+:   */
+/*   in_normal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 22:14:06 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:01 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/01 21:49:36 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:15:04 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../variable_expand_internal.h"
 #include "variable_expand.h"
 
+static void	by_last(t_shell_table *shell_table, t_expand_store *store,
+				t_expand_state *state, char **current);
+static void	by_quote(t_shell_table *shell_table, t_expand_store *store,
+				t_expand_state *state, char **current);
 static void	by_dollar(t_shell_table *shell_table, t_expand_store *store,
 				t_expand_state *state, char **current);
-static void	by_double_quote_end(t_shell_table *shell_table,
-				t_expand_store *store, t_expand_state *state, char **current);
 static void	add_buffer_with_expanded(t_expand_store *store,
 				t_expand_state *state, char *expanded);
 
-void	expand_in_double_quote(t_shell_table *shell_table,
-		t_expand_store *store, t_expand_state *state, char **current)
+void	in_normal_expand(t_shell_table *shell_table, t_expand_store *store,
+		t_expand_state *state, char **current)
 {
 	if (**current == '\0')
-		*state = EXPAND_ON_ERROR;
+		by_last(shell_table, store, state, current);
+	else if (**current == '"' || **current == '\'')
+		by_quote(shell_table, store, state, current);
 	else if (**current == '$')
 		by_dollar(shell_table, store, state, current);
-	else if (**current == '"')
-		by_double_quote_end(shell_table, store, state, current);
-	else if (expand_add_buffer(store, **current) == ERROR)
+	else if (add_buffer_expand(store, **current) == ERROR)
 		*state = EXPAND_ON_ERROR;
+}
+
+static void	by_last(t_shell_table *shell_table, t_expand_store *store,
+		t_expand_state *state, char **current)
+{
+	(void)current;
+	if (push_token_expand(store, shell_table) == ERROR)
+		*state = EXPAND_ON_ERROR;
+	else
+		*state = EXPAND_ON_SUCCESS;
+}
+
+static void	by_quote(t_shell_table *shell_table, t_expand_store *store,
+		t_expand_state *state, char **current)
+{
+	if (push_token_expand(store, shell_table) == ERROR
+		|| add_buffer_expand(store, **current) == ERROR)
+		*state = EXPAND_ON_ERROR;
+	else if (**current == '"')
+		*state = EXPAND_IN_DOUBLE_QUOTE;
+	else
+		*state = EXPAND_IN_SINGLE_QUOTE;
 }
 
 static void	by_dollar(t_shell_table *shell_table, t_expand_store *store,
@@ -43,7 +67,7 @@ static void	by_dollar(t_shell_table *shell_table, t_expand_store *store,
 	key_length = get_key_length(*current + 1);
 	if (key_length == 0)
 	{
-		if (expand_add_buffer(store, **current) == ERROR)
+		if (add_buffer_expand(store, **current) == ERROR)
 			*state = EXPAND_ON_ERROR;
 		return ;
 	}
@@ -61,16 +85,6 @@ static void	by_dollar(t_shell_table *shell_table, t_expand_store *store,
 	store->skip_count = key_length;
 }
 
-static void	by_double_quote_end(t_shell_table *shell_table,
-		t_expand_store *store, t_expand_state *state, char **current)
-{
-	if (expand_add_buffer(store, **current) == ERROR || expand_push_token(store,
-			shell_table) == ERROR)
-		*state = EXPAND_ON_ERROR;
-	else
-		*state = EXPAND_IN_NORMAL;
-}
-
 static void	add_buffer_with_expanded(t_expand_store *store,
 		t_expand_state *state, char *expanded)
 {
@@ -81,7 +95,7 @@ static void	add_buffer_with_expanded(t_expand_store *store,
 	i = 0;
 	while (expanded[i] != '\0')
 	{
-		if (expand_add_buffer(store, expanded[i]) == ERROR)
+		if (add_buffer_expand(store, expanded[i]) == ERROR)
 		{
 			*state = EXPAND_ON_ERROR;
 			return ;
