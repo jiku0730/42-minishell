@@ -6,13 +6,14 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:51:36 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 01:45:23 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/13 23:10:45 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "remove_quotes.h"
 #include <stdlib.h>
 
+static bool	is_quote_char(char c);
 static char	*remove_quotes_from_string(const char *str);
 static int	count_result_length(const char *str);
 
@@ -50,7 +51,7 @@ static int	count_result_length(const char *str)
 	quote_count = 0;
 	while (*str)
 	{
-		if (*str == '\'' || *str == '"' || *str == '`')
+		if (is_quote_char(*str))
 			quote_count++;
 		str++;
 	}
@@ -70,7 +71,7 @@ static char	*remove_quotes_from_string(const char *str)
 		return (NULL);
 	while (str[i])
 	{
-		if (str[i] != '\'' && str[i] != '"' && str[i] != '`')
+		if (!is_quote_char(str[i]))
 		{
 			removed_str[j] = str[i];
 			j++;
@@ -79,4 +80,9 @@ static char	*remove_quotes_from_string(const char *str)
 	}
 	removed_str[j] = '\0';
 	return (removed_str);
+}
+
+static bool	is_quote_char(char c)
+{
+	return (c == '\'' || c == '"' || c == '`');
 }
