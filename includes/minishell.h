@@ -18,6 +18,7 @@
 # include "libft.h"
 # include "parser.h"
 # include "prompt.h"
+# include "remove_quotes.h"
 # include "shell_table.h"
 # include "tokenize.h"
 
@@ -32,5 +33,6 @@ void	parser_checker(char *input, t_shell_table *shell_table);
 void	directory_checker(char *input, t_shell_table *shell_table);
 void	path_checker(char *input, t_shell_table *shell_table);
 void	builtin_checker(char *input, t_shell_table *shell_table);
+void	remove_quotes_checker(char *input, t_shell_table *shell_table);
 
 #endif

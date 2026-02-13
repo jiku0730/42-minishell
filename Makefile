@@ -70,6 +70,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/parser_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
+				src/checker/remove_quotes_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -112,6 +113,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
 				src/component/path/append_path.c \
+				src/component/remove_quotes/remove_quotes.c \
 
 SRCS_BONUS	:=
 
