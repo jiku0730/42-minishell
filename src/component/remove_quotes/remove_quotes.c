@@ -6,14 +6,14 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:51:36 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/13 23:13:29 by surayama         ###   ########.fr       */
+/*   Updated: 2026/02/13 23:26:09 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "remove_quotes.h"
 #include <stdlib.h>
 
-static bool	is_quote_char(char c);
+static bool	is_quote(char c);
 static char	*remove_quotes_from_string(const char *str);
 static int	removed_str_length(const char *str);
 
@@ -51,7 +51,7 @@ static int	removed_str_length(const char *str)
 	quote_count = 0;
 	while (*str)
 	{
-		if (is_quote_char(*str))
+		if (is_quote(*str))
 			quote_count++;
 		str++;
 	}
@@ -71,7 +71,7 @@ static char	*remove_quotes_from_string(const char *str)
 		return (NULL);
 	while (str[i])
 	{
-		if (!is_quote_char(str[i]))
+		if (!is_quote(str[i]))
 		{
 			removed_str[j] = str[i];
 			j++;
@@ -82,7 +82,7 @@ static char	*remove_quotes_from_string(const char *str)
 	return (removed_str);
 }
 
-static bool	is_quote_char(char c)
+static bool	is_quote(char c)
 {
 	return (c == '\'' || c == '"' || c == '`');
 }
