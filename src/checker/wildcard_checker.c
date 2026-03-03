@@ -29,15 +29,15 @@ void	wildcard_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	print_tokens(token_list, "Before resolve_wildcard_path");
-	result = resolve_wildcard_path(token_list);
+	print_tokens(token_list, "Before expand_wildcard");
+	result = expand_wildcard(token_list);
 	if (!result)
 	{
-		ft_putstr_fd("Error: resolve_wildcard_path failed\n", STDOUT_FILENO);
+		ft_putstr_fd("Error: expand_wildcard failed\n", STDOUT_FILENO);
 		ft_lstclear(&token_list, free);
 		return ;
 	}
-	print_tokens(result, "After resolve_wildcard_path");
+	print_tokens(result, "After expand_wildcard");
 	ft_lstclear(&result, free);
 }
 

@@ -14,12 +14,12 @@
 # define MINISHELL_H
 
 # include "constants.h"
+# include "expand.h"
 # include "heredoc.h"
 # include "libft.h"
 # include "parser.h"
 # include "prompt.h"
 # include "path.h"
-# include "remove_quotes.h"
 # include "shell_table.h"
 # include "tokenize.h"
 

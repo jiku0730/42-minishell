@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "variable_expand.h"
 
 static void	on_exit_token(t_list *token_list);
 static void	print_expanded_tokens(t_list *token_list);
@@ -29,10 +28,10 @@ void	expand_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	expanded_tokens = variable_expand(token_list, shell_table);
+	expanded_tokens = expand_variable(token_list, shell_table);
 	if (!expanded_tokens)
 	{
-		ft_putstr_fd("Error: variable_expand failed\n", STDOUT_FILENO);
+		ft_putstr_fd("Error: expand_variable failed\n", STDOUT_FILENO);
 		ft_lstclear(&token_list, free);
 		return ;
 	}

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.h                                             :+:      :+:    :+:   */
+/*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 17:15:58 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/01 22:38:01 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:15:14 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATH_H
-# define PATH_H
+#include "../expand_variable_internal.h"
+#include "expand.h"
 
-# include "libft.h"
-# include <limits.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <unistd.h>
+t_list	*on_success_expand(t_expand_store *store, char *token)
+{
+	t_list	*expanded_tokens;
 
-char	*to_absolute_path(const char *path);
-t_list	*append_path(t_list **dest, const char *content);
-t_list	*resolve_relative_path(t_list *tokens);
-char	*join_path(const char *path_before, const char *path_after);
-
-#endif
+	(void)token;
+	if (!store)
+		return (NULL);
+	expanded_tokens = store->tokens;
+	store->tokens = NULL;
+	ft_lstclear(&(store->buffer), free);
+	return (expanded_tokens);
+}

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.h                                             :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 17:15:58 by surayama         ###   ########.fr       */
+/*   Created: 2026/03/03 17:16:33 by surayama          #+#    #+#             */
+/*   Updated: 2026/03/03 17:54:02 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATH_H
-# define PATH_H
+#include "expand.h"
 
-# include "libft.h"
-# include <limits.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*to_absolute_path(const char *path);
-t_list	*append_path(t_list **dest, const char *content);
-t_list	*resolve_relative_path(t_list *tokens);
-char	*join_path(const char *path_before, const char *path_after);
-
-#endif
+t_list	*expand(t_list *tokens, t_shell_table *shell_table)
+{
+	tokens = expand_tilde(tokens, shell_table);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_variable(tokens, shell_table);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_wildcard(tokens);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_remove_quotes(tokens);
+	if (!tokens)
+		return (NULL);
+	return (tokens);
+}
