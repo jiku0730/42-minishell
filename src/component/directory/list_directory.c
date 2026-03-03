@@ -15,7 +15,7 @@
 static int	throw_error(void);
 static int	append_entry(t_list **entries, const char *entry_name);
 
-int	get_directory_entries(const char *path, bool include_hidden,
+int	list_directory(const char *path, bool include_hidden,
 		t_list **entries)
 {
 	DIR				*dir;

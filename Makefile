@@ -112,26 +112,27 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_print.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
-				src/component/pattern/filter_pattern.c \
-				src/component/directory/get_directory_entries.c \
-				src/component/directory/get_directory_all_entries.c \
+				src/component/directory/list_directory.c \
+				src/component/directory/list_directory_recursive.c \
 				src/component/path/to_absolute_path.c \
 				src/component/path/join_path.c \
 				src/component/path/append_path.c \
-				src/component/path/resolve_wildcard_path.c \
 				src/component/path/resolve_relative_path.c \
-				src/component/path/resolve_wildcard.c \
-				src/component/variable_expand/variable_expand.c \
-				src/component/variable_expand/state/in_normal_expand.c \
-				src/component/variable_expand/state/in_double_quote_expand.c \
-				src/component/variable_expand/state/in_single_quote_expand.c \
-				src/component/variable_expand/state/on_success_expand.c \
-				src/component/variable_expand/state/on_error_expand.c \
-				src/component/variable_expand/store/push_token_expand.c \
-				src/component/variable_expand/store/add_buffer_expand.c \
-				src/component/variable_expand/store/get_key_length_expand.c \
-				src/component/variable_expand/store/free_store_expand.c \
-				src/component/remove_quotes/remove_quotes.c \
+				src/expand/expand.c \
+				src/expand/expand_parameter/expand_parameter.c \
+				src/expand/expand_parameter/state/in_normal_expand.c \
+				src/expand/expand_parameter/state/in_double_quote_expand.c \
+				src/expand/expand_parameter/state/in_single_quote_expand.c \
+				src/expand/expand_parameter/state/on_success_expand.c \
+				src/expand/expand_parameter/state/on_error_expand.c \
+				src/expand/expand_parameter/store/push_token_expand.c \
+				src/expand/expand_parameter/store/add_buffer_expand.c \
+				src/expand/expand_parameter/store/get_key_length_expand.c \
+				src/expand/expand_parameter/store/free_store_expand.c \
+				src/expand/expand_tilde/expand_tilde.c \
+				src/expand/expand_wildcard/resolve_wildcard.c \
+				src/expand/expand_wildcard/expand_wildcard.c \
+				src/expand/expand_remove_quotes/expand_remove_quotes.c \
 
 SRCS_BONUS	:=
 

@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "path.h"
-#include "pattern.h"
 #include "directory.h"
+#include "expand_wildcard_internal.h"
 
 static t_list	*get_matches(const char *abs_dir, const char *pattern);
 static t_list	*build_full_paths(t_list *matches, const char *abs_dir);
+static bool		match_pattern(const char *str, const char *pattern);
+static t_list	*filter_pattern(t_list *source, const char *pattern);
 
 t_list	*resolve_wildcard(const char *token)
 {
@@ -44,15 +46,15 @@ t_list	*resolve_wildcard(const char *token)
 static t_list	*get_matches(const char *abs_dir, const char *pattern)
 {
 	t_list	*entries;
-	t_list	*matches;
+	t_list	*filtered_matches;
 	t_list	*result;
 
-	if (get_directory_entries(abs_dir, pattern[0] == '.', &entries) != SUCCESS)
+	if (list_directory(abs_dir, pattern[0] == '.', &entries) != SUCCESS)
 		return (NULL);
-	matches = filter_pattern(entries, pattern);
+	filtered_matches = filter_pattern(entries, pattern);
 	ft_lstclear(&entries, free);
-	result = build_full_paths(matches, abs_dir);
-	ft_lstclear(&matches, free);
+	result = build_full_paths(filtered_matches, abs_dir);
+	ft_lstclear(&filtered_matches, free);
 	return (result);
 }
 
@@ -83,4 +85,50 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 	}
 	free(dir_slash);
 	return (result);
+}
+
+static t_list	*filter_pattern(t_list *source, const char *pattern)
+{
+	t_list	*result;
+	t_list	*current;
+	t_list	*new_node;
+
+	if (!source || !pattern)
+		return (NULL);
+	result = NULL;
+	current = source;
+	while (current)
+	{
+		if (match_pattern((const char *)current->content, pattern))
+		{
+			new_node = ft_lstnew(ft_strdup((const char *)current->content));
+			if (!new_node)
+			{
+				ft_lstclear(&result, free);
+				return (NULL);
+			}
+			ft_lstadd_back(&result, new_node);
+		}
+		current = current->next;
+	}
+	return (result);
+}
+
+static bool	match_pattern(const char *str, const char *pattern)
+{
+	if (*pattern == '\0')
+		return (*str == '\0');
+	if (*pattern == WILDCARD)
+	{
+		while (*str)
+		{
+			if (match_pattern(str, pattern + 1))
+				return (true);
+			str++;
+		}
+		return (match_pattern(str, pattern + 1));
+	}
+	if (*str == *pattern)
+		return (match_pattern(str + 1, pattern + 1));
+	return (false);
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pattern.h                                          :+:      :+:    :+:   */
+/*   free_store.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/27 11:36:50 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:51 by kjikuhar         ###   ########.fr       */
+/*   Created: 2026/02/01 22:44:15 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:14:47 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATTERN_H
-# define PATTERN_H
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
-# include "libft.h"
-# include <stdbool.h>
-
-# define WILDCARD '*'
-
-t_list	*filter_pattern(t_list *source, const char *pattern);
-
-#endif
+void	free_store_expand(t_expand_store *store)
+{
+	if (!store)
+		return ;
+	ft_lstclear(&(store->buffer), free);
+	ft_lstclear(&(store->tokens), free);
+}

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variable_expand.h                                  :+:      :+:    :+:   */
+/*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 21:37:05 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/05 16:29:26 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/01 22:38:01 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:15:14 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARIABLE_EXPAND_H
-# define VARIABLE_EXPAND_H
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
-# include "constants.h"
-# include "libft.h"
-# include "shell_table.h"
+t_list	*on_success_expand(t_expand_store *store, char *token)
+{
+	t_list	*expanded_tokens;
 
-t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table);
-
-#endif
+	(void)token;
+	if (!store)
+		return (NULL);
+	expanded_tokens = store->tokens;
+	store->tokens = NULL;
+	ft_lstclear(&(store->buffer), free);
+	return (expanded_tokens);
+}

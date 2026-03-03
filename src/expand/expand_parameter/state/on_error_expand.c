@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../variable_expand_internal.h"
-#include "variable_expand.h"
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
 t_list	*on_error_expand(t_expand_store *store, char *token)
 {

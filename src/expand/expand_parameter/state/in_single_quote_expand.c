@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../variable_expand_internal.h"
-#include "variable_expand.h"
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
 static void	by_single_quote_end(t_shell_table *shell_table,
 				t_expand_store *store, t_expand_state *state, char **current);

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   on_success.c                                       :+:      :+:    :+:   */
+/*   wildcard_expand_internal.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 22:38:01 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:14 by surayama         ###   ########.fr       */
+/*   Created: 2026/03/03 17:21:58 by surayama          #+#    #+#             */
+/*   Updated: 2026/03/03 18:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../variable_expand_internal.h"
-#include "variable_expand.h"
+#ifndef EXPAND_WILDCARD_INTERNAL_H
+# define EXPAND_WILDCARD_INTERNAL_H
 
-t_list	*on_success_expand(t_expand_store *store, char *token)
-{
-	t_list	*expanded_tokens;
+# include "libft.h"
+# include <stdbool.h>
 
-	(void)token;
-	if (!store)
-		return (NULL);
-	expanded_tokens = store->tokens;
-	store->tokens = NULL;
-	ft_lstclear(&(store->buffer), free);
-	return (expanded_tokens);
-}
+# define WILDCARD '*'
+
+t_list	*resolve_wildcard(const char *token);
+
+#endif

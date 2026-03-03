@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "remove_quotes.h"
+#include "expand.h"
 #include <stdlib.h>
 
 static bool	is_quote(char c);
 static char	*remove_quotes_from_string(const char *str);
 static int	excluded_quote_length(const char *str);
 
-t_list	*remove_quotes(t_list *tokens)
+t_list	*expand_remove_quotes(t_list *tokens)
 {
 	t_list	*current;
 	char	*new_content;

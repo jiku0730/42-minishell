@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "variable_expand.h"
-#include "variable_expand_internal.h"
+#include "expand.h"
+#include "expand_parameter_internal.h"
 
 static t_list	*expand_token(char *token, t_shell_table *shell_table);
 static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
@@ -19,7 +19,7 @@ static t_list	*remove_current_token(t_list *tokens, t_list *prev_token,
 static t_list	*insert_expanded_token(t_list **tokens, t_list *prev_token,
 					t_list *current_token, t_list *expanded_token);
 
-t_list	*variable_expand(t_list *tokens, t_shell_table *shell_table)
+t_list	*expand_parameter(t_list *tokens, t_shell_table *shell_table)
 {
 	t_list	*prev_token;
 	t_list	*current_token;

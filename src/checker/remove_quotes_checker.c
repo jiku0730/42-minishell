@@ -30,7 +30,7 @@ void	remove_quotes_checker(char *input, t_shell_table *shell_table)
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
 	print_tokens(token_list, "Before remove_quote");
-	result = remove_quotes(token_list);
+	result = expand_remove_quotes(token_list);
 	if (!result)
 	{
 		ft_putstr_fd("Error: remove_quote failed\n", STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:13:47 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/03/03 13:03:53 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 19:17:28 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main_dev(int argc, char const **argv, char *const envp[])
 	if (!shell_table)
 		return (1);
 	shell_table_checker(shell_table);
-	prompt(wildcard_checker, shell_table);
+	prompt(expand_checker, shell_table);
 	st_destroy(shell_table);
 	return (0);
 }

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../variable_expand_internal.h"
-#include "variable_expand.h"
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
 static char	*build_token_from_buffer(t_list *buffer)
 {

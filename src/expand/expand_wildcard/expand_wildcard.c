@@ -6,18 +6,17 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 13:00:00 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 18:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "path.h"
-#include "pattern.h"
-#include <stdbool.h>
+#include "expand.h"
+#include "expand_wildcard_internal.h"
 
 static bool		has_wildcard(const char *str);
 static t_list	*handle_wildcard(t_list *prev, t_list *current, t_list **head);
 
-t_list	*resolve_wildcard_path(t_list *tokens)
+t_list	*expand_wildcard(t_list *tokens)
 {
 	t_list	*prev;
 	t_list	*current;
