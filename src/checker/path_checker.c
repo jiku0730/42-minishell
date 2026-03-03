@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/01 13:57:16 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 12:41:23 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	path_checker(char *input, t_shell_table *shell_table)
 	}
 	printf("\n=== Path Checker ===\n");
 	printf("Input: %s\n", input);
-	absolute_path = to_absolute(input);
+	absolute_path = to_absolute_path(input);
 	if (absolute_path)
 	{
 		printf("Absolute Path: %s\n", absolute_path);

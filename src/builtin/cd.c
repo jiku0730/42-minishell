@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/22 19:50:36 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 12:41:23 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	cd(t_list *argv, t_shell_table *shell_table)
 			return (by_move_to_home(shell_table));
 		if (ft_strncmp((char *)argv->next->content, "-", 2) == 0)
 			return (by_move_to_oldpwd(shell_table));
-		return (move_to_path(to_absolute((char *)argv->next->content),
+		return (move_to_path(to_absolute_path((char *)argv->next->content),
 				shell_table));
 	}
 	return (SUCCESS);
