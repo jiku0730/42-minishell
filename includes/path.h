@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:51 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 16:49:39 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 char	*to_absolute(const char *path);
 t_list	*append_path(t_list **dest, const char *content);
 t_list	*append_path_list(t_list **dest, const char *content);
+char	*join_path(const char *path, const char *cmd);
 
 #endif
