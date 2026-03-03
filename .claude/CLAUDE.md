@@ -35,7 +35,7 @@ make                 # コンテナ内でビルド
 シェルは以下のインタープリタパイプラインに従う:
 
 ```
-Input → tokenize() → heredoc() → variable_expand() → remove_quotes() → parser() → AST → execute
+Input → tokenize() → heredoc() → variable_expand() → remove_quotes() → parse() → AST → execute
 ```
 
 ### パイプラインの各段階
@@ -46,7 +46,7 @@ Input → tokenize() → heredoc() → variable_expand() → remove_quotes() →
 
 3. **クォート削除** (`src/component/remove_quotes/`) — 展開後のトークンからクォート文字を除去。
 
-4. **parser** (`src/parser/`) — 再帰下降パーサ。二分木ASTを生成。ノード型: `PIPE`(内部ノード)、`CMD`(葉ノード、`t_cmd` に argv リストとリダイレクションリストを持つ)。
+4. **parse** (`src/parse/`) — 再帰下降パーサ。二分木ASTを生成。ノード型: `PIPE`(内部ノード)、`CMD`(葉ノード、`t_cmd` に argv リストとリダイレクションリストを持つ)。
 
 5. **実行** — 未実装。エントリポイントは `src/callback/on_input.c`。
 
@@ -60,9 +60,9 @@ Input → tokenize() → heredoc() → variable_expand() → remove_quotes() →
 ### 主要データ構造 (`includes/`)
 
 - `t_shell_table` / `t_shell_node` — 環境変数ハッシュテーブル (`shell_table.h`)
-- `t_ast` — AST木。`t_ast_type` (PIPE/CMD) と left/right 子ノード (`parser.h`)
-- `t_cmd` — コマンド。`t_list *argv` と `t_list *redirs` を持つ (`parser.h`)
-- `t_redir` — リダイレクション。`t_redir_kind` (R_IN, R_OUT_TRUNC, R_OUT_APPEND) と filename (`parser.h`)
+- `t_ast` — AST木。`t_ast_type` (PIPE/CMD) と left/right 子ノード (`parse.h`)
+- `t_cmd` — コマンド。`t_list *argv` と `t_list *redirs` を持つ (`parse.h`)
+- `t_redir` — リダイレクション。`t_redir_kind` (R_IN, R_OUT_TRUNC, R_OUT_APPEND) と filename (`parse.h`)
 - `t_list` — libft のリンクリスト。トークンリストや引数リストとして全体で使用
 
 ## Critical Rules

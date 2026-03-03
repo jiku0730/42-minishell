@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
 void	print_pipe_node(t_ast *node, const char *prefix, bool is_last)
 {

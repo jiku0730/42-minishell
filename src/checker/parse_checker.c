@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_checker.c                                   :+:      :+:    :+:   */
+/*   parse_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@ static void	on_exit_token(t_list *token_list)
 	exit(0);
 }
 
-void	parser_checker(char *input, t_shell_table *shell_table)
+void	parse_checker(char *input, t_shell_table *shell_table)
 {
 	t_list	*token_list;
 	t_ast	*ast_root;
@@ -33,7 +33,7 @@ void	parser_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	ast_root = parser(token_list);
+	ast_root = parse(token_list);
 	print_ast(ast_root);
 	free_ast(ast_root);
 	ft_lstclear(&token_list, free);

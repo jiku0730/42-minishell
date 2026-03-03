@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_ast_node.c                                     :+:      :+:    :+:   */
+/*   new_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 18:29:33 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/19 23:39:24 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/11/14 18:29:38 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/11/19 23:39:34 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
-t_ast	*new_ast_node(t_ast_type type)
+t_cmd	*new_cmd(void)
 {
-	t_ast	*node;
+	t_cmd	*cmd;
 
-	node = malloc(sizeof(t_ast));
-	if (!node)
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
 		return (NULL);
-	node->type = type;
-	node->cmd = NULL;
-	node->left = NULL;
-	node->right = NULL;
-	return (node);
+	cmd->argv = NULL;
+	cmd->redirs = NULL;
+	return (cmd);
 }
