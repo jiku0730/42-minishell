@@ -28,10 +28,10 @@ void	expand_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	expanded_tokens = expand_parameter(token_list, shell_table);
+	expanded_tokens = expand(token_list, shell_table);
 	if (!expanded_tokens)
 	{
-		ft_putstr_fd("Error: expand_parameter failed\n", STDOUT_FILENO);
+		ft_putstr_fd("Error: expand failed\n", STDOUT_FILENO);
 		ft_lstclear(&token_list, free);
 		return ;
 	}
@@ -47,7 +47,7 @@ static void	print_expanded_tokens(t_list *token_list)
 
 	index = 0;
 	current = token_list;
-	printf("expanded_tokens:\n");
+	printf("expanded:\n");
 	while (current)
 	{
 		content = current->content;
