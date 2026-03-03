@@ -28,8 +28,6 @@ int	cd(t_list *argv, t_shell_table *shell_table)
 		return (by_move_to_home(shell_table));
 	if (argc == 2 && argv->next->content)
 	{
-		if (ft_strncmp((char *)argv->next->content, "~", 2) == 0)
-			return (by_move_to_home(shell_table));
 		if (ft_strncmp((char *)argv->next->content, "-", 2) == 0)
 			return (by_move_to_oldpwd(shell_table));
 		return (move_to_path(to_absolute_path((char *)argv->next->content),
