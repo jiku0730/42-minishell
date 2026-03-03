@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resolve_path.c                                    :+:      :+:    :+:   */
+/*   resolve_wildcard_path.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,11 +15,9 @@
 #include <stdbool.h>
 
 static bool		has_wildcard(const char *str);
-static bool		has_path(const char *str);
 static t_list	*handle_wildcard(t_list *prev, t_list *cur, t_list **head);
-static void		handle_path(t_list *current);
 
-t_list	*resolve_path(t_list *tokens)
+t_list	*resolve_wildcard_path(t_list *tokens)
 {
 	t_list	*prev;
 	t_list	*current;
@@ -30,11 +28,6 @@ t_list	*resolve_path(t_list *tokens)
 	{
 		if (has_wildcard((char *)current->content))
 			prev = handle_wildcard(prev, current, &tokens);
-		else if (has_path((char *)current->content))
-		{
-			handle_path(current);
-			prev = current;
-		}
 		else
 			prev = current;
 		current = prev->next;
@@ -45,11 +38,6 @@ t_list	*resolve_path(t_list *tokens)
 static bool	has_wildcard(const char *str)
 {
 	return (ft_strchr(str, WILDCARD) != NULL);
-}
-
-static bool	has_path(const char *str)
-{
-	return (ft_strchr(str, '/') != NULL);
 }
 
 static t_list	*handle_wildcard(t_list *prev, t_list *cur, t_list **head)
@@ -63,16 +51,4 @@ static t_list	*handle_wildcard(t_list *prev, t_list *cur, t_list **head)
 	if (!prev)
 		*head = resolved;
 	return (ft_lstlast(resolved));
-}
-
-static void	handle_path(t_list *current)
-{
-	char	*abs_path;
-
-	abs_path = to_absolute_path((char *)current->content);
-	if (abs_path)
-	{
-		free(current->content);
-		current->content = abs_path;
-	}
 }

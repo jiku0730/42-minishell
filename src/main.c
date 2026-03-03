@@ -36,7 +36,7 @@ int	main_dev(int argc, char const **argv, char *const envp[])
 	if (!shell_table)
 		return (1);
 	shell_table_checker(shell_table);
-	prompt(resolve_checker, shell_table);
+	prompt(wildcard_checker, shell_table);
 	st_destroy(shell_table);
 	return (0);
 }

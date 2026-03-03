@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resolve_checker.c                                 :+:      :+:    :+:   */
+/*   wildcard_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 static void	on_exit_token(t_list *token_list);
 static void	print_tokens(t_list *token_list, const char *title);
 
-void	resolve_checker(char *input, t_shell_table *shell_table)
+void	wildcard_checker(char *input, t_shell_table *shell_table)
 {
 	t_list	*token_list;
 	t_list	*result;
@@ -29,15 +29,15 @@ void	resolve_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	print_tokens(token_list, "Before resolve_path");
-	result = resolve_path(token_list);
+	print_tokens(token_list, "Before resolve_wildcard_path");
+	result = resolve_wildcard_path(token_list);
 	if (!result)
 	{
-		ft_putstr_fd("Error: resolve_path failed\n", STDOUT_FILENO);
+		ft_putstr_fd("Error: resolve_wildcard_path failed\n", STDOUT_FILENO);
 		ft_lstclear(&token_list, free);
 		return ;
 	}
-	print_tokens(result, "After resolve_path");
+	print_tokens(result, "After resolve_wildcard_path");
 	ft_lstclear(&result, free);
 }
 

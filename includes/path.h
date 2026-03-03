@@ -22,7 +22,8 @@
 char	*to_absolute_path(const char *path);
 t_list	*append_path(t_list **dest, const char *content);
 t_list	*append_path_list(t_list **dest, const char *content);
-t_list	*resolve_path(t_list *tokens);
+t_list	*resolve_wildcard_path(t_list *tokens);
+t_list	*resolve_relative_path(t_list *tokens);
 t_list	*resolve_wildcard(const char *token);
 
 #endif

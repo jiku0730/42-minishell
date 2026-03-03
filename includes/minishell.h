@@ -36,6 +36,7 @@ void	path_checker(char *input, t_shell_table *shell_table);
 void	builtin_checker(char *input, t_shell_table *shell_table);
 void	expand_checker(char *input, t_shell_table *shell_table);
 void	remove_quotes_checker(char *input, t_shell_table *shell_table);
-void	resolve_checker(char *input, t_shell_table *shell_table);
+void	wildcard_checker(char *input, t_shell_table *shell_table);
+void	relative_path_checker(char *input, t_shell_table *shell_table);
 
 #endif
