@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:29:03 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/06 16:20:07 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 19:31:33 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ static char	*get_value_from_assignment(const char *assignment);
 int	export(t_list *argv, t_shell_table *shell_table)
 {
 	if (!argv || !argv->content)
-		return (ERROR);
+		return (1);
 	skip_head_node(&argv);
 	if (!argv)
 	{
 		st_print_env(shell_table);
-		return (SUCCESS);
+		return (0);
 	}
 	while (argv)
 	{
 		if (insert_assignment(shell_table,
 				(const char *)argv->content) == ERROR)
-			return (ERROR);
+			return (1);
 		skip_head_node(&argv);
 	}
-	return (SUCCESS);
+	return (0);
 }
 
 static void	skip_head_node(t_list **argv)
