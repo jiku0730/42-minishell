@@ -15,7 +15,7 @@
 #include <stdbool.h>
 
 static bool		has_wildcard(const char *str);
-static t_list	*handle_wildcard(t_list *prev, t_list *cur, t_list **head);
+static t_list	*handle_wildcard(t_list *prev, t_list *current, t_list **head);
 
 t_list	*resolve_wildcard_path(t_list *tokens)
 {
@@ -40,14 +40,14 @@ static bool	has_wildcard(const char *str)
 	return (ft_strchr(str, WILDCARD) != NULL);
 }
 
-static t_list	*handle_wildcard(t_list *prev, t_list *cur, t_list **head)
+static t_list	*handle_wildcard(t_list *prev, t_list *current, t_list **head)
 {
 	t_list	*resolved;
 
-	resolved = resolve_wildcard((char *)cur->content);
+	resolved = resolve_wildcard((char *)current->content);
 	if (!resolved)
-		return (cur);
-	ft_lstreplace(prev, cur, resolved);
+		return (current);
+	ft_lstreplace(prev, current, resolved);
 	if (!prev)
 		*head = resolved;
 	return (ft_lstlast(resolved));

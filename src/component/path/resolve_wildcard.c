@@ -60,16 +60,25 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 {
 	t_list	*result;
 	t_list	*current;
+	t_list	*node;
 	char	*dir_slash;
 	char	*full_path;
 
 	result = NULL;
 	dir_slash = ft_strjoin(abs_dir, "/");
+	if (!dir_slash)
+		return (NULL);
 	current = matches;
 	while (current)
 	{
 		full_path = ft_strjoin(dir_slash, (char *)current->content);
-		ft_lstadd_back(&result, ft_lstnew(full_path));
+		node = ft_lstnew(full_path);
+		if (!node)
+		{
+			free(full_path);
+			break ;
+		}
+		ft_lstadd_back(&result, node);
 		current = current->next;
 	}
 	free(dir_slash);
