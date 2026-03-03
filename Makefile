@@ -68,7 +68,7 @@ SRCS_MAND	:=	src/main.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \
-				src/checker/parser_checker.c \
+				src/checker/parse_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
 				src/checker/expand_checker.c \
@@ -91,16 +91,16 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
-				src/parser/parser.c \
-				src/parser/utils/add_to_cmd.c \
-				src/parser/utils/new_ast_node.c \
-				src/parser/utils/new_cmd.c \
-				src/parser/utils/new_redir.c \
-				src/parser/utils/token_check.c \
-				src/parser/utils/free_ast.c \
-				src/parser/utils/print_ast.c \
-				src/parser/utils/print_ast_utils.c \
-				src/parser/utils/print_ast_utils2.c \
+				src/parse/parse.c \
+				src/parse/utils/add_to_cmd.c \
+				src/parse/utils/new_ast_node.c \
+				src/parse/utils/new_cmd.c \
+				src/parse/utils/new_redir.c \
+				src/parse/utils/token_check.c \
+				src/parse/utils/free_ast.c \
+				src/parse/utils/print_ast.c \
+				src/parse/utils/print_ast_utils.c \
+				src/parse/utils/print_ast_utils2.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \

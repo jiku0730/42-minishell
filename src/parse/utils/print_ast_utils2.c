@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
 void	print_redir_entry(t_redir *redir, int index)
 {

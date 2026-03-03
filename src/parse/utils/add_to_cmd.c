@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
 bool	add_redir_to_cmd(t_cmd *cmd, t_redir_kind kind, const char *file)
 {

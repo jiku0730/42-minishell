@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
 t_redir	*new_redir(t_redir_kind kind, const char *filename)
 {

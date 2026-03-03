@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parse.h"
 
 static t_redir_kind	find_redir_kind(t_list *current)
 {
@@ -91,7 +91,7 @@ static t_ast	*parse_pipeline(t_list **current)
 	return (left);
 }
 
-t_ast	*parser(t_list *token_head)
+t_ast	*parse(t_list *token_head)
 {
 	t_list	*current;
 	t_ast	*root;

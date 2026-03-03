@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSE_H
+# define PARSE_H
 
 # include "libft.h"
 # include "constants.h"
@@ -59,7 +59,7 @@ typedef struct s_ast
 }					t_ast;
 
 /* main function------------------------------------------------------------- */
-t_ast			*parser(t_list *token_head);
+t_ast			*parse(t_list *token_head);
 
 /* AST's token utils--------------------------------------------------------- */
 bool			is_word(const t_list *node);

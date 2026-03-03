@@ -16,7 +16,7 @@
 # include "constants.h"
 # include "heredoc.h"
 # include "libft.h"
-# include "parser.h"
+# include "parse.h"
 # include "prompt.h"
 # include "path.h"
 # include "remove_quotes.h"
@@ -30,7 +30,7 @@ void	on_input(char *input, t_shell_table *shell_table);
 void	tokenize_checker(char *input, t_shell_table *shell_table);
 void	heredoc_checker(char *input, t_shell_table *shell_table);
 void	shell_table_checker(t_shell_table *shell_table);
-void	parser_checker(char *input, t_shell_table *shell_table);
+void	parse_checker(char *input, t_shell_table *shell_table);
 void	directory_checker(char *input, t_shell_table *shell_table);
 void	path_checker(char *input, t_shell_table *shell_table);
 void	builtin_checker(char *input, t_shell_table *shell_table);
