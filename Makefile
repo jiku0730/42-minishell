@@ -6,7 +6,7 @@
 #    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/03/03 17:04:01 by surayama         ###   ########.fr        #
+#    Updated: 2026/03/03 20:32:45 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,11 +57,12 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
-				src/builtin/echo.c \
-				src/builtin/export.c \
-				src/builtin/pwd.c \
-				src/builtin/unset.c \
-				src/builtin/cd.c \
+				src/builtin/echo/echo.c \
+				src/builtin/export/export.c \
+				src/builtin/pwd/pwd.c \
+				src/builtin/unset/unset.c \
+				src/builtin/cd/cd.c \
+				src/builtin/cd/search_cdpath.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/builtin_checker.c \

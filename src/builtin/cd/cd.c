@@ -6,15 +6,15 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 12:41:23 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 20:07:23 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtin.h>
 
-static int	by_too_many_arguments_error(void);
 static int	by_move_to_home(t_shell_table *shell_table);
 static int	by_move_to_oldpwd(t_shell_table *shell_table);
+static int	by_move_to_arg(const char *arg, t_shell_table *shell_table);
 static int	move_to_path(const char *absolute_path, t_shell_table *shell_table);
 
 int	cd(t_list *argv, t_shell_table *shell_table)
@@ -23,23 +23,35 @@ int	cd(t_list *argv, t_shell_table *shell_table)
 
 	argc = ft_lstsize(argv);
 	if (argc > 2)
-		return (by_too_many_arguments_error());
+	{
+		ft_putstr_fd("Error: cd too many arguments\n", STDERR_FILENO);
+		return (1);
+	}
 	if (argc == 1)
 		return (by_move_to_home(shell_table));
 	if (argc == 2 && argv->next->content)
 	{
 		if (ft_strncmp((char *)argv->next->content, "-", 2) == 0)
 			return (by_move_to_oldpwd(shell_table));
-		return (move_to_path(to_absolute_path((char *)argv->next->content),
-				shell_table));
+		return (by_move_to_arg((char *)argv->next->content, shell_table));
 	}
 	return (SUCCESS);
 }
 
-static int	by_too_many_arguments_error(void)
+static int	by_move_to_arg(const char *arg, t_shell_table *shell_table)
 {
-	ft_putstr_fd("Error: cd too many arguments\n", STDERR_FILENO);
-	return (1);
+	char	*cdpath_result;
+
+	if (arg[0] != '/')
+	{
+		cdpath_result = search_cdpath(arg, shell_table);
+		if (cdpath_result)
+		{
+			ft_putendl_fd(cdpath_result, STDOUT_FILENO);
+			return (move_to_path(cdpath_result, shell_table));
+		}
+	}
+	return (move_to_path(to_absolute_path(arg), shell_table));
 }
 
 static int	by_move_to_home(t_shell_table *shell_table)

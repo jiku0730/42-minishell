@@ -24,5 +24,6 @@ int	pwd(t_list *argv, t_shell_table *shell_table);
 int	export(t_list *argv, t_shell_table *shell_table);
 int	unset(t_list *argv, t_shell_table *shell_table);
 int	cd(t_list *argv, t_shell_table *shell_table);
+char	*search_cdpath(const char *arg, t_shell_table *st);
 
 #endif
