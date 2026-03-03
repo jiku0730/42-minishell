@@ -6,13 +6,13 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:34:11 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/03/03 16:34:35 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 16:44:45 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path.h"
 
-static char	*join_path(const char *path, const char *cmd)
+char	*join_path(const char *path, const char *cmd)
 {
 	size_t	path_len;
 	size_t	cmd_len;
