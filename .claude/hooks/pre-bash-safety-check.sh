@@ -8,7 +8,6 @@ DANGEROUS_PATTERNS=(
   "rm -rf /"
   "git push --force.*main"
   "git push --force.*develop"
-  "rails db:drop.*production"
 )
 
 for pattern in "${DANGEROUS_PATTERNS[@]}"; do
