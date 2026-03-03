@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../expand_variable_internal.h"
+#include "../expand_parameter_internal.h"
 #include "expand.h"
 
 int	add_buffer_expand(t_expand_store *store, char c)

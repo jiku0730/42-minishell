@@ -21,9 +21,9 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 
-int	get_directory_entries(const char *path, bool include_hidden,
+int	list_directory(const char *path, bool include_hidden,
 		t_list **entries);
-int	get_directory_all_entries(const char *path, bool include_hidden,
+int	list_directory_recursive(const char *path, bool include_hidden,
 		t_list **entries);
 
 #endif

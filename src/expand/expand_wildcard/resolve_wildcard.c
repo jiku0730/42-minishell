@@ -49,7 +49,7 @@ static t_list	*get_matches(const char *abs_dir, const char *pattern)
 	t_list	*filtered_matches;
 	t_list	*result;
 
-	if (get_directory_entries(abs_dir, pattern[0] == '.', &entries) != SUCCESS)
+	if (list_directory(abs_dir, pattern[0] == '.', &entries) != SUCCESS)
 		return (NULL);
 	filtered_matches = filter_pattern(entries, pattern);
 	ft_lstclear(&entries, free);

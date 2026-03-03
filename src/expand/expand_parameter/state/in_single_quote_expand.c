@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../expand_variable_internal.h"
+#include "../expand_parameter_internal.h"
 #include "expand.h"
 
 static void	by_single_quote_end(t_shell_table *shell_table,

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_directory_all_entries.c                        :+:      :+:    :+:   */
+/*   list_directory_recursive.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "directory.h"
+#include "path.h"
 
 static int	throw_error(void);
 static int	process_entry(const char *path, const char *name,
 				bool include_hidden, t_list **entries);
-static char	*join_path(const char *dir, const char *name);
 static int	read_directory_entries(DIR *dir, const char *path,
 				bool include_hidden, t_list **entries);
 
-int	get_directory_all_entries(const char *path, bool include_hidden,
+int	list_directory_recursive(const char *path, bool include_hidden,
 		t_list **entries)
 {
 	DIR	*dir;
@@ -78,29 +78,11 @@ static int	process_entry(const char *path, const char *name,
 		free(full_path);
 		return (SUCCESS);
 	}
-	result = get_directory_all_entries(full_path, include_hidden, &sub_entries);
+	result = list_directory_recursive(full_path, include_hidden, &sub_entries);
 	if (result == SUCCESS && sub_entries)
 		ft_lstadd_back(entries, sub_entries);
 	free(full_path);
 	return (SUCCESS);
-}
-
-static char	*join_path(const char *dir, const char *name)
-{
-	char	*temp;
-	char	*result;
-
-	temp = ft_strjoin(dir, "/");
-	if (!temp)
-		return (NULL);
-	result = ft_strjoin(temp, name);
-	if (!result)
-	{
-		free(temp);
-		return (NULL);
-	}
-	free(temp);
-	return (result);
 }
 
 static int	throw_error(void)

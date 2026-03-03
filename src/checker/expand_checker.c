@@ -28,10 +28,10 @@ void	expand_checker(char *input, t_shell_table *shell_table)
 	}
 	if (token_list->content && ft_strncmp(token_list->content, "exit", 5) == 0)
 		on_exit_token(token_list);
-	expanded_tokens = expand_variable(token_list, shell_table);
+	expanded_tokens = expand_parameter(token_list, shell_table);
 	if (!expanded_tokens)
 	{
-		ft_putstr_fd("Error: expand_variable failed\n", STDOUT_FILENO);
+		ft_putstr_fd("Error: expand_parameter failed\n", STDOUT_FILENO);
 		ft_lstclear(&token_list, free);
 		return ;
 	}

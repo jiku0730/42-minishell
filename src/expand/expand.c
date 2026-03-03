@@ -17,7 +17,7 @@ t_list	*expand(t_list *tokens, t_shell_table *shell_table)
 	tokens = expand_tilde(tokens, shell_table);
 	if (!tokens)
 		return (NULL);
-	tokens = expand_variable(tokens, shell_table);
+	tokens = expand_parameter(tokens, shell_table);
 	if (!tokens)
 		return (NULL);
 	tokens = expand_wildcard(tokens);

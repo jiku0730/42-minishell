@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_VARIABLE_INTERNAL_H
-# define EXPAND_VARIABLE_INTERNAL_H
+#ifndef EXPAND_PARAMETER_INTERNAL_H
+# define EXPAND_PARAMETER_INTERNAL_H
 
 # include "libft.h"
 # include "shell_table.h"

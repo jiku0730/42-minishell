@@ -112,23 +112,23 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_print.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
-				src/component/directory/get_directory_entries.c \
-				src/component/directory/get_directory_all_entries.c \
+				src/component/directory/list_directory.c \
+				src/component/directory/list_directory_recursive.c \
 				src/component/path/to_absolute_path.c \
 				src/component/path/join_path.c \
 				src/component/path/append_path.c \
 				src/component/path/resolve_relative_path.c \
 				src/expand/expand.c \
-				src/expand/expand_variable/expand_variable.c \
-				src/expand/expand_variable/state/in_normal_expand.c \
-				src/expand/expand_variable/state/in_double_quote_expand.c \
-				src/expand/expand_variable/state/in_single_quote_expand.c \
-				src/expand/expand_variable/state/on_success_expand.c \
-				src/expand/expand_variable/state/on_error_expand.c \
-				src/expand/expand_variable/store/push_token_expand.c \
-				src/expand/expand_variable/store/add_buffer_expand.c \
-				src/expand/expand_variable/store/get_key_length_expand.c \
-				src/expand/expand_variable/store/free_store_expand.c \
+				src/expand/expand_parameter/expand_parameter.c \
+				src/expand/expand_parameter/state/in_normal_expand.c \
+				src/expand/expand_parameter/state/in_double_quote_expand.c \
+				src/expand/expand_parameter/state/in_single_quote_expand.c \
+				src/expand/expand_parameter/state/on_success_expand.c \
+				src/expand/expand_parameter/state/on_error_expand.c \
+				src/expand/expand_parameter/store/push_token_expand.c \
+				src/expand/expand_parameter/store/add_buffer_expand.c \
+				src/expand/expand_parameter/store/get_key_length_expand.c \
+				src/expand/expand_parameter/store/free_store_expand.c \
 				src/expand/expand_tilde/expand_tilde.c \
 				src/expand/expand_wildcard/resolve_wildcard.c \
 				src/expand/expand_wildcard/expand_wildcard.c \

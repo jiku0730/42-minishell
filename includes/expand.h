@@ -19,7 +19,7 @@
 # include <stdbool.h>
 
 t_list	*expand(t_list *tokens, t_shell_table *shell_table);
-t_list	*expand_variable(t_list *tokens, t_shell_table *shell_table);
+t_list	*expand_parameter(t_list *tokens, t_shell_table *shell_table);
 t_list	*expand_tilde(t_list *tokens, t_shell_table *shell_table);
 t_list	*expand_wildcard(t_list *tokens);
 t_list	*expand_remove_quotes(t_list *tokens);
