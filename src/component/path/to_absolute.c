@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_absolute.c                                      :+:      :+:    :+:   */
+/*   to_absolute_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,7 +17,7 @@ static t_list	*split_path_to_list(const char *path);
 static void		consume_head(t_list **path_list);
 static char		*list_to_path(t_list *resolved_path);
 
-char	*to_absolute(const char *path)
+char	*to_absolute_path(const char *path)
 {
 	t_list	*path_list;
 	t_list	*resolved_path;
