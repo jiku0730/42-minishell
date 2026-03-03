@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 12:55:55 by surayama         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:03:25 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_list	*append_path(t_list **dest, const char *content);
 t_list	*resolve_wildcard_path(t_list *tokens);
 t_list	*resolve_relative_path(t_list *tokens);
 t_list	*resolve_wildcard(const char *token);
+char	*join_path(const char *path_before, const char *path_after);
 
 #endif
