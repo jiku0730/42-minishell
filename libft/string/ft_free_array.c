@@ -6,15 +6,15 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 23:08:19 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/03/03 13:50:46 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 14:23:20 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_array(char **arr)
+void	ft_free_array(void **arr)
 {
-	char	**temp;
+	void	**temp;
 
 	if (!arr)
 		return ;

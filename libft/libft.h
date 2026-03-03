@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/03/03 13:49:37 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:53:04 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(const char *s, int fd);
 
 // string
-void				ft_free_array(char **arr);
+void				ft_free_array(void **arr);
 char				**ft_split(char const *s, char c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s);
