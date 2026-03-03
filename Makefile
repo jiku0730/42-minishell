@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/02/13 23:37:21 by surayama         ###   ########.fr        #
+#    Updated: 2026/03/03 16:45:10 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
+				src/component/path/join_path.c \
 				src/component/path/append_path.c \
 				src/component/variable_expand/variable_expand.c \
 				src/component/variable_expand/state/in_normal_expand.c \
