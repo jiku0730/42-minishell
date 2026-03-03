@@ -23,6 +23,13 @@
 # include "shell_table.h"
 # include "tokenize.h"
 
+typedef void				(*t_checker)(char *, t_shell_table *);
+typedef struct s_checker_entry
+{
+	char		*name;
+	t_checker	checker;
+}	t_checker_entry;
+
 // callbacks
 void	on_input(char *input, t_shell_table *shell_table);
 
