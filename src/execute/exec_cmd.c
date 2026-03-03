@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/01/08 10:36:05 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:49:37 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 	{
 		full_path = join_path(paths[i], cmd);
 		if (!full_path)
-			return (ft_free_split(paths), NULL);
+			return (ft_free_array(paths), NULL);
 		if (access(full_path, X_OK) == 0)
-			return (ft_free_split(paths), full_path);
+			return (ft_free_array(paths), full_path);
 		free(full_path);
 		i++;
 	}
-	ft_free_split(paths);
+	ft_free_array(paths);
 	return (NULL);
 }
 
@@ -90,7 +90,7 @@ int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 	if (!argv || !argv[0])
 	{
 		if (argv)
-			ft_free_split(argv);
+			ft_free_array(argv);
 		return (127);
 	}
 	return (exec_cmd_core(argv, shell_table));

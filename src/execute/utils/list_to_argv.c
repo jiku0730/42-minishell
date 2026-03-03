@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:41:14 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/11/27 16:34:10 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:49:37 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**list_to_argv(t_list *lst)
 		out[i] = ft_strdup((const char *)lst->content);
 		if (!out[i])
 		{
-			ft_free_split(out);
+			ft_free_array(out);
 			return (NULL);
 		}
 		i++;
