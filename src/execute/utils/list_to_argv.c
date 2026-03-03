@@ -28,7 +28,7 @@ char	**list_to_argv(t_list *lst)
 		out[i] = ft_strdup((const char *)lst->content);
 		if (!out[i])
 		{
-			ft_free_array(out);
+			ft_free_array((void **)out);
 			return (NULL);
 		}
 		i++;

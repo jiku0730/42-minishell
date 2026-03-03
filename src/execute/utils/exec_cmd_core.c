@@ -20,21 +20,21 @@ int	exec_cmd_core(char **argv, t_shell_table *shell_table)
 	cmd_path = find_command(argv[0], shell_table);
 	if (!cmd_path)
 	{
-		ft_free_array(argv);
+		ft_free_array((void **)argv);
 		return (126);
 	}
 	new_envp = export_envp(shell_table);
 	if (!new_envp)
 	{
 		free(cmd_path);
-		ft_free_array(argv);
+		ft_free_array((void **)argv);
 		return (1);
 	}
 	execve(cmd_path, argv, new_envp);
 	perror(cmd_path);
 	free(cmd_path);
 	st_destroy(shell_table);
-	ft_free_array(new_envp);
-	ft_free_array(argv);
+	ft_free_array((void **)new_envp);
+	ft_free_array((void **)argv);
 	return (127);
 }
