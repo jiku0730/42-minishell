@@ -6,7 +6,7 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:48:09 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 20:07:23 by surayama         ###   ########.fr       */
+/*   Updated: 2026/04/06 07:40:57 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	by_move_to_home(t_shell_table *shell_table);
 static int	by_move_to_oldpwd(t_shell_table *shell_table);
 static int	by_move_to_arg(const char *arg, t_shell_table *shell_table);
 static int	move_to_path(const char *absolute_path, t_shell_table *shell_table);
+
+char	*search_cdpath(const char *arg, t_shell_table *st);
 
 int	cd(t_list *argv, t_shell_table *shell_table)
 {
