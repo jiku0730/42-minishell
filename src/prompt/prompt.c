@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "prompt.h"
+#include "signal_handler.h"
 
 void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
 		t_shell_table *shell_table)
@@ -19,7 +20,10 @@ void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
 
 	while (1)
 	{
+		g_signal = 0;
 		input = readline(PROMPT);
+		if (!input && g_signal == SIGINT)
+			continue ;
 		if (!input)
 			break ;
 		if (is_blank_line(input))

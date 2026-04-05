@@ -29,6 +29,7 @@ int	main(int argc, char const **argv, char *const envp[])
 	shell_table = build_shell_table(envp);
 	if (!shell_table)
 		return (1);
+	setup_signal_handlers();
 	prompt(on_input, shell_table);
 	st_destroy(shell_table);
 	return (0);

@@ -133,6 +133,7 @@ SRCS_MAND	:=	src/main.c \
 				src/expand/expand_wildcard/resolve_wildcard.c \
 				src/expand/expand_wildcard/expand_wildcard.c \
 				src/expand/expand_remove_quotes/expand_remove_quotes.c \
+				src/signal/setup_signal.c \
 
 SRCS_BONUS	:=
 
