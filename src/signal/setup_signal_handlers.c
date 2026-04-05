@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal.h"
+#include "signal_handler.h"
 #include <readline/readline.h>
 #include <unistd.h>
 
@@ -36,4 +36,3 @@ void	setup_signal_handlers(void)
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
 }
-

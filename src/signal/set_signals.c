@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal.h"
+#include "signal_handler.h"
 
 void	set_signal_ignore(void)
 {
