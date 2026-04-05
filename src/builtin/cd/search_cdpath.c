@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_cdpath.c                                        :+:      :+:    :+:   */
+/*   search_cdpath.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 00:00:00 by surayama          #+#    #+#             */
-/*   Updated: 2026/03/03 00:00:00 by surayama         ###   ########.fr       */
+/*   Updated: 2026/04/06 07:32:01 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#include "builtin.h"
 
 static t_list	*split_cdpath(const char *cdpath);
 static char		*try_cdpath_entry(const char *entry, const char *arg);
