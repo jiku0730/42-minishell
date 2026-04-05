@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_signal.c                                    :+:      :+:    :+:   */
+/*   set_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal_handler.h"
-#include <readline/readline.h>
-#include <unistd.h>
+#include "signal.h"
 
-volatile sig_atomic_t	g_signal;
-
-static void	sigint_handler(int sig)
-{
-	g_signal = sig;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	setup_signal_handlers(void)
+void	set_signal_ignore(void)
 {
 	struct sigaction	sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
-	sa.sa_handler = sigint_handler;
-	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa, NULL);
+}
+
+void	set_signal_default(void)
+{
+	struct sigaction	sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = SIG_DFL;
+	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	set_signal_interactive(void)
+{
+	setup_signal_handlers();
 }
