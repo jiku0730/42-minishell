@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "signal_handler.h"
 #include <readline/readline.h>
 
 static int	write_line_to_file(int fd, char *line);
 static char	*by_found_delimiter(char *line, int fd, char *tmpfile_path);
 static void	*by_fail_write_line_to_file(char *line, int fd, char *tmpfile_path);
+static void	*by_sigint(int fd, char *tmpfile_path);
 
 char	*heredoc_prompt(const char *delimiter)
 {
@@ -32,6 +34,8 @@ char	*heredoc_prompt(const char *delimiter)
 	while (1)
 	{
 		line = readline(HEREDOC_PROMPT);
+		if (line == NULL && g_signal == SIGINT)
+			return (by_sigint(fd, tmpfile_path));
 		if (line == NULL)
 			break ;
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1) == 0)
@@ -67,6 +71,14 @@ static void	*by_fail_write_line_to_file(char *line, int fd, char *tmpfile_path)
 {
 	free(line);
 	close(fd);
+	free(tmpfile_path);
+	return (NULL);
+}
+
+static void	*by_sigint(int fd, char *tmpfile_path)
+{
+	close(fd);
+	unlink(tmpfile_path);
 	free(tmpfile_path);
 	return (NULL);
 }

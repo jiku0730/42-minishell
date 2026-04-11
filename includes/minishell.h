@@ -21,6 +21,7 @@
 # include "prompt.h"
 # include "path.h"
 # include "shell_table.h"
+# include "signal_handler.h"
 # include "tokenize.h"
 
 typedef void				(*t_checker)(char *, t_shell_table *);
