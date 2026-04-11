@@ -22,5 +22,6 @@ void	setup_signal_handlers(void);
 void	set_signal_ignore(void);
 void	set_signal_default(void);
 void	set_signal_interactive(void);
+void	set_signal_heredoc(void);
 
 #endif

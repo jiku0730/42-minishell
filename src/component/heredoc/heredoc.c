@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "signal_handler.h"
 
 static bool	is_heredoc_operator(const char *token);
 static int	rebuild_tokens(t_list *current, t_list *eof_node,
@@ -30,7 +31,11 @@ t_list	*heredoc(t_list *tokens)
 			eof_node = current->next;
 			if (eof_node == NULL)
 				return (NULL);
+			set_signal_heredoc();
 			tmpfile_path = heredoc_prompt((char *)eof_node->content);
+			set_signal_interactive();
+			if (tmpfile_path == NULL)
+				return (NULL);
 			if (rebuild_tokens(current, eof_node, tmpfile_path) == ERROR)
 				return (NULL);
 		}
