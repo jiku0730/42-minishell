@@ -12,6 +12,7 @@
 
 #include "signal_handler.h"
 #include <readline/readline.h>
+#include <termios.h>
 #include <unistd.h>
 
 volatile sig_atomic_t	g_signal;
@@ -25,10 +26,20 @@ static void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
+static void	disable_echoctl(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
+
 void	setup_signal_handlers(void)
 {
 	struct sigaction	sa;
 
+	disable_echoctl();
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = sigint_handler;
