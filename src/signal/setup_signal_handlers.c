@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "signal_handler.h"
+#include "libft.h"
 #include <readline/readline.h>
 #include <termios.h>
 #include <unistd.h>
@@ -30,6 +31,7 @@ static void	disable_echoctl(void)
 {
 	struct termios	term;
 
+	ft_memset(&term, 0, sizeof(term));
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
