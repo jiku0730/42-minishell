@@ -22,7 +22,8 @@
 int					exec_ast(t_ast *node, t_shell_table *shell_table);
 int					exec_cmd(t_ast *node, t_shell_table *shell_table);
 int					exec_external_cmd(char **argv, t_shell_table *shell_table);
-char				*find_exec_path(const char *cmd, t_shell_table *shell_table);
+char				*find_exec_path(const char *cmd, \
+							t_shell_table *shell_table);
 int					exec_pipe(t_ast *node, t_shell_table *shell_table);
 void				exec_left_child(t_ast *node, \
 						t_shell_table *shell_table, int fd[2]);
