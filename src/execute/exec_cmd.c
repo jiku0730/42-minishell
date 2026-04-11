@@ -57,21 +57,21 @@ static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 	return (NULL);
 }
 
-static char	*find_absolute_or_relative(const char *cmd)
+static char	*resolve_exec_path(const char *cmd)
 {
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	return (NULL);
 }
 
-char	*find_command(const char *cmd, t_shell_table *shell_table)
+char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
 {
 	char	*result;
 
 	if (!cmd || !*cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
-		result = find_absolute_or_relative(cmd);
+		result = resolve_exec_path(cmd);
 	else
 		result = find_in_path(cmd, shell_table);
 	return (result);
@@ -93,5 +93,5 @@ int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 			ft_free_array((void **)argv);
 		return (127);
 	}
-	return (exec_cmd_core(argv, shell_table));
+	return (exec_external_cmd(argv, shell_table));
 }

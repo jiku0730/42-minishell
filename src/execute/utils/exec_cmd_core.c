@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_core.c                                    :+:      :+:    :+:   */
+/*   exec_external_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,12 @@
 
 #include "execute.h"
 
-int	exec_cmd_core(char **argv, t_shell_table *shell_table)
+int	exec_external_cmd(char **argv, t_shell_table *shell_table)
 {
 	char		*cmd_path;
 	char		**new_envp;
 
-	cmd_path = find_command(argv[0], shell_table);
+	cmd_path = find_exec_path(argv[0], shell_table);
 	if (!cmd_path)
 	{
 		ft_free_array((void **)argv);
