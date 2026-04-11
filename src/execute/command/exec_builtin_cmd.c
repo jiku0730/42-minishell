@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   exec_builtin_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec_builtin_private.h"
+#include "exec_builtin_cmd_private.h"
 
 static t_builtin_fn	find_builtin(const char *name)
 {
@@ -35,7 +35,7 @@ static t_builtin_fn	find_builtin(const char *name)
 	return (NULL);
 }
 
-int	exec_builtin(t_ast *node, t_shell_table *shell_table)
+int	exec_builtin_cmd(t_ast *node, t_shell_table *shell_table)
 {
 	t_builtin_fn	fn;
 	char			*name;

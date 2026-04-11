@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin_private.h                             :+:      :+:    :+:   */
+/*   exec_builtin_cmd_private.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_BUILTIN_PRIVATE_H
-# define EXEC_BUILTIN_PRIVATE_H
+#ifndef EXEC_BUILTIN_CMD_PRIVATE_H
+# define EXEC_BUILTIN_CMD_PRIVATE_H
 
 # include "builtin.h"
 # include "execute.h"

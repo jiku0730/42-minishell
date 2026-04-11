@@ -87,7 +87,7 @@ int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 		if (exec_redirs(node->cmd->redirs) != 0)
 			return (1);
 	}
-	status = exec_builtin(node, shell_table);
+	status = exec_builtin_cmd(node, shell_table);
 	if (status != -1)
 		return (status);
 	argv = list_to_argv(node->cmd->argv);
