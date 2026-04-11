@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
 #    Updated: 2026/03/03 20:32:45 by surayama         ###   ########.fr        #
@@ -63,6 +63,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/unset/unset.c \
 				src/builtin/cd/cd.c \
 				src/builtin/cd/search_cdpath.c \
+				src/builtin/exit/exit.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/builtin_checker.c \
@@ -113,6 +114,16 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_print.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
+				src/execute/exec_ast.c \
+				src/execute/exec_cmd.c \
+				src/execute/exec_pipe.c \
+				src/execute/utils/ft_wexitstatus.c \
+				src/execute/utils/ft_wifexited.c \
+				src/execute/command/exec_external_cmd.c \
+				src/execute/command/exec_builtin_cmd.c \
+				src/execute/command/list_to_argv.c \
+				src/execute/pipe/exec_pipe_child.c \
+				src/execute/redirects/exec_redirs.c \
 				src/component/directory/list_directory.c \
 				src/component/directory/list_directory_recursive.c \
 				src/component/path/to_absolute_path.c \

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/02/01 21:36:07 by surayama         ###   ########.fr        #
+#    Updated: 2026/03/03 13:49:37 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS	=	conversion/ft_atoi.c \
 			output/ft_putendl_fd.c \
 			output/ft_putnbr_fd.c \
 			output/ft_putstr_fd.c \
+			string/ft_free_array.c \
 			string/ft_split.c \
 			string/ft_strchr.c \
 			string/ft_strdup.c \

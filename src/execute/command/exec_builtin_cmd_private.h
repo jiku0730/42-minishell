@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_builtin_cmd_private.h                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/11 18:30:58 by kjikuhar          #+#    #+#             */
+/*   Updated: 2026/04/11 18:30:59 by kjikuhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef EXEC_BUILTIN_CMD_PRIVATE_H
+# define EXEC_BUILTIN_CMD_PRIVATE_H
+
+# include "builtin.h"
+# include "execute.h"
+
+typedef int					(*t_builtin_fn)(t_list *, t_shell_table *);
+
+typedef struct s_builtin_entry
+{
+	const char		*name;
+	t_builtin_fn	func;
+}	t_builtin_entry;
+
+#endif
