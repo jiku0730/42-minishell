@@ -63,6 +63,7 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/unset/unset.c \
 				src/builtin/cd/cd.c \
 				src/builtin/cd/search_cdpath.c \
+				src/builtin/exit/exit.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/builtin_checker.c \
@@ -119,6 +120,7 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/utils/ft_wexitstatus.c \
 				src/execute/utils/ft_wifexited.c \
 				src/execute/command/exec_external_cmd.c \
+				src/execute/command/exec_builtin.c \
 				src/execute/command/list_to_argv.c \
 				src/execute/pipe/exec_pipe_child.c \
 				src/execute/redirects/exec_redirs.c \

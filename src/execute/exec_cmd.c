@@ -80,12 +80,16 @@ char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
 int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
 	char	**argv;
+	int		status;
 
 	if (node->cmd->redirs)
 	{
 		if (exec_redirs(node->cmd->redirs) != 0)
 			return (1);
 	}
+	status = exec_builtin(node, shell_table);
+	if (status != -1)
+		return (status);
 	argv = list_to_argv(node->cmd->argv);
 	if (!argv || !argv[0])
 	{
