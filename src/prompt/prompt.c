@@ -25,7 +25,10 @@ void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
 		if (!input && g_signal == SIGINT)
 			continue ;
 		if (!input)
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
+		}
 		if (is_blank_line(input))
 		{
 			free(input);
