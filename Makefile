@@ -113,7 +113,6 @@ SRCS_MAND	:=	src/main.c \
 				src/component/shell_table/shell_print.c \
 				src/component/shell_table/build_shell_table.c \
 				src/component/shell_table/export_envp.c \
-				src/component/pattern/filter_pattern.c \
 				src/execute/exec_ast.c \
 				src/execute/exec_cmd.c \
 				src/execute/exec_pipe.c \
@@ -123,9 +122,6 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/command/list_to_argv.c \
 				src/execute/pipe/exec_pipe_child.c \
 				src/execute/redirects/exec_redirs.c \
-				src/component/directory/get_directory_entries.c \
-				src/component/directory/get_directory_all_entries.c \
-				src/component/path/to_absolute.c \
 				src/component/directory/list_directory.c \
 				src/component/directory/list_directory_recursive.c \
 				src/component/path/to_absolute_path.c \
