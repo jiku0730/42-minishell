@@ -36,19 +36,19 @@ void	directory_checker(char *input, t_shell_table *shell_table)
 
 static void	test_entries(const char *input)
 {
-	printf("\n=== Testing get_directory_entries ===\nPath: %s\n", input);
-	test_function(input, false, get_directory_entries,
+	printf("\n=== Testing list_directory ===\nPath: %s\n", input);
+	test_function(input, false, list_directory,
 		"\n--- Without hidden files ---\nEntries");
-	test_function(input, true, get_directory_entries,
+	test_function(input, true, list_directory,
 		"\n--- With hidden files ---\nEntries");
 }
 
 static void	test_all_entries(const char *input)
 {
-	printf("\n=== Testing get_directory_all_entries ===\nPath: %s\n", input);
-	test_function(input, false, get_directory_all_entries,
+	printf("\n=== Testing list_directory_recursive ===\nPath: %s\n", input);
+	test_function(input, false, list_directory_recursive,
 		"\n--- Without hidden files ---\nAll Entries (recursive)");
-	test_function(input, true, get_directory_all_entries,
+	test_function(input, true, list_directory_recursive,
 		"\n--- With hidden files ---\nAll Entries (recursive)");
 }
 

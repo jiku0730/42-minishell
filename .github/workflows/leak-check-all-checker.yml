@@ -1,0 +1,260 @@
+name: Memory Leak Check (All Checkers)
+
+on:
+  pull_request:
+    branches: [ "master", "develop" ]
+  push:
+    branches: [ "master", "develop" ]
+
+jobs:
+  leak-check-all-checker:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        checker:
+          - tokenize
+          - heredoc
+          - expand
+          - remove-quotes
+          - parse
+          - builtin
+          - directory
+          - path
+          - relative-path
+          - wildcard
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libreadline-dev valgrind
+
+    - name: Build project
+      run: |
+        echo "Building minishell..."
+        make
+
+    - name: Verify binary exists
+      run: |
+        if [ ! -f "./minishell" ]; then
+          echo "ERROR: minishell binary not found"
+          exit 1
+        fi
+        echo "minishell binary found"
+        ls -la ./minishell
+
+    - name: Generate test input for ${{ matrix.checker }}
+      run: |
+        CHECKER="${{ matrix.checker }}"
+        case "$CHECKER" in
+          tokenize)
+            cat << 'TESTEOF' > test_input.txt
+
+        echo hello
+        echo "'nested'"
+        cmd|cat>file<in
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+        <<EOF >>out
+        || &&
+        "unclosed
+        echo "hello world" | cat -e > output.txt
+        TESTEOF
+            ;;
+          heredoc)
+            cat << 'TESTEOF' > test_input.txt
+        cat << EOF
+        hello world
+        EOF
+        echo hello
+        cat << 'DELIM'
+        no expand $VAR
+        DELIM
+        cat << EOF | grep hello
+        hello world
+        EOF
+
+        cat << EOF > /tmp/test_heredoc_out
+        test
+        EOF
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        cat << EOF
+        $HOME
+        EOF
+        TESTEOF
+            ;;
+          expand)
+            cat << 'TESTEOF' > test_input.txt
+        echo $PATH
+        echo $UNDEFINED
+        echo '$NO_EXPAND'
+        echo "$HOME"
+        echo $?
+        echo $A$B$C
+        echo $
+        echo $AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        echo ""
+        echo "$?"
+        TESTEOF
+            ;;
+          remove-quotes)
+            cat << 'TESTEOF' > test_input.txt
+        echo ""
+        echo ''
+        echo "'nested'"
+        echo 'hello world'
+        echo "he said \"hi\""
+        echo "a"'b'"c"
+        echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        echo hello
+        echo "hello"'world'"!"
+        TESTEOF
+            ;;
+          parse)
+            cat << 'TESTEOF' > test_input.txt
+        echo hello
+        cat | grep | wc
+        echo > out.txt
+        < in cat | grep > out
+        echo a | echo b | echo c | echo d | echo e | echo f | echo g | echo h | echo i | echo j
+        echo "hello | world"
+        echo hello > out.txt < in.txt >> append.txt
+        echo hello world foo bar baz
+        cat | grep pattern | sort | uniq
+        TESTEOF
+            ;;
+          builtin)
+            cat << 'TESTEOF' > test_input.txt
+        export A=1
+        export A=1 B=2 C=3
+        export EMPTY=
+        export
+        unset A
+        export LONG_VAR=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        export SPECIAL="hello world"
+        export A=1
+        export A=2
+        unset NONEXISTENT
+        TESTEOF
+            ;;
+          directory)
+            cat << 'TESTEOF' > test_input.txt
+        .
+        ..
+        /tmp
+        /nonexistent
+        /
+
+        /usr/local/bin
+        /a/b/c/d/e/f/g/h/i/j
+        /tmp/test dir
+        TESTEOF
+            ;;
+          path)
+            cat << 'TESTEOF' > test_input.txt
+        ../src
+        ./file.c
+        /usr/bin
+        ../../..
+        //tmp///file
+        .
+        /
+        /tmp/
+        ./a/b/c/d
+        TESTEOF
+            ;;
+          relative-path)
+            cat << 'TESTEOF' > test_input.txt
+        ./file
+        ../dir
+        ../../file
+        ./a/b/../c
+        .
+        ..
+        hello
+        ./aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        ../a/b/c
+        TESTEOF
+            ;;
+          wildcard)
+            cat << 'TESTEOF' > test_input.txt
+        *.c
+        src/*.h
+        ?
+        nonexistent*.xyz
+        "*.c"
+        src/*/*.c
+        [a-z]*
+        *
+        *.o
+        TESTEOF
+            ;;
+        esac
+
+        echo "exit" >> test_input.txt
+
+        echo "=== Test input for $CHECKER ==="
+        cat -n test_input.txt
+
+    - name: Run valgrind leak check for ${{ matrix.checker }}
+      run: |
+        CHECKER="${{ matrix.checker }}"
+        echo "Running valgrind for --${CHECKER} checker..."
+
+        cat test_input.txt | timeout 10 valgrind \
+          --leak-check=full \
+          --show-leak-kinds=all \
+          --track-origins=yes \
+          --suppressions=./readline.supp \
+          --error-exitcode=42 \
+          --log-file=valgrind_result.txt \
+          ./minishell --${CHECKER} 2>&1 || true
+
+        VALGRIND_EXIT=${PIPESTATUS[1]:-$?}
+
+        echo ""
+        echo "=========================================="
+        echo "Valgrind Output (--${CHECKER}):"
+        echo "=========================================="
+        cat valgrind_result.txt
+        echo "=========================================="
+
+        if [ "$VALGRIND_EXIT" -eq 42 ]; then
+          echo ""
+          echo "MEMORY LEAK DETECTED in --${CHECKER} checker!"
+          echo ""
+          echo "Summary of leaks:"
+          grep "definitely lost" valgrind_result.txt || echo "No definitely lost blocks"
+          grep "indirectly lost" valgrind_result.txt || echo "No indirectly lost blocks"
+          grep "possibly lost" valgrind_result.txt || echo "No possibly lost blocks"
+          exit 1
+        else
+          echo ""
+          echo "NO MEMORY LEAKS DETECTED in --${CHECKER} checker"
+          echo ""
+          echo "Leak Summary:"
+          grep "LEAK SUMMARY" valgrind_result.txt -A 5 || true
+
+          if grep -q "All heap blocks were freed -- no leaks are possible" valgrind_result.txt; then
+            echo "All heap blocks were freed"
+          elif grep -q "definitely lost: 0 bytes in 0 blocks" valgrind_result.txt && \
+               grep -q "indirectly lost: 0 bytes in 0 blocks" valgrind_result.txt && \
+               grep -q "possibly lost: 0 bytes in 0 blocks" valgrind_result.txt; then
+            echo "No definite, indirect, or possible leaks"
+          else
+            echo "Warning: Some reachable memory detected (this is usually OK for readline)"
+          fi
+
+          exit 0
+        fi
+
+    - name: Upload valgrind report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: valgrind-report-${{ matrix.checker }}
+        path: valgrind_result.txt
+        retention-days: 30

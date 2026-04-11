@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreplace.c                                    :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 21:36:30 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:40 by surayama         ###   ########.fr       */
+/*   Created: 2026/03/03 17:16:33 by surayama          #+#    #+#             */
+/*   Updated: 2026/03/03 17:54:02 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "expand.h"
 
-void	ft_lstreplace(t_list *prev, t_list *target, t_list *new)
+t_list	*expand(t_list *tokens, t_shell_table *shell_table)
 {
-	t_list	*next_node;
-	t_list	*last_new;
-
-	if (!target || !new)
-		return ;
-	next_node = target->next;
-	last_new = ft_lstlast(new);
-	last_new->next = next_node;
-	free(target->content);
-	free(target);
-	if (prev)
-		prev->next = new;
+	tokens = expand_tilde(tokens, shell_table);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_parameter(tokens, shell_table);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_wildcard(tokens);
+	if (!tokens)
+		return (NULL);
+	tokens = expand_remove_quotes(tokens);
+	if (!tokens)
+		return (NULL);
+	return (tokens);
 }

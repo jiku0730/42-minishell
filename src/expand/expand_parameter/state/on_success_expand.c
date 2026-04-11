@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstreplace.c                                    :+:      :+:    :+:   */
+/*   on_success.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/01 21:36:30 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/07 00:15:40 by surayama         ###   ########.fr       */
+/*   Created: 2026/02/01 22:38:01 by surayama          #+#    #+#             */
+/*   Updated: 2026/02/07 00:15:14 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../expand_parameter_internal.h"
+#include "expand.h"
 
-void	ft_lstreplace(t_list *prev, t_list *target, t_list *new)
+t_list	*on_success_expand(t_expand_store *store, char *token)
 {
-	t_list	*next_node;
-	t_list	*last_new;
+	t_list	*expanded_tokens;
 
-	if (!target || !new)
-		return ;
-	next_node = target->next;
-	last_new = ft_lstlast(new);
-	last_new->next = next_node;
-	free(target->content);
-	free(target);
-	if (prev)
-		prev->next = new;
+	(void)token;
+	if (!store)
+		return (NULL);
+	expanded_tokens = store->tokens;
+	store->tokens = NULL;
+	ft_lstclear(&(store->buffer), free);
+	return (expanded_tokens);
 }

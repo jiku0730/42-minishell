@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 17:16:51 by surayama          #+#    #+#             */
-/*   Updated: 2026/04/06 07:41:22 by surayama         ###   ########.fr       */
+/*   Created: 2026/03/03 17:13:55 by surayama          #+#    #+#             */
+/*   Updated: 2026/03/03 18:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef EXPAND_H
+# define EXPAND_H
 
-# include "path.h"
+# include "constants.h"
+# include "libft.h"
 # include "shell_table.h"
-# include <limits.h>
-# include <stdio.h>
-# include <unistd.h>
+# include <stdbool.h>
 
-int		echo(t_list *argv, t_shell_table *shell_table);
-int		pwd(t_list *argv, t_shell_table *shell_table);
-int		export(t_list *argv, t_shell_table *shell_table);
-int		unset(t_list *argv, t_shell_table *shell_table);
-int		cd(t_list *argv, t_shell_table *shell_table);
+t_list	*expand(t_list *tokens, t_shell_table *shell_table);
+t_list	*expand_parameter(t_list *tokens, t_shell_table *shell_table);
+t_list	*expand_tilde(t_list *tokens, t_shell_table *shell_table);
+t_list	*expand_wildcard(t_list *tokens);
+t_list	*expand_remove_quotes(t_list *tokens);
 
 #endif

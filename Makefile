@@ -6,9 +6,10 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/01/17 02:33:17 by surayama         ###   ########.fr        #
+#    Updated: 2026/03/03 20:32:45 by surayama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 #-----------------------------------------------------------------------------
 #> options
@@ -56,21 +57,25 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 
 #mandatory sources
 SRCS_MAND	:=	src/main.c \
-				src/builtin/echo.c \
-				src/builtin/export.c \
-				src/builtin/pwd.c \
-				src/builtin/unset.c \
-				src/builtin/cd.c \
+				src/builtin/echo/echo.c \
+				src/builtin/export/export.c \
+				src/builtin/pwd/pwd.c \
+				src/builtin/unset/unset.c \
+				src/builtin/cd/cd.c \
+				src/builtin/cd/search_cdpath.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
 				src/checker/builtin_checker.c \
 				src/checker/tokenize_checker.c \
 				src/checker/heredoc_checker.c \
 				src/checker/shell_table_checker.c \
-				src/checker/parser_checker.c \
+				src/checker/parse_checker.c \
 				src/checker/path_checker.c \
 				src/checker/directory_checker.c \
+				src/checker/expand_checker.c \
 				src/checker/remove_quotes_checker.c \
+				src/checker/wildcard_checker.c \
+				src/checker/relative_path_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -87,16 +92,16 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/free_store.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
-				src/parser/parser.c \
-				src/parser/utils/add_to_cmd.c \
-				src/parser/utils/new_ast_node.c \
-				src/parser/utils/new_cmd.c \
-				src/parser/utils/new_redir.c \
-				src/parser/utils/token_check.c \
-				src/parser/utils/free_ast.c \
-				src/parser/utils/print_ast.c \
-				src/parser/utils/print_ast_utils.c \
-				src/parser/utils/print_ast_utils2.c \
+				src/parse/parse.c \
+				src/parse/utils/add_to_cmd.c \
+				src/parse/utils/new_ast_node.c \
+				src/parse/utils/new_cmd.c \
+				src/parse/utils/new_redir.c \
+				src/parse/utils/token_check.c \
+				src/parse/utils/free_ast.c \
+				src/parse/utils/print_ast.c \
+				src/parse/utils/print_ast_utils.c \
+				src/parse/utils/print_ast_utils2.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
@@ -121,8 +126,27 @@ SRCS_MAND	:=	src/main.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
+				src/component/directory/list_directory.c \
+				src/component/directory/list_directory_recursive.c \
+				src/component/path/to_absolute_path.c \
+				src/component/path/join_path.c \
 				src/component/path/append_path.c \
-				src/component/remove_quotes/remove_quotes.c \
+				src/component/path/resolve_relative_path.c \
+				src/expand/expand.c \
+				src/expand/expand_parameter/expand_parameter.c \
+				src/expand/expand_parameter/state/in_normal_expand.c \
+				src/expand/expand_parameter/state/in_double_quote_expand.c \
+				src/expand/expand_parameter/state/in_single_quote_expand.c \
+				src/expand/expand_parameter/state/on_success_expand.c \
+				src/expand/expand_parameter/state/on_error_expand.c \
+				src/expand/expand_parameter/store/push_token_expand.c \
+				src/expand/expand_parameter/store/add_buffer_expand.c \
+				src/expand/expand_parameter/store/get_key_length_expand.c \
+				src/expand/expand_parameter/store/free_store_expand.c \
+				src/expand/expand_tilde/expand_tilde.c \
+				src/expand/expand_wildcard/resolve_wildcard.c \
+				src/expand/expand_wildcard/expand_wildcard.c \
+				src/expand/expand_remove_quotes/expand_remove_quotes.c \
 
 SRCS_BONUS	:=
 
