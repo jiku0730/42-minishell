@@ -114,10 +114,10 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/exec_pipe.c \
 				src/execute/utils/ft_wexitstatus.c \
 				src/execute/utils/ft_wifexited.c \
-				src/execute/utils/exec_cmd_core.c \
-				src/execute/utils/exec_pipe_child.c \
-				src/execute/utils/exec_redirs.c \
-				src/execute/utils/list_to_argv.c \
+				src/execute/command/exec_cmd_core.c \
+				src/execute/command/list_to_argv.c \
+				src/execute/pipe/exec_pipe_child.c \
+				src/execute/redirects/exec_redirs.c \
 				src/component/directory/get_directory_entries.c \
 				src/component/directory/get_directory_all_entries.c \
 				src/component/path/to_absolute.c \
