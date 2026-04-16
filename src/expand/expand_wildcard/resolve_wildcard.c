@@ -94,4 +94,3 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 	ft_lstclear(&matches, free);
 	return (result);
 }
-

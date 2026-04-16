@@ -6,16 +6,15 @@
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 00:51:36 by surayama          #+#    #+#             */
-/*   Updated: 2026/02/13 23:29:35 by surayama         ###   ########.fr       */
+/*   Updated: 2026/04/16 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include <stdlib.h>
 
-static bool	is_quote(char c);
+static int	count_unquoted_len(const char *str);
 static char	*remove_quotes_from_string(const char *str);
-static int	excluded_quote_length(const char *str);
 
 t_list	*expand_remove_quotes(t_list *tokens)
 {
@@ -42,47 +41,47 @@ t_list	*expand_remove_quotes(t_list *tokens)
 	return (tokens);
 }
 
-static int	excluded_quote_length(const char *str)
+static int	count_unquoted_len(const char *str)
 {
-	size_t	len;
-	size_t	quote_count;
+	int		len;
+	char	quote;
 
-	len = ft_strlen(str);
-	quote_count = 0;
+	len = 0;
+	quote = 0;
 	while (*str)
 	{
-		if (is_quote(*str))
-			quote_count++;
+		if (!quote && (*str == '\'' || *str == '"'))
+			quote = *str;
+		else if (*str == quote)
+			quote = 0;
+		else
+			len++;
 		str++;
 	}
-	return (len - quote_count);
+	return (len);
 }
 
 static char	*remove_quotes_from_string(const char *str)
 {
-	char	*removed_str;
-	int		i;
+	char	*result;
+	char	quote;
 	int		j;
 
-	i = 0;
-	j = 0;
-	removed_str = malloc(sizeof(char) * (excluded_quote_length(str) + 1));
-	if (!removed_str)
+	result = malloc(sizeof(char) * (count_unquoted_len(str) + 1));
+	if (!result)
 		return (NULL);
-	while (str[i])
+	quote = 0;
+	j = 0;
+	while (*str)
 	{
-		if (!is_quote(str[i]))
-		{
-			removed_str[j] = str[i];
-			j++;
-		}
-		i++;
+		if (!quote && (*str == '\'' || *str == '"'))
+			quote = *str;
+		else if (*str == quote)
+			quote = 0;
+		else
+			result[j++] = *str;
+		str++;
 	}
-	removed_str[j] = '\0';
-	return (removed_str);
-}
-
-static bool	is_quote(char c)
-{
-	return (c == '\'' || c == '"' || c == '`');
+	result[j] = '\0';
+	return (result);
 }

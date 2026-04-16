@@ -16,7 +16,11 @@ void	in_double_quote(t_token_store *store, t_token_state *state,
 		char current)
 {
 	if (current == '\0')
+	{
+		ft_putstr_fd("jikussh: unexpected EOF while looking"
+			" for matching `\"'\n", STDERR_FILENO);
 		*state = ON_ERROR;
+	}
 	else if (add_buffer(store, current) == ERROR)
 		*state = ON_ERROR;
 	else if (current == '"')
