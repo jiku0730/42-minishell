@@ -11,47 +11,28 @@
 /* ************************************************************************** */
 
 #include "execute.h"
-#include "path.h"
 
-static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
+static int	cmd_not_found(char **argv)
 {
-	char	**paths;
-	char	*path_env;
-	char	*full_path;
-	int		i;
-
-	path_env = st_search(shell_table, "PATH");
-	if (!path_env)
-		return (NULL);
-	paths = ft_split(path_env, ':');
-	if (!paths)
-		return (NULL);
-	i = 0;
-	while (paths[i])
+	if (ft_strchr(argv[0], '/'))
 	{
-		full_path = join_path(paths[i], cmd);
-		if (!full_path)
-			return (ft_free_array((void **)paths), NULL);
-		if (access(full_path, X_OK) == 0)
-			return (ft_free_array((void **)paths), full_path);
-		free(full_path);
-		i++;
+		if (access(argv[0], F_OK) == 0)
+		{
+			ft_putstr_fd("jikussh: ", STDERR_FILENO);
+			perror(argv[0]);
+			ft_free_array((void **)argv);
+			return (126);
+		}
+		ft_putstr_fd("jikussh: ", STDERR_FILENO);
+		perror(argv[0]);
+		ft_free_array((void **)argv);
+		return (127);
 	}
-	ft_free_array((void **)paths);
-	return (NULL);
-}
-
-char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
-{
-	if (!cmd || !*cmd)
-		return (NULL);
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
-	return (find_in_path(cmd, shell_table));
+	ft_putstr_fd("jikussh: ", STDERR_FILENO);
+	ft_putstr_fd(argv[0], STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	ft_free_array((void **)argv);
+	return (127);
 }
 
 static int	exec_external_cmd(char **argv, t_shell_table *shell_table)
@@ -61,10 +42,7 @@ static int	exec_external_cmd(char **argv, t_shell_table *shell_table)
 
 	cmd_path = find_exec_path(argv[0], shell_table);
 	if (!cmd_path)
-	{
-		ft_free_array((void **)argv);
-		return (126);
-	}
+		return (cmd_not_found(argv));
 	new_envp = export_envp(shell_table);
 	if (!new_envp)
 	{
