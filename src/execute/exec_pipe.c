@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "signal_handler.h"
 
 static int	exec_pipe_left(t_ast *node, t_shell_table *shell_table, \
 				pid_t *left, int fd[2])
@@ -62,9 +63,11 @@ int	exec_pipe(t_ast *node, t_shell_table *shell_table)
 	}
 	close(fd[0]);
 	close(fd[1]);
+	set_signal_ignore();
 	waitpid(left, &exit_status_left_child, 0);
 	waitpid(right, &exit_status_right_child, 0);
+	set_signal_interactive();
 	if (ft_wifexited(exit_status_right_child))
 		return (ft_wexitstatus(exit_status_right_child));
-	return (1);
+	return (128 + WTERMSIG(exit_status_right_child));
 }
