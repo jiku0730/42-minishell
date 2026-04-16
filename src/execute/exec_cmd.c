@@ -77,9 +77,33 @@ char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
 	return (result);
 }
 
+static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
+{
+	pid_t	pid;
+	int		wstatus;
+	char	**argv;
+
+	pid = fork();
+	if (pid < 0)
+		return (perror("fork"), 1);
+	if (pid == 0)
+	{
+		if (node->cmd->redirs)
+			if (exec_redirs(node->cmd->redirs) != 0)
+				exit(1);
+		argv = list_to_argv(node->cmd->argv);
+		if (!argv || !argv[0])
+			exit(127);
+		exit(exec_external_cmd(argv, shell_table));
+	}
+	waitpid(pid, &wstatus, 0);
+	if (ft_wifexited(wstatus))
+		return (ft_wexitstatus(wstatus));
+	return (1);
+}
+
 int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
-	char	**argv;
 	int		status;
 
 	if (node->cmd->redirs)
@@ -90,12 +114,5 @@ int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 	status = exec_builtin_cmd(node, shell_table);
 	if (status != -1)
 		return (status);
-	argv = list_to_argv(node->cmd->argv);
-	if (!argv || !argv[0])
-	{
-		if (argv)
-			ft_free_array((void **)argv);
-		return (127);
-	}
-	return (exec_external_cmd(argv, shell_table));
+	return (fork_and_exec(node, shell_table));
 }
