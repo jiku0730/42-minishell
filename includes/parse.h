@@ -29,7 +29,8 @@ typedef enum e_ast_type
 	PIPE,
 	CMD,
 	AND,
-	OR
+	OR,
+	SUBSHELL
 }					t_ast_type;
 
 typedef enum e_redir_kind
@@ -62,7 +63,9 @@ typedef struct s_ast
 
 /* main function------------------------------------------------------------- */
 t_ast			*parse(t_list *token_head);
+t_ast			*parse_cmd(t_list **current);
 t_ast			*parse_pipeline(t_list **current);
+t_ast			*parse_list(t_list **current);
 
 /* AST's token utils--------------------------------------------------------- */
 bool			is_word(const t_list *node);

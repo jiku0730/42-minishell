@@ -25,6 +25,8 @@ bool	is_word(const t_list *node)
 		ft_strncmp(s, "|", 2) == 0 || \
 		ft_strncmp(s, "&&", 3) == 0 || \
 		ft_strncmp(s, "||", 3) == 0 || \
+		ft_strncmp(s, "(", 2) == 0 || \
+		ft_strncmp(s, ")", 2) == 0 || \
 		ft_strncmp(s, "EOF", 4) == 0)
 		return (false);
 	return (true);
