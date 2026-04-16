@@ -12,10 +12,22 @@
 
 #include "minishell.h"
 
+static void	update_exit_status(t_shell_table *shell_table, int status)
+{
+	char	*status_str;
+
+	status_str = ft_itoa(status);
+	if (!status_str)
+		return ;
+	st_insert(shell_table, "?", status_str, false);
+	free(status_str);
+}
+
 void	on_input(char *input, t_shell_table *shell_table)
 {
 	t_list	*tokens;
 	t_ast	*ast;
+	int		status;
 
 	tokens = tokenize(input);
 	if (!tokens)
@@ -32,6 +44,7 @@ void	on_input(char *input, t_shell_table *shell_table)
 	ft_lstclear(&tokens, free);
 	if (!ast)
 		return ;
-	exec_ast(ast, shell_table);
+	status = exec_ast(ast, shell_table);
 	free_ast(ast);
+	update_exit_status(shell_table, status);
 }
