@@ -48,8 +48,8 @@ static void	by_last(t_shell_table *shell_table, t_expand_store *store,
 static void	by_quote(t_shell_table *shell_table, t_expand_store *store,
 		t_expand_state *state, char **current)
 {
-	if (push_token_expand(store, shell_table) == ERROR
-		|| add_buffer_expand(store, **current) == ERROR)
+	(void)shell_table;
+	if (add_buffer_expand(store, **current) == ERROR)
 		*state = EXPAND_ON_ERROR;
 	else if (**current == '"')
 		*state = EXPAND_IN_DOUBLE_QUOTE;

@@ -16,8 +16,7 @@
 
 static t_list	*get_matches(const char *abs_dir, const char *pattern);
 static t_list	*build_full_paths(t_list *matches, const char *abs_dir);
-static bool		match_pattern(const char *str, const char *pattern);
-static t_list	*filter_pattern(t_list *source, const char *pattern);
+t_list			*filter_pattern(t_list *source, const char *pattern);
 
 t_list	*resolve_wildcard(const char *token)
 {
@@ -57,13 +56,29 @@ static t_list	*get_matches(const char *abs_dir, const char *pattern)
 	return (result);
 }
 
+static void	append_full_path(t_list **result, const char *prefix,
+		const char *name)
+{
+	char	*full_path;
+	t_list	*node;
+
+	full_path = ft_strjoin(prefix, name);
+	if (!full_path)
+		return ;
+	node = ft_lstnew(full_path);
+	if (!node)
+	{
+		free(full_path);
+		return ;
+	}
+	ft_lstadd_back(result, node);
+}
+
 static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 {
 	t_list	*result;
 	t_list	*current;
-	t_list	*node;
 	char	*dir_slash;
-	char	*full_path;
 
 	result = NULL;
 	dir_slash = ft_strjoin(abs_dir, "/");
@@ -72,14 +87,7 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 	current = matches;
 	while (current)
 	{
-		full_path = ft_strjoin(dir_slash, (char *)current->content);
-		node = ft_lstnew(full_path);
-		if (!node)
-		{
-			free(full_path);
-			break ;
-		}
-		ft_lstadd_back(&result, node);
+		append_full_path(&result, dir_slash, (char *)current->content);
 		current = current->next;
 	}
 	free(dir_slash);
@@ -87,48 +95,3 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 	return (result);
 }
 
-static t_list	*filter_pattern(t_list *source, const char *pattern)
-{
-	t_list	*result;
-	t_list	*current;
-	t_list	*new_node;
-
-	if (!source || !pattern)
-		return (NULL);
-	result = NULL;
-	current = source;
-	while (current)
-	{
-		if (match_pattern((const char *)current->content, pattern))
-		{
-			new_node = ft_lstnew(ft_strdup((const char *)current->content));
-			if (!new_node)
-			{
-				ft_lstclear(&result, free);
-				return (NULL);
-			}
-			ft_lstadd_back(&result, new_node);
-		}
-		current = current->next;
-	}
-	return (result);
-}
-
-static bool	match_pattern(const char *str, const char *pattern)
-{
-	if (*pattern == '\0')
-		return (*str == '\0');
-	if (*pattern == WILDCARD)
-	{
-		while (*str)
-		{
-			if (match_pattern(str, pattern + 1))
-				return (true);
-			str++;
-		}
-		return (match_pattern(str, pattern + 1));
-	}
-	if (*str == *pattern)
-		return (match_pattern(str + 1, pattern + 1));
-	return (false);
-}

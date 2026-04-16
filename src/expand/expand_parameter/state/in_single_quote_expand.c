@@ -30,8 +30,8 @@ void	in_single_quote_expand(t_shell_table *shell_table,
 static void	by_single_quote_end(t_shell_table *shell_table,
 		t_expand_store *store, t_expand_state *state, char **current)
 {
-	if (add_buffer_expand(store, **current) == ERROR || push_token_expand(store,
-			shell_table) == ERROR)
+	(void)shell_table;
+	if (add_buffer_expand(store, **current) == ERROR)
 		*state = EXPAND_ON_ERROR;
 	else
 		*state = EXPAND_IN_NORMAL;
