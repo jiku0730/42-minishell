@@ -6,28 +6,12 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/03/03 13:49:37 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/04/16 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-static char	*join_path(const char *path, const char *cmd)
-{
-	size_t	path_len;
-	size_t	cmd_len;
-	char	*joined;
-
-	path_len = ft_strlen(path);
-	cmd_len = ft_strlen(cmd);
-	joined = malloc(sizeof(char) * (path_len + 1 + cmd_len + 1));
-	if (!joined)
-		return (NULL);
-	ft_strlcpy(joined, path, path_len + 1);
-	joined[path_len] = '/';
-	ft_strlcpy(joined + path_len + 1, cmd, cmd_len + 1);
-	return (joined);
-}
+#include "path.h"
 
 static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 {
@@ -57,24 +41,44 @@ static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 	return (NULL);
 }
 
-static char	*resolve_exec_path(const char *cmd)
-{
-	if (access(cmd, X_OK) == 0)
-		return (ft_strdup(cmd));
-	return (NULL);
-}
-
 char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
 {
-	char	*result;
-
 	if (!cmd || !*cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
-		result = resolve_exec_path(cmd);
-	else
-		result = find_in_path(cmd, shell_table);
-	return (result);
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	return (find_in_path(cmd, shell_table));
+}
+
+static int	exec_external_cmd(char **argv, t_shell_table *shell_table)
+{
+	char		*cmd_path;
+	char		**new_envp;
+
+	cmd_path = find_exec_path(argv[0], shell_table);
+	if (!cmd_path)
+	{
+		ft_free_array((void **)argv);
+		return (126);
+	}
+	new_envp = export_envp(shell_table);
+	if (!new_envp)
+	{
+		free(cmd_path);
+		ft_free_array((void **)argv);
+		return (1);
+	}
+	execve(cmd_path, argv, new_envp);
+	perror(cmd_path);
+	free(cmd_path);
+	st_destroy(shell_table);
+	ft_free_array((void **)new_envp);
+	ft_free_array((void **)argv);
+	return (127);
 }
 
 static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
