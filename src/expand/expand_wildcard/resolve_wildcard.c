@@ -39,6 +39,8 @@ t_list	*resolve_wildcard(const char *token)
 		result = get_matches(abs_dir, slash + 1);
 	else
 		result = get_matches(abs_dir, token);
+	if (slash && result)
+		result = build_full_paths(result, abs_dir);
 	free(abs_dir);
 	return (result);
 }
@@ -46,15 +48,12 @@ t_list	*resolve_wildcard(const char *token)
 static t_list	*get_matches(const char *abs_dir, const char *pattern)
 {
 	t_list	*entries;
-	t_list	*filtered_matches;
 	t_list	*result;
 
 	if (list_directory(abs_dir, pattern[0] == '.', &entries) != SUCCESS)
 		return (NULL);
-	filtered_matches = filter_pattern(entries, pattern);
+	result = filter_pattern(entries, pattern);
 	ft_lstclear(&entries, free);
-	result = build_full_paths(filtered_matches, abs_dir);
-	ft_lstclear(&filtered_matches, free);
 	return (result);
 }
 
@@ -84,6 +83,7 @@ static t_list	*build_full_paths(t_list *matches, const char *abs_dir)
 		current = current->next;
 	}
 	free(dir_slash);
+	ft_lstclear(&matches, free);
 	return (result);
 }
 
