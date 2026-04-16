@@ -66,17 +66,6 @@ SRCS_MAND	:=	src/main.c \
 				src/builtin/exit/exit.c \
 				src/prompt/prompt.c \
 				src/callback/on_input.c \
-				src/checker/builtin_checker.c \
-				src/checker/tokenize_checker.c \
-				src/checker/heredoc_checker.c \
-				src/checker/shell_table_checker.c \
-				src/checker/parse_checker.c \
-				src/checker/path_checker.c \
-				src/checker/directory_checker.c \
-				src/checker/expand_checker.c \
-				src/checker/remove_quotes_checker.c \
-				src/checker/wildcard_checker.c \
-				src/checker/relative_path_checker.c \
 				src/tokenize/tokenize.c \
 				src/tokenize/is_specific.c \
 				src/tokenize/state/in_normal.c \
@@ -100,9 +89,6 @@ SRCS_MAND	:=	src/main.c \
 				src/parse/utils/new_redir.c \
 				src/parse/utils/token_check.c \
 				src/parse/utils/free_ast.c \
-				src/parse/utils/print_ast.c \
-				src/parse/utils/print_ast_utils.c \
-				src/parse/utils/print_ast_utils2.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
 				src/component/heredoc/tmpfile.c \
@@ -209,15 +195,7 @@ re: fclean all
 
 #-----------------------------------------------------------------------------
 
-norm:
-	norminette src/* includes/* libft/
-
-valgrind: re
-	valgrind --leak-check=full --suppressions=readline.supp ./$(NAME) --dev
-
-test: norm valgrind
-
 docker:
 	docker compose up -d && docker compose exec minishell bash
 
-.PHONY: norm valgrind test docker
+.PHONY: docker

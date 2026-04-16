@@ -78,20 +78,4 @@ bool			add_argv_to_cmd(t_cmd *cmd, const char *arg);
 void			free_cmd(t_cmd *cmd);
 void			free_ast(t_ast *node);
 
-/* test print function------------------------------------------------------- */
-void			print_branch_line(const char *prefix, bool is_last,
-					const char *text);
-void			build_child_prefix(const char *prefix, bool is_last,
-					char *buffer, size_t size);
-void			print_argv_item(t_list *node, int index);
-const char		*get_redir_symbol(t_redir *redir);
-void			print_redir_entry(t_redir *redir, int index);
-void			print_argv_line(const char *prefix, bool is_last,
-					t_list *argv);
-void			print_redir_line(const char *prefix, bool is_last,
-					t_list *redirs);
-void			print_pipe_children(t_ast *node, const char *prefix);
-void			print_pipe_node(t_ast *node, const char *prefix, bool is_last);
-void			print_ast_node(t_ast *node, const char *prefix, bool is_last);
-void			print_ast(t_ast *ast_root);
 #endif
