@@ -26,6 +26,6 @@
 # include "tokenize.h"
 
 // callbacks
-int		on_input(char *input, t_shell_table *shell_table);
+int		on_input(char *input, t_shell_table *shell_table, int *last_status);
 
 #endif
