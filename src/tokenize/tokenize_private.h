@@ -15,6 +15,7 @@
 
 # include "tokenize.h"
 # include "constants.h"
+# include <unistd.h>
 
 typedef enum e_token_state
 {
