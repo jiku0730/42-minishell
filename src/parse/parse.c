@@ -47,7 +47,9 @@ static t_ast	*parse_cmd(t_list **current)
 	cmd = new_cmd();
 	if (!cmd)
 		return (NULL);
-	while (*current && !is_symbol(*current, "|"))
+	while (*current && !is_symbol(*current, "|")
+		&& !is_symbol(*current, "&&")
+		&& !is_symbol(*current, "||"))
 	{
 		if (is_redir(*current))
 		{
@@ -68,7 +70,7 @@ static t_ast	*parse_cmd(t_list **current)
 	return (ast);
 }
 
-static t_ast	*parse_pipeline(t_list **current)
+t_ast	*parse_pipeline(t_list **current)
 {
 	t_ast	*left;
 	t_ast	*pipe_node;
@@ -89,14 +91,4 @@ static t_ast	*parse_pipeline(t_list **current)
 		return (pipe_node);
 	}
 	return (left);
-}
-
-t_ast	*parse(t_list *token_head)
-{
-	t_list	*current;
-	t_ast	*root;
-
-	current = token_head;
-	root = parse_pipeline(&current);
-	return (root);
 }

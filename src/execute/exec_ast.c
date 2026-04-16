@@ -12,14 +12,27 @@
 
 #include "execute.h"
 
+static int	exec_logical(t_ast *node, t_shell_table *shell_table)
+{
+	int	status;
+
+	status = exec_ast(node->left, shell_table);
+	if (node->type == AND && status == 0)
+		return (exec_ast(node->right, shell_table));
+	if (node->type == OR && status != 0)
+		return (exec_ast(node->right, shell_table));
+	return (status);
+}
+
 int	exec_ast(t_ast *node, t_shell_table *shell_table)
 {
 	if (!node)
 		return (EXIT_FAILURE);
 	if (node->type == PIPE)
 		return (exec_pipe(node, shell_table));
-	else if (node->type == CMD)
+	if (node->type == CMD)
 		return (exec_cmd(node, shell_table));
-	else
-		return (EXIT_FAILURE);
+	if (node->type == AND || node->type == OR)
+		return (exec_logical(node, shell_table));
+	return (EXIT_FAILURE);
 }

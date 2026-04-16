@@ -83,6 +83,7 @@ SRCS_MAND	:=	src/main.c \
 				src/tokenize/store/push_token.c \
 				src/tokenize/store/add_buffer.c \
 				src/parse/parse.c \
+				src/parse/parse_list.c \
 				src/parse/utils/add_to_cmd.c \
 				src/parse/utils/new_ast_node.c \
 				src/parse/utils/new_cmd.c \
