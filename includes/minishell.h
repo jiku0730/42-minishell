@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "constants.h"
+# include "execute.h"
 # include "expand.h"
 # include "heredoc.h"
 # include "libft.h"
