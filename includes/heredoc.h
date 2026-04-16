@@ -18,6 +18,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <sys/fcntl.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 t_list	*heredoc(t_list *tokens);
