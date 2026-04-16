@@ -25,9 +25,6 @@ void	on_input(char *input, t_shell_table *shell_table)
 		ft_lstclear(&tokens, free);
 		return ;
 	}
-	tokens = expand(tokens, shell_table);
-	if (!tokens)
-		return ;
 	ast = parse(tokens);
 	ft_lstclear(&tokens, free);
 	if (!ast)

@@ -111,6 +111,7 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/command/list_to_argv.c \
 				src/execute/pipe/exec_pipe_child.c \
 				src/execute/redirects/exec_redirs.c \
+				src/execute/redirects/expand_redirs.c \
 				src/component/directory/list_directory.c \
 				src/component/directory/list_directory_recursive.c \
 				src/component/path/to_absolute_path.c \
