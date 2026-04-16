@@ -106,6 +106,7 @@ SRCS_MAND	:=	src/main.c \
 				src/execute/utils/ft_wexitstatus.c \
 				src/execute/utils/ft_wifexited.c \
 				src/execute/command/find_exec_path.c \
+				src/execute/command/exec_external_cmd.c \
 				src/execute/command/exec_builtin_cmd.c \
 				src/execute/command/list_to_argv.c \
 				src/execute/pipe/exec_pipe_child.c \
