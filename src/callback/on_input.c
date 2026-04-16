@@ -12,26 +12,28 @@
 
 #include "minishell.h"
 
-void	on_input(char *input, t_shell_table *shell_table)
+int	on_input(char *input, t_shell_table *shell_table)
 {
 	t_list	*tokens;
 	t_ast	*ast;
+	int		status;
 
 	tokens = tokenize(input);
 	if (!tokens)
-		return ;
+		return (2);
 	if (!heredoc(tokens))
 	{
 		ft_lstclear(&tokens, free);
-		return ;
+		return (130);
 	}
 	tokens = expand(tokens, shell_table);
 	if (!tokens)
-		return ;
+		return (1);
 	ast = parse(tokens);
 	ft_lstclear(&tokens, free);
 	if (!ast)
-		return ;
-	exec_ast(ast, shell_table);
+		return (2);
+	status = exec_ast(ast, shell_table);
 	free_ast(ast);
+	return (status);
 }
