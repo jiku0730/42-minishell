@@ -12,6 +12,14 @@
 
 #include "shell_table.h"
 
+static void	print_exported_node(t_shell_node *node)
+{
+	if (node->value)
+		printf("declare -x %s=\"%s\"\n", node->key, node->value);
+	else
+		printf("declare -x %s\n", node->key);
+}
+
 void	st_print_env(t_shell_table *table)
 {
 	size_t			i;
@@ -24,12 +32,7 @@ void	st_print_env(t_shell_table *table)
 		while (node)
 		{
 			if (node->exported)
-			{
-				if (node->value && node->value[0] != '\0')
-					printf("%s=%s\n", node->key, node->value);
-				else
-					printf("%s=''\n", node->key);
-			}
+				print_exported_node(node);
 			node = node->next;
 		}
 		i++;

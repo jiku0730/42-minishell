@@ -46,7 +46,7 @@ static int	count_exported_nodes(t_shell_table *shell_table)
 		node = shell_table->buckets[index];
 		while (node)
 		{
-			if (node->exported)
+			if (node->exported && node->value)
 				count++;
 			node = node->next;
 		}
@@ -68,7 +68,7 @@ static int	export_envp_entries(char **envp, t_shell_table *shell_table)
 		node = shell_table->buckets[index];
 		while (node)
 		{
-			if (node->exported)
+			if (node->exported && node->value)
 			{
 				envp[env_index] = export_envp_str(node);
 				if (!envp[env_index])

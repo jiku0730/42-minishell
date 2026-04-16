@@ -12,7 +12,7 @@
 
 #include "shell_table.h"
 
-static bool	is_valid_key(const char *key)
+bool	st_is_valid_key(const char *key)
 {
 	size_t	i;
 
@@ -40,16 +40,13 @@ static t_shell_node	*create_node(const char *key, const char *value,
 		return (NULL);
 	node->key = ft_strdup(key);
 	if (!node->key)
+		return (free(node), NULL);
+	node->value = NULL;
+	if (value)
 	{
-		free(node);
-		return (NULL);
-	}
-	node->value = ft_strdup(value);
-	if (!node->value)
-	{
-		free(node->key);
-		free(node);
-		return (NULL);
+		node->value = ft_strdup(value);
+		if (!node->value)
+			return (free(node->key), free(node), NULL);
 	}
 	node->exported = exported;
 	return (node);
@@ -59,9 +56,13 @@ static int	update_existing_node(t_shell_node *node, const char *value)
 {
 	char	*new_value;
 
-	new_value = ft_strdup(value);
-	if (!new_value)
-		return (0);
+	new_value = NULL;
+	if (value)
+	{
+		new_value = ft_strdup(value);
+		if (!new_value)
+			return (0);
+	}
 	free(node->value);
 	node->value = new_value;
 	return (1);
@@ -74,7 +75,7 @@ int	st_insert(t_shell_table *table, const char *key, const char *value,
 	t_shell_node	*node;
 	t_shell_node	*new_node;
 
-	if (!table || !key || !value || !is_valid_key(key))
+	if (!table || !key || !st_is_valid_key(key))
 		return (0);
 	index = st_hash(key, table->size);
 	node = table->buckets[index];
@@ -99,7 +100,7 @@ int	st_set_exported(t_shell_table *table, const char *key)
 	t_shell_node	*node;
 	t_shell_node	*new_node;
 
-	if (!table || !key || !is_valid_key(key))
+	if (!table || !key || !st_is_valid_key(key))
 		return (0);
 	index = st_hash(key, table->size);
 	node = table->buckets[index];
@@ -112,7 +113,7 @@ int	st_set_exported(t_shell_table *table, const char *key)
 		}
 		node = node->next;
 	}
-	new_node = create_node(key, "", true);
+	new_node = create_node(key, NULL, true);
 	if (!new_node)
 		return (0);
 	new_node->next = table->buckets[index];
