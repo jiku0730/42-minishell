@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 17:04:25 by surayama          #+#    #+#             */
-/*   Updated: 2026/04/16 20:54:35 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/04/16 22:24:40 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	on_input(char *input, t_shell_table *shell_table, int *last_status)
 		ft_lstclear(&tokens, free);
 		return (130);
 	}
-	tokens = expand(tokens, shell_table);
+	tokens = expand(tokens, shell_table, *last_status);
 	if (!tokens)
 		return (1);
 	ast = parse(tokens);

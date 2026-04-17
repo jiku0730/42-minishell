@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 21:11:39 by kjikuhar          #+#    #+#              #
-#    Updated: 2026/03/03 20:32:45 by surayama         ###   ########.fr        #
+#    Updated: 2026/04/17 21:12:31 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,7 @@ SRCS_MAND	:=	src/main.c \
 				src/expand/expand_wildcard/match_wildcard.c \
 				src/expand/expand_wildcard/expand_wildcard.c \
 				src/expand/expand_remove_quotes/expand_remove_quotes.c \
+				src/expand/expand_question/expand_question.c \
 				src/signal/setup_signal_handlers.c \
 				src/signal/set_signals.c \
 
