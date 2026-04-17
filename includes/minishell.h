@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:14:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2026/04/16 00:00:00 by surayama         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:21:52 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 # include "tokenize.h"
 
 // callbacks
-int		on_input(char *input, t_shell_table *shell_table, int *last_status);
+int		on_input(char *input, t_shell_table *shell_table, int last_status);
 
 #endif
