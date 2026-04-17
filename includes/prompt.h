@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:35:18 by surayama          #+#    #+#             */
-/*   Updated: 2026/01/16 13:59:51 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:22:24 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	prompt(void (*handler)(char *input, t_shell_table *shell_table),
-			t_shell_table *shell_table);
+void	prompt(int (*handler)(char *input, t_shell_table *shell_table,
+					int last_status), t_shell_table *shell_table);
 
 #endif
