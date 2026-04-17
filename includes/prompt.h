@@ -6,7 +6,7 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:35:18 by surayama          #+#    #+#             */
-/*   Updated: 2026/04/17 21:22:24 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:35:51 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 # include <unistd.h>
 
 void	prompt(int (*handler)(char *input, t_shell_table *shell_table,
-					int last_status), t_shell_table *shell_table);
+				int last_status), t_shell_table *shell_table);
 
 #endif
