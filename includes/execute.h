@@ -30,8 +30,6 @@ void				exec_left_child(t_ast *node, \
 void				exec_right_child(t_ast *node, \
 						t_shell_table *shell_table, int fd[2]);
 int					exec_redirs(t_list *redirs);
-void				expand_redir_filenames(t_list *redirs, \
-							t_shell_table *shell_table);
 char				**list_to_argv(t_list *lst);
 int					ft_wifexited(int exit_status);
 int					ft_wexitstatus(int exit_status);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "execute.h"
-#include "expand.h"
 
 static int	cmd_not_found(char **argv)
 {
@@ -89,9 +88,6 @@ int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
 	int		status;
 
-	node->cmd->argv = expand(node->cmd->argv, shell_table);
-	if (node->cmd->redirs)
-		expand_redir_filenames(node->cmd->redirs, shell_table);
 	if (node->cmd->redirs)
 	{
 		if (exec_redirs(node->cmd->redirs) != 0)
