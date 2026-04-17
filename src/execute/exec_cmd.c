@@ -65,16 +65,30 @@ static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
 	return (status);
 }
 
+static bool	is_builtin(t_ast *node)
+{
+	static const char	*builtins[] = {"echo", "pwd", "cd",
+		"export", "unset", "exit", NULL};
+	int					i;
+	char				*name;
+
+	if (!node->cmd->argv || !node->cmd->argv->content)
+		return (false);
+	name = (char *)node->cmd->argv->content;
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strncmp(name, builtins[i],
+				ft_strlen(builtins[i]) + 1) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
-	int		status;
-
-	status = exec_builtin_cmd(node, shell_table);
-	if (status != -1)
-	{
-		if (node->cmd->redirs)
-			return (exec_builtin_with_redir(node, shell_table));
-		return (status);
-	}
+	if (is_builtin(node))
+		return (exec_builtin_with_redir(node, shell_table));
 	return (fork_and_exec(node, shell_table));
 }
