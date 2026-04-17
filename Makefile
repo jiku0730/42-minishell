@@ -59,6 +59,7 @@ LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 SRCS_MAND	:=	src/main.c \
 				src/builtin/echo/echo.c \
 				src/builtin/export/export.c \
+				src/builtin/export/export_errors.c \
 				src/builtin/pwd/pwd.c \
 				src/builtin/unset/unset.c \
 				src/builtin/cd/cd.c \

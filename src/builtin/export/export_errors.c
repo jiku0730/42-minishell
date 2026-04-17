@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_shell_table.c                                :+:      :+:    :+:   */
+/*   export_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: surayama <surayama@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 16:11:42 by surayama          #+#    #+#             */
-/*   Updated: 2025/12/06 16:17:45 by surayama         ###   ########.fr       */
+/*   Created: 2026/04/17 00:00:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/04/17 00:00:00 by surayama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_table.h"
+#include "builtin.h"
 
-void	st_print_env(t_shell_table *table)
+void	print_export_error(const char *assignment)
 {
-	size_t			i;
-	t_shell_node	*node;
-
-	i = 0;
-	while (i < table->size)
-	{
-		node = table->buckets[i];
-		while (node)
-		{
-			if (node->exported)
-			{
-				if (node->value)
-					printf("declare -x %s=\"%s\"\n",
-						node->key, node->value);
-				else
-					printf("declare -x %s\n", node->key);
-			}
-			node = node->next;
-		}
-		i++;
-	}
+	ft_putstr_fd(SHELL_NAME, STDERR_FILENO);
+	ft_putstr_fd(": export: `", STDERR_FILENO);
+	ft_putstr_fd((char *)assignment, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 }

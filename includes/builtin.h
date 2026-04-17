@@ -25,5 +25,6 @@ int		export(t_list *argv, t_shell_table *shell_table);
 int		unset(t_list *argv, t_shell_table *shell_table);
 int		cd(t_list *argv, t_shell_table *shell_table);
 int		builtin_exit(t_list *argv, t_shell_table *shell_table);
+void	print_export_error(const char *assignment);
 
 #endif

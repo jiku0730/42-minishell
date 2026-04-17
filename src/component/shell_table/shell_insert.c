@@ -44,12 +44,15 @@ static t_shell_node	*create_node(const char *key, const char *value,
 		free(node);
 		return (NULL);
 	}
-	node->value = ft_strdup(value);
-	if (!node->value)
+	if (value)
 	{
-		free(node->key);
-		free(node);
-		return (NULL);
+		node->value = ft_strdup(value);
+		if (!node->value)
+		{
+			free(node->key);
+			free(node);
+			return (NULL);
+		}
 	}
 	node->exported = exported;
 	return (node);
@@ -112,7 +115,7 @@ int	st_set_exported(t_shell_table *table, const char *key)
 		}
 		node = node->next;
 	}
-	new_node = create_node(key, "", true);
+	new_node = create_node(key, NULL, true);
 	if (!new_node)
 		return (0);
 	new_node->next = table->buckets[index];
