@@ -41,9 +41,6 @@ make
 | `make re`       | Clean rebuild                                    |
 | `make clean`    | Remove object files                              |
 | `make fclean`   | Remove object files and binary                   |
-| `make norm`     | Run norminette style checker                     |
-| `make valgrind` | Rebuild and run with valgrind for leak detection  |
-| `make test`     | Run norminette + valgrind                        |
 
 ### Usage Examples
 
