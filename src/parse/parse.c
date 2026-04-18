@@ -73,6 +73,8 @@ static t_ast	*parse_cmd(t_list **current)
 			if (!add_argv_to_cmd(cmd, (*current)->content))
 				return (free_cmd(cmd), NULL);
 		}
+		else
+			return (free_cmd(cmd), NULL);
 		*current = (*current)->next;
 	}
 	return (wrap_cmd(cmd));

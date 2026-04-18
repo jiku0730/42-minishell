@@ -71,6 +71,7 @@ typedef enum e_redir_kind
 ## 備考
 
 - `command` は WORD またはリダイレクションを 1 つ以上含む必要がある。空 CMD は構文エラー (`parse_cmd()` が `NULL` を返す)。これにより `| foo`、`foo |`、`&& foo`、`foo &&` などが検出される。
+- `parse_cmd()` のループは WORD でも redir でもないトークン (想定外トークン / 将来追加される未対応演算子) を黙って読み飛ばさず、即座に `NULL` を返す。
 - `redir` の WORD 部は `parse_redir()` が `is_word()` で検査し、演算子トークンや末尾 NULL をエラーとして弾く。
 - `WORD` トークンは展開 (`$VAR`) とクォート除去を済ませた後の値が渡される前提。
 - ヒアドキュメント (`<<`) は本パーサの対象外で、`src/component/heredoc/` が事前段階で処理する。
