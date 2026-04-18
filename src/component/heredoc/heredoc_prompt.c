@@ -59,7 +59,7 @@ char	*heredoc_prompt(const char *delim, bool expand,
 	pid = fork();
 	if (pid == 0)
 	{
-		set_signal_default();
+		set_signal_heredoc();
 		heredoc_child(delim, fd, expand, st);
 	}
 	close(fd);
