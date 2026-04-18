@@ -21,18 +21,12 @@ Key features include:
 
 ### Prerequisites
 
-- Docker (recommended for building and running)
-- Or: GCC, Make, GNU readline library
+- GCC, Make, GNU readline library
 
 ### Build and Run
 
-The recommended way to build and run is inside the Docker environment:
-
 ```bash
-# Enter the Docker container
-make docker
-
-# Build inside the container
+# Build the project
 make
 
 # Run the shell
@@ -47,9 +41,6 @@ make
 | `make re`       | Clean rebuild                                    |
 | `make clean`    | Remove object files                              |
 | `make fclean`   | Remove object files and binary                   |
-| `make norm`     | Run norminette style checker                     |
-| `make valgrind` | Rebuild and run with valgrind for leak detection  |
-| `make test`     | Run norminette + valgrind                        |
 
 ### Usage Examples
 
@@ -76,14 +67,13 @@ minishell$ exit
 The shell follows an interpreter pipeline:
 
 ```
-Input -> tokenize() -> heredoc() -> variable_expand() -> remove_quotes() -> parse() -> AST -> execute
+Input -> tokenize() -> heredoc() -> parse() -> AST -> expand() -> execute
 ```
 
 1. **Tokenizer** -- State-machine-based lexer that splits input into tokens at operator, space, and quote boundaries.
-2. **Variable Expansion** -- Expands `$VAR` syntax while respecting quote context.
-3. **Quote Removal** -- Strips quote characters from expanded tokens.
-4. **Parser** -- Recursive descent parser that produces a binary AST with `PIPE` (internal) and `CMD` (leaf) nodes.
-5. **Executor** -- Walks the AST, sets up pipes and redirections, and executes commands via `fork`/`execve`.
+2. **Heredoc** -- Processes here-document redirections before parsing.
+3. **Parser** -- Recursive descent parser that produces a binary AST with `PIPE`, `AND`, `OR`, `SUBSHELL` (internal) and `CMD` (leaf) nodes.
+4. **Expand & Execute** -- Walks the AST and, for each command, applies expansion (tilde, `$?`, parameter, wildcard, quote removal) then executes via `fork`/`execve`.
 
 ## Resources
 
