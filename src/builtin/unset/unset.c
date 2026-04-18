@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/29 20:59:00 by surayama          #+#    #+#             */
+/*   Updated: 2026/01/07 21:12:00 by kjikuhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtin.h"
+
+static void	skip_head_node(t_list **argv);
+
+int	unset(t_list *argv, t_shell_table *shell_table)
+{
+	char	*key;
+	int		result;
+
+	if (!argv || !argv->content)
+		return (SUCCESS);
+	result = SUCCESS;
+	skip_head_node(&argv);
+	while (argv)
+	{
+		key = (char *)argv->content;
+		if (key)
+			st_delete(shell_table, key);
+		skip_head_node(&argv);
+	}
+	return (result);
+}
+
+static void	skip_head_node(t_list **argv)
+{
+	if (argv && *argv)
+		*argv = (*argv)->next;
+}

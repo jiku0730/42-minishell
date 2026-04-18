@@ -1,0 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 17:18:25 by kjikuhar          #+#    #+#             */
+/*   Updated: 2026/04/16 00:00:00 by surayama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "execute.h"
+#include "expand.h"
+#include "signal_handler.h"
+
+static int	wait_for_child(pid_t pid)
+{
+	int	wstatus;
+
+	set_signal_ignore();
+	waitpid(pid, &wstatus, 0);
+	set_signal_interactive();
+	if (ft_wifexited(wstatus))
+		return (ft_wexitstatus(wstatus));
+	if (WTERMSIG(wstatus) == SIGQUIT)
+		ft_putendl_fd("Quit: 3", STDERR_FILENO);
+	return (128 + WTERMSIG(wstatus));
+}
+
+static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
+{
+	pid_t	pid;
+	char	**argv;
+
+	pid = fork();
+	if (pid < 0)
+		return (perror("fork"), 1);
+	if (pid == 0)
+	{
+		set_signal_default();
+		if (node->cmd->redirs)
+			if (exec_redirs(node->cmd->redirs) != 0)
+				exit(1);
+		argv = list_to_argv(node->cmd->argv);
+		if (!argv || !argv[0])
+			exit(127);
+		exit(exec_external_cmd(argv, shell_table));
+	}
+	return (wait_for_child(pid));
+}
+
+static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
+{
+	int	saved_in;
+	int	saved_out;
+	int	status;
+
+	saved_in = dup(STDIN_FILENO);
+	saved_out = dup(STDOUT_FILENO);
+	if (node->cmd->redirs
+		&& exec_redirs(node->cmd->redirs) != 0)
+		status = 1;
+	else
+		status = exec_builtin_cmd(node, st);
+	dup2(saved_in, STDIN_FILENO);
+	dup2(saved_out, STDOUT_FILENO);
+	close(saved_in);
+	close(saved_out);
+	return (status);
+}
+
+static bool	is_builtin(t_ast *node)
+{
+	static const char	*builtins[] = {"echo", "pwd", "cd",
+		"export", "unset", "exit", NULL};
+	int					i;
+	char				*name;
+
+	if (!node->cmd->argv || !node->cmd->argv->content)
+		return (false);
+	name = (char *)node->cmd->argv->content;
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strncmp(name, builtins[i],
+				ft_strlen(builtins[i]) + 1) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+int	exec_cmd(t_ast *node, t_shell_table *shell_table)
+{
+	if (expand_cmd(node->cmd, shell_table) == ERROR)
+		return (-1);
+	if (is_builtin(node))
+		return (exec_builtin_with_redir(node, shell_table));
+	return (fork_and_exec(node, shell_table));
+}
