@@ -10,7 +10,7 @@ list     = pipeline , { ( "&&" | "||" ) , pipeline } ;
 
 pipeline = command , [ "|" , pipeline ] ;
 
-command  = { redir | WORD } ;
+command  = ( redir | WORD ) , { redir | WORD } ;
 
 redir    = redir_op , WORD ;
 
@@ -70,7 +70,7 @@ typedef enum e_redir_kind
 
 ## 備考
 
-- `command` は空列も受理する (`{ redir | WORD }`)。空コマンドの意味論的エラーはパーサではなく実行段で扱う。
+- `command` は WORD またはリダイレクションを 1 つ以上含む必要がある。空 CMD は構文エラー (`parse_cmd()` が `NULL` を返す)。これにより `| foo`、`foo |`、`&& foo`、`foo &&` などが検出される。
 - `redir` の WORD 部は `parse_redir()` が `is_word()` で検査し、演算子トークンや末尾 NULL をエラーとして弾く。
 - `WORD` トークンは展開 (`$VAR`) とクォート除去を済ませた後の値が渡される前提。
 - ヒアドキュメント (`<<`) は本パーサの対象外で、`src/component/heredoc/` が事前段階で処理する。

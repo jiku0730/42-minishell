@@ -39,9 +39,21 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 	return (SUCCESS);
 }
 
-static t_ast	*parse_cmd(t_list **current)
+static t_ast	*wrap_cmd(t_cmd *cmd)
 {
 	t_ast	*ast;
+
+	if (!cmd->argv && !cmd->redirs)
+		return (free_cmd(cmd), NULL);
+	ast = new_ast_node(CMD);
+	if (!ast)
+		return (free_cmd(cmd), NULL);
+	ast->cmd = cmd;
+	return (ast);
+}
+
+static t_ast	*parse_cmd(t_list **current)
+{
 	t_cmd	*cmd;
 
 	cmd = new_cmd();
@@ -63,11 +75,7 @@ static t_ast	*parse_cmd(t_list **current)
 		}
 		*current = (*current)->next;
 	}
-	ast = new_ast_node(CMD);
-	if (!ast)
-		return (free_cmd(cmd), NULL);
-	ast->cmd = cmd;
-	return (ast);
+	return (wrap_cmd(cmd));
 }
 
 t_ast	*parse_pipeline(t_list **current)
