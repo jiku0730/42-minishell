@@ -39,7 +39,7 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 	return (SUCCESS);
 }
 
-static t_ast	*parse_cmd(t_list **current)
+t_ast	*parse_cmd(t_list **current)
 {
 	t_ast	*ast;
 	t_cmd	*cmd;
@@ -49,7 +49,8 @@ static t_ast	*parse_cmd(t_list **current)
 		return (NULL);
 	while (*current && !is_symbol(*current, "|")
 		&& !is_symbol(*current, "&&")
-		&& !is_symbol(*current, "||"))
+		&& !is_symbol(*current, "||")
+		&& !is_symbol(*current, ")"))
 	{
 		if (is_redir(*current))
 		{
@@ -70,25 +71,3 @@ static t_ast	*parse_cmd(t_list **current)
 	return (ast);
 }
 
-t_ast	*parse_pipeline(t_list **current)
-{
-	t_ast	*left;
-	t_ast	*pipe_node;
-
-	left = parse_cmd(current);
-	if (!left)
-		return (NULL);
-	if (*current && is_symbol(*current, "|"))
-	{
-		*current = (*current)->next;
-		pipe_node = new_ast_node(PIPE);
-		if (!pipe_node)
-			return (free_ast(left), NULL);
-		pipe_node->left = left;
-		pipe_node->right = parse_pipeline(current);
-		if (!pipe_node->right)
-			return (free_ast(pipe_node), NULL);
-		return (pipe_node);
-	}
-	return (left);
-}

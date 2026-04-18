@@ -37,14 +37,12 @@ void	free_ast(t_ast *ast)
 {
 	if (!ast)
 		return ;
-	if (ast->type == PIPE)
+	if (ast->type == CMD)
+		free_cmd(ast->cmd);
+	else
 	{
 		free_ast(ast->left);
 		free_ast(ast->right);
-	}
-	else if (ast->type == CMD)
-	{
-		free_cmd(ast->cmd);
 	}
 	free(ast);
 }

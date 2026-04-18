@@ -21,7 +21,7 @@ static t_ast_type	get_logical_type(t_list *current)
 	return (CMD);
 }
 
-static t_ast	*parse_list(t_list **current)
+t_ast	*parse_list(t_list **current)
 {
 	t_ast		*left;
 	t_ast		*node;
