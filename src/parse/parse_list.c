@@ -51,7 +51,14 @@ t_ast	*parse_list(t_list **current)
 t_ast	*parse(t_list *token_head)
 {
 	t_list	*current;
+	t_ast	*ast;
 
 	current = token_head;
-	return (parse_list(&current));
+	ast = parse_list(&current);
+	if (current != NULL)
+	{
+		free_ast(ast);
+		return (NULL);
+	}
+	return (ast);
 }
