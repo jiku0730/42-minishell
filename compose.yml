@@ -1,7 +1,0 @@
-services:
-  minishell:
-    build: .
-    volumes:
-      - .:/cursus
-    working_dir: /cursus
-    tty: true
