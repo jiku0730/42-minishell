@@ -39,6 +39,30 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+static int	parse_token(t_list **current, t_cmd *cmd)
+{
+	if (is_redir(*current))
+	{
+		if (parse_redir(current, cmd) == ERROR)
+			return (ERROR);
+	}
+	else if (is_word(*current))
+	{
+		if (!add_argv_to_cmd(cmd, (*current)->content))
+			return (ERROR);
+	}
+	*current = (*current)->next;
+	return (SUCCESS);
+}
+
+static bool	is_cmd_end(t_list *current)
+{
+	if (!current)
+		return (true);
+	return (is_symbol(current, "|") || is_symbol(current, "&&")
+		|| is_symbol(current, "||") || is_symbol(current, ")"));
+}
+
 t_ast	*parse_cmd(t_list **current)
 {
 	t_ast	*ast;
@@ -47,22 +71,10 @@ t_ast	*parse_cmd(t_list **current)
 	cmd = new_cmd();
 	if (!cmd)
 		return (NULL);
-	while (*current && !is_symbol(*current, "|")
-		&& !is_symbol(*current, "&&")
-		&& !is_symbol(*current, "||")
-		&& !is_symbol(*current, ")"))
+	while (!is_cmd_end(*current))
 	{
-		if (is_redir(*current))
-		{
-			if (parse_redir(current, cmd) == ERROR)
-				return (free_cmd(cmd), NULL);
-		}
-		else if (is_word(*current))
-		{
-			if (!add_argv_to_cmd(cmd, (*current)->content))
-				return (free_cmd(cmd), NULL);
-		}
-		*current = (*current)->next;
+		if (parse_token(current, cmd) == ERROR)
+			return (free_cmd(cmd), NULL);
 	}
 	ast = new_ast_node(CMD);
 	if (!ast)
@@ -70,4 +82,3 @@ t_ast	*parse_cmd(t_list **current)
 	ast->cmd = cmd;
 	return (ast);
 }
-
