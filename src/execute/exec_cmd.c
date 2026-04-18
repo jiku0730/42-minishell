@@ -24,6 +24,7 @@ static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 		return (perror("fork"), 1);
 	if (pid == 0)
 	{
+		set_signal_default();
 		if (node->cmd->redirs)
 			if (exec_redirs(node->cmd->redirs) != 0)
 				exit(1);
@@ -32,10 +33,12 @@ static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 			exit(127);
 		exit(exec_external_cmd(argv, shell_table));
 	}
+	set_signal_ignore();
 	waitpid(pid, &wstatus, 0);
+	set_signal_interactive();
 	if (ft_wifexited(wstatus))
 		return (ft_wexitstatus(wstatus));
-	return (1);
+	return (128 + WTERMSIG(wstatus));
 }
 
 static void	restore_fds(int saved_in, int saved_out)

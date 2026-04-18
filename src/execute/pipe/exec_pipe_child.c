@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "signal_handler.h"
 
 void	exec_left_child(t_ast *node, t_shell_table *shell_table, int fd[2])
 {
@@ -26,6 +27,7 @@ void	exec_left_child(t_ast *node, t_shell_table *shell_table, int fd[2])
 	}
 	close(fd[0]);
 	close(fd[1]);
+	set_signal_default();
 	left_node = node->left;
 	right_node = node->right;
 	free(node);
@@ -49,6 +51,7 @@ void	exec_right_child(t_ast *node, t_shell_table *shell_table, int fd[2])
 	}
 	close(fd[1]);
 	close(fd[0]);
+	set_signal_default();
 	left_node = node->left;
 	right_node = node->right;
 	free(node);
