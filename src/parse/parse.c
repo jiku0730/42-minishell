@@ -30,13 +30,13 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 
 	kind = find_redir_kind(*current);
 	if (kind == R_NOT_FOUND)
-		return (ERROR);
+		return (0);
 	*current = (*current)->next;
 	if (!*current || !is_word(*current))
-		return (ERROR);
+		return (0);
 	if (!add_redir_to_cmd(cmd, kind, (*current)->content))
-		return (ERROR);
-	return (SUCCESS);
+		return (0);
+	return (1);
 }
 
 static t_ast	*wrap_cmd(t_cmd *cmd)
