@@ -19,6 +19,7 @@
 extern volatile sig_atomic_t	g_signal;
 
 void	setup_signal_handlers(void);
+void	enable_echoctl(void);
 void	set_signal_ignore(void);
 void	set_signal_default(void);
 void	set_signal_interactive(void);

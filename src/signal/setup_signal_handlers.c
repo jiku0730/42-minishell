@@ -37,6 +37,16 @@ static void	disable_echoctl(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
+void	enable_echoctl(void)
+{
+	struct termios	term;
+
+	ft_memset(&term, 0, sizeof(term));
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
+
 void	setup_signal_handlers(void)
 {
 	struct sigaction	sa;
