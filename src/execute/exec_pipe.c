@@ -43,13 +43,32 @@ static int	exec_pipe_right(t_ast *node, t_shell_table *shell_table, \
 	return (0);
 }
 
+static int	get_exit_status(int wstatus)
+{
+	if (ft_wifexited(wstatus))
+		return (ft_wexitstatus(wstatus));
+	if (WTERMSIG(wstatus) == SIGQUIT)
+		ft_putendl_fd("Quit: 3", STDERR_FILENO);
+	return (128 + WTERMSIG(wstatus));
+}
+
+static int	wait_pipe_children(pid_t left, pid_t right)
+{
+	int	wstatus_left;
+	int	wstatus_right;
+
+	set_signal_ignore();
+	waitpid(left, &wstatus_left, 0);
+	waitpid(right, &wstatus_right, 0);
+	set_signal_interactive();
+	return (get_exit_status(wstatus_right));
+}
+
 int	exec_pipe(t_ast *node, t_shell_table *shell_table)
 {
 	int		fd[2];
 	pid_t	left;
 	pid_t	right;
-	int		exit_status_left_child;
-	int		exit_status_right_child;
 
 	if (pipe(fd) == -1)
 		return (1);
@@ -63,13 +82,5 @@ int	exec_pipe(t_ast *node, t_shell_table *shell_table)
 	}
 	close(fd[0]);
 	close(fd[1]);
-	set_signal_ignore();
-	waitpid(left, &exit_status_left_child, 0);
-	waitpid(right, &exit_status_right_child, 0);
-	set_signal_interactive();
-	if (ft_wifexited(exit_status_right_child))
-		return (ft_wexitstatus(exit_status_right_child));
-	if (WTERMSIG(exit_status_right_child) == SIGQUIT)
-		ft_putendl_fd("Quit: 3", STDERR_FILENO);
-	return (128 + WTERMSIG(exit_status_right_child));
+	return (wait_pipe_children(left, right));
 }

@@ -14,10 +14,23 @@
 #include "expand.h"
 #include "signal_handler.h"
 
+static int	wait_for_child(pid_t pid)
+{
+	int	wstatus;
+
+	set_signal_ignore();
+	waitpid(pid, &wstatus, 0);
+	set_signal_interactive();
+	if (ft_wifexited(wstatus))
+		return (ft_wexitstatus(wstatus));
+	if (WTERMSIG(wstatus) == SIGQUIT)
+		ft_putendl_fd("Quit: 3", STDERR_FILENO);
+	return (128 + WTERMSIG(wstatus));
+}
+
 static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 {
 	pid_t	pid;
-	int		wstatus;
 	char	**argv;
 
 	pid = fork();
@@ -34,22 +47,7 @@ static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 			exit(127);
 		exit(exec_external_cmd(argv, shell_table));
 	}
-	set_signal_ignore();
-	waitpid(pid, &wstatus, 0);
-	set_signal_interactive();
-	if (ft_wifexited(wstatus))
-		return (ft_wexitstatus(wstatus));
-	if (WTERMSIG(wstatus) == SIGQUIT)
-		ft_putendl_fd("Quit: 3", STDERR_FILENO);
-	return (128 + WTERMSIG(wstatus));
-}
-
-static void	restore_fds(int saved_in, int saved_out)
-{
-	dup2(saved_in, STDIN_FILENO);
-	dup2(saved_out, STDOUT_FILENO);
-	close(saved_in);
-	close(saved_out);
+	return (wait_for_child(pid));
 }
 
 static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
@@ -62,12 +60,13 @@ static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
 	saved_out = dup(STDOUT_FILENO);
 	if (node->cmd->redirs
 		&& exec_redirs(node->cmd->redirs) != 0)
-	{
-		restore_fds(saved_in, saved_out);
-		return (1);
-	}
-	status = exec_builtin_cmd(node, st);
-	restore_fds(saved_in, saved_out);
+		status = 1;
+	else
+		status = exec_builtin_cmd(node, st);
+	dup2(saved_in, STDIN_FILENO);
+	dup2(saved_out, STDOUT_FILENO);
+	close(saved_in);
+	close(saved_out);
 	return (status);
 }
 

@@ -13,7 +13,7 @@
 #include "prompt.h"
 #include "signal_handler.h"
 
-void	prompt(int (*handler)(char *input, t_shell_table *shell_table,
+int	prompt(int (*handler)(char *input, t_shell_table *shell_table,
 			int last_status), t_shell_table *shell_table)
 {
 	char	*input;
@@ -39,4 +39,5 @@ void	prompt(int (*handler)(char *input, t_shell_table *shell_table,
 			last_status = handler(input, shell_table, last_status);
 	}
 	rl_clear_history();
+	return (last_status);
 }

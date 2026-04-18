@@ -15,6 +15,7 @@
 int	main(int argc, char const **argv, char *const envp[])
 {
 	t_shell_table	*shell_table;
+	int				last_status;
 
 	(void)argc;
 	(void)argv;
@@ -22,7 +23,7 @@ int	main(int argc, char const **argv, char *const envp[])
 	if (!shell_table)
 		return (1);
 	setup_signal_handlers();
-	prompt(on_input, shell_table);
+	last_status = prompt(on_input, shell_table);
 	st_destroy(shell_table);
-	return (0);
+	return (last_status);
 }

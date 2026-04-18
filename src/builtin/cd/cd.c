@@ -71,6 +71,7 @@ static int	by_move_to_home(t_shell_table *shell_table)
 static int	by_move_to_oldpwd(t_shell_table *shell_table)
 {
 	char	*oldpwd;
+	int		result;
 
 	oldpwd = st_search(shell_table, "OLDPWD");
 	if (!oldpwd)
@@ -78,7 +79,10 @@ static int	by_move_to_oldpwd(t_shell_table *shell_table)
 		ft_putstr_fd("Error: cd OLDPWD not set\n", STDERR_FILENO);
 		return (1);
 	}
-	return (move_to_path(oldpwd, shell_table));
+	result = move_to_path(oldpwd, shell_table);
+	if (result == 0)
+		ft_putendl_fd(oldpwd, STDOUT_FILENO);
+	return (result);
 }
 
 static int	move_to_path(const char *absolute_path, t_shell_table *shell_table)

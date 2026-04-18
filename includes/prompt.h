@@ -21,6 +21,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	prompt(int (*handler)(char *input, t_shell_table *shell_table,
+int		prompt(int (*handler)(char *input, t_shell_table *shell_table,
 				int last_status), t_shell_table *shell_table);
 #endif

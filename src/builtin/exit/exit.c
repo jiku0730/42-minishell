@@ -38,27 +38,66 @@ static void	exit_numeric_error(const char *str)
 	exit(2);
 }
 
+static long long	ft_atoll_check(const char *str, bool *ovf)
+{
+	long long	num;
+	int			sign;
+	int			digit;
+
+	*ovf = false;
+	sign = 1;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	num = 0;
+	while (ft_isdigit((unsigned char)*str))
+	{
+		digit = *str - '0';
+		if (sign == 1 && num > (LLONG_MAX - digit) / 10)
+			return (*ovf = true, 0);
+		if (sign == -1 && num > -(LLONG_MIN + digit) / 10)
+			return (*ovf = true, 0);
+		num = num * 10 + digit;
+		str++;
+	}
+	return (num * sign);
+}
+
+static void	exit_no_args(t_shell_table *shell_table)
+{
+	char	*str;
+
+	str = st_search(shell_table, "?");
+	if (!str)
+		exit(0);
+	exit(ft_atoi(str) & 0xFF);
+}
+
 int	builtin_exit(t_list *argv, t_shell_table *shell_table)
 {
-	t_list	*args;
-	char	*str;
+	t_list		*args;
+	char		*str;
+	long long	val;
+	bool		ovf;
 
 	write(STDOUT_FILENO, "exit\n", 5);
 	args = argv->next;
 	if (!args)
-	{
-		str = st_search(shell_table, "?");
-		if (!str)
-			exit(0);
-		exit(ft_atoi(str) & 0xFF);
-	}
-	if (args->next)
-	{
-		ft_putstr_fd(SHELL_NAME ": exit: too many arguments\n", STDERR_FILENO);
-		return (1);
-	}
+		exit_no_args(shell_table);
 	str = (char *)args->content;
 	if (!is_numeric(str))
 		exit_numeric_error(str);
-	exit(ft_atoi(str) & 0xFF);
+	if (args->next)
+	{
+		ft_putstr_fd(SHELL_NAME ": exit: too many arguments\n",
+			STDERR_FILENO);
+		return (1);
+	}
+	val = ft_atoll_check(str, &ovf);
+	if (ovf)
+		exit_numeric_error(str);
+	exit((unsigned char)val);
 }
