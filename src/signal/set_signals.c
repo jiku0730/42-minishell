@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "signal_handler.h"
-#include <readline/readline.h>
 #include <unistd.h>
 
 void	set_signal_ignore(void)
@@ -41,20 +40,13 @@ void	set_signal_interactive(void)
 	setup_signal_handlers();
 }
 
-static void	sigint_heredoc_handler(int sig)
-{
-	g_signal = sig;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_done = 1;
-}
-
 void	set_signal_heredoc(void)
 {
 	struct sigaction	sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
-	sa.sa_handler = sigint_heredoc_handler;
+	sa.sa_handler = SIG_DFL;
 	sigaction(SIGINT, &sa, NULL);
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
