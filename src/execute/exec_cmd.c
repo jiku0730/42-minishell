@@ -11,53 +11,7 @@
 /* ************************************************************************** */
 
 #include "execute.h"
-
-static int	cmd_not_found(char **argv)
-{
-	if (ft_strchr(argv[0], '/'))
-	{
-		if (access(argv[0], F_OK) == 0)
-		{
-			ft_putstr_fd("jikussh: ", STDERR_FILENO);
-			perror(argv[0]);
-			ft_free_array((void **)argv);
-			return (126);
-		}
-		ft_putstr_fd("jikussh: ", STDERR_FILENO);
-		perror(argv[0]);
-		ft_free_array((void **)argv);
-		return (127);
-	}
-	ft_putstr_fd("jikussh: ", STDERR_FILENO);
-	ft_putstr_fd(argv[0], STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	ft_free_array((void **)argv);
-	return (127);
-}
-
-static int	exec_external_cmd(char **argv, t_shell_table *shell_table)
-{
-	char		*cmd_path;
-	char		**new_envp;
-
-	cmd_path = find_exec_path(argv[0], shell_table);
-	if (!cmd_path)
-		return (cmd_not_found(argv));
-	new_envp = export_envp(shell_table);
-	if (!new_envp)
-	{
-		free(cmd_path);
-		ft_free_array((void **)argv);
-		return (1);
-	}
-	execve(cmd_path, argv, new_envp);
-	perror(cmd_path);
-	free(cmd_path);
-	st_destroy(shell_table);
-	ft_free_array((void **)new_envp);
-	ft_free_array((void **)argv);
-	return (127);
-}
+#include "signal_handler.h"
 
 static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 {
@@ -84,17 +38,58 @@ static int	fork_and_exec(t_ast *node, t_shell_table *shell_table)
 	return (1);
 }
 
+static void	restore_fds(int saved_in, int saved_out)
+{
+	dup2(saved_in, STDIN_FILENO);
+	dup2(saved_out, STDOUT_FILENO);
+	close(saved_in);
+	close(saved_out);
+}
+
+static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
+{
+	int	saved_in;
+	int	saved_out;
+	int	status;
+
+	saved_in = dup(STDIN_FILENO);
+	saved_out = dup(STDOUT_FILENO);
+	if (node->cmd->redirs
+		&& exec_redirs(node->cmd->redirs) != 0)
+	{
+		restore_fds(saved_in, saved_out);
+		return (1);
+	}
+	status = exec_builtin_cmd(node, st);
+	fflush(stdout);
+	restore_fds(saved_in, saved_out);
+	return (status);
+}
+
+static bool	is_builtin(t_ast *node)
+{
+	static const char	*builtins[] = {"echo", "pwd", "cd",
+		"export", "unset", "exit", NULL};
+	int					i;
+	char				*name;
+
+	if (!node->cmd->argv || !node->cmd->argv->content)
+		return (false);
+	name = (char *)node->cmd->argv->content;
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strncmp(name, builtins[i],
+				ft_strlen(builtins[i]) + 1) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
-	int		status;
-
-	if (node->cmd->redirs)
-	{
-		if (exec_redirs(node->cmd->redirs) != 0)
-			return (1);
-	}
-	status = exec_builtin_cmd(node, shell_table);
-	if (status != -1)
-		return (status);
+	if (is_builtin(node))
+		return (exec_builtin_with_redir(node, shell_table));
 	return (fork_and_exec(node, shell_table));
 }

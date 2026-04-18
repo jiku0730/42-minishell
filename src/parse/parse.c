@@ -53,7 +53,7 @@ static t_ast	*parse_cmd(t_list **current)
 	{
 		if (is_redir(*current))
 		{
-			if (!parse_redir(current, cmd))
+			if (parse_redir(current, cmd) == ERROR)
 				return (free_cmd(cmd), NULL);
 		}
 		else if (is_word(*current))
