@@ -51,7 +51,18 @@ t_ast	*parse_list(t_list **current)
 t_ast	*parse(t_list *token_head)
 {
 	t_list	*current;
+	t_ast	*ast;
 
 	current = token_head;
-	return (parse_list(&current));
+	ast = parse_list(&current);
+	if (current != NULL)
+	{
+		ft_putstr_fd("jikussh: syntax error near unexpected token `",
+			STDERR_FILENO);
+		ft_putstr_fd((char *)current->content, STDERR_FILENO);
+		ft_putendl_fd("'", STDERR_FILENO);
+		free_ast(ast);
+		return (NULL);
+	}
+	return (ast);
 }
