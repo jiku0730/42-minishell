@@ -93,7 +93,7 @@ static bool	is_builtin(t_ast *node)
 int	exec_cmd(t_ast *node, t_shell_table *shell_table)
 {
 	if (expand_cmd(node->cmd, shell_table) == ERROR)
-		return (1);
+		return (-1);
 	if (is_builtin(node))
 		return (exec_builtin_with_redir(node, shell_table));
 	return (fork_and_exec(node, shell_table));
