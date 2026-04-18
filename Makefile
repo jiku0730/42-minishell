@@ -121,6 +121,7 @@ SRCS_MAND	:=	src/main.c \
 				src/component/path/append_path.c \
 				src/component/path/resolve_relative_path.c \
 				src/expand/expand.c \
+				src/expand/expand_cmd.c \
 				src/expand/expand_parameter/expand_parameter.c \
 				src/expand/expand_parameter/state/in_normal_expand.c \
 				src/expand/expand_parameter/state/in_double_quote_expand.c \

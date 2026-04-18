@@ -15,10 +15,12 @@
 
 # include "constants.h"
 # include "libft.h"
+# include "parse.h"
 # include "shell_table.h"
 # include <stdbool.h>
 
 t_list	*expand(t_list *tokens, t_shell_table *shell_table, int last_status);
+int		expand_cmd(t_cmd *cmd, t_shell_table *shell_table);
 t_list	*expand_tilde(t_list *tokens, t_shell_table *shell_table);
 t_list	*expand_question(t_list *tokens, int last_exit_status);
 t_list	*expand_parameter(t_list *tokens, t_shell_table *shell_table);

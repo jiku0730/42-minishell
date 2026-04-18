@@ -11,18 +11,30 @@
 /* ************************************************************************** */
 
 #include "execute.h"
+#include <sys/stat.h>
+
+static int	cmd_path_error(char **argv)
+{
+	struct stat	sb;
+
+	ft_putstr_fd("jikussh: ", STDERR_FILENO);
+	if (stat(argv[0], &sb) == 0 && S_ISDIR(sb.st_mode))
+	{
+		ft_putstr_fd(argv[0], STDERR_FILENO);
+		ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
+	}
+	else
+		perror(argv[0]);
+	ft_free_array((void **)argv);
+	return (126);
+}
 
 static int	cmd_not_found(char **argv)
 {
 	if (ft_strchr(argv[0], '/'))
 	{
 		if (access(argv[0], F_OK) == 0)
-		{
-			ft_putstr_fd("jikussh: ", STDERR_FILENO);
-			perror(argv[0]);
-			ft_free_array((void **)argv);
-			return (126);
-		}
+			return (cmd_path_error(argv));
 		ft_putstr_fd("jikussh: ", STDERR_FILENO);
 		perror(argv[0]);
 		ft_free_array((void **)argv);

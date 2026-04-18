@@ -12,6 +12,16 @@
 
 #include "execute.h"
 #include "path.h"
+#include <sys/stat.h>
+
+static int	is_directory(const char *path)
+{
+	struct stat	sb;
+
+	if (stat(path, &sb) == 0 && S_ISDIR(sb.st_mode))
+		return (1);
+	return (0);
+}
 
 static char	*find_in_path(const char *cmd, t_shell_table *shell_table)
 {
@@ -47,7 +57,7 @@ char	*find_exec_path(const char *cmd, t_shell_table *shell_table)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, X_OK) == 0)
+		if (access(cmd, X_OK) == 0 && !is_directory(cmd))
 			return (ft_strdup(cmd));
 		return (NULL);
 	}

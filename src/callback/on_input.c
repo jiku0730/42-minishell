@@ -26,9 +26,7 @@ int	on_input(char *input, t_shell_table *shell_table, int last_status)
 		ft_lstclear(&tokens, free);
 		return (130);
 	}
-	tokens = expand(tokens, shell_table, last_status);
-	if (!tokens)
-		return (1);
+	shell_table->last_status = last_status;
 	ast = parse(tokens);
 	ft_lstclear(&tokens, free);
 	if (!ast)

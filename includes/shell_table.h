@@ -33,6 +33,7 @@ typedef struct s_shell_table
 	t_shell_node		**buckets;
 	size_t				size;
 	size_t				n_nodes;
+	int					last_status;
 }						t_shell_table;
 
 // shell_table operations
