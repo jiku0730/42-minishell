@@ -12,7 +12,17 @@
 
 #include "signal_handler.h"
 #include <readline/readline.h>
+#include <termios.h>
 #include <unistd.h>
+
+static void	enable_echoctl(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
 
 void	set_signal_ignore(void)
 {
@@ -28,6 +38,7 @@ void	set_signal_default(void)
 {
 	struct sigaction	sa;
 
+	enable_echoctl();
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = SIG_DFL;
