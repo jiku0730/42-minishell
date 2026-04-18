@@ -69,5 +69,7 @@ int	exec_pipe(t_ast *node, t_shell_table *shell_table)
 	set_signal_interactive();
 	if (ft_wifexited(exit_status_right_child))
 		return (ft_wexitstatus(exit_status_right_child));
+	if (WTERMSIG(exit_status_right_child) == SIGQUIT)
+		ft_putendl_fd("Quit: 3", STDERR_FILENO);
 	return (128 + WTERMSIG(exit_status_right_child));
 }
