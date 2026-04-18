@@ -32,7 +32,7 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 	if (kind == R_NOT_FOUND)
 		return (ERROR);
 	*current = (*current)->next;
-	if (!*current)
+	if (!*current || !is_word(*current))
 		return (ERROR);
 	if (!add_redir_to_cmd(cmd, kind, (*current)->content))
 		return (ERROR);
