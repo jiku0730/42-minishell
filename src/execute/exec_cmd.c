@@ -23,6 +23,8 @@ static int	wait_for_child(pid_t pid)
 	set_signal_interactive();
 	if (ft_wifexited(wstatus))
 		return (ft_wexitstatus(wstatus));
+	if (WTERMSIG(wstatus) == SIGINT)
+		ft_putstr_fd("\n", STDERR_FILENO);
 	if (WTERMSIG(wstatus) == SIGQUIT)
 		ft_putendl_fd("Quit: 3", STDERR_FILENO);
 	return (128 + WTERMSIG(wstatus));

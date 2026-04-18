@@ -35,7 +35,7 @@ static void	exit_numeric_error(const char *str)
 	ft_putstr_fd(SHELL_NAME ": exit: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-	exit(2);
+	exit(255);
 }
 
 static long long	ft_atoll_check(const char *str, bool *ovf)
