@@ -21,18 +21,12 @@ Key features include:
 
 ### Prerequisites
 
-- Docker (recommended for building and running)
-- Or: GCC, Make, GNU readline library
+- GCC, Make, GNU readline library
 
 ### Build and Run
 
-The recommended way to build and run is inside the Docker environment:
-
 ```bash
-# Enter the Docker container
-make docker
-
-# Build inside the container
+# Build the project
 make
 
 # Run the shell
