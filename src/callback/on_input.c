@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+static bool	has_valid_heredoc(t_list *tokens)
+{
+	while (tokens)
+	{
+		if (ft_strncmp(tokens->content, "<<", 3) == 0)
+			if (!tokens->next || !tokens->next->content)
+				return (false);
+		tokens = tokens->next;
+	}
+	return (true);
+}
+
 int	on_input(char *input, t_shell_table *shell_table, int last_status)
 {
 	t_list	*tokens;
@@ -21,7 +33,12 @@ int	on_input(char *input, t_shell_table *shell_table, int last_status)
 	tokens = tokenize(input);
 	if (!tokens)
 		return (2);
-	if (!heredoc(tokens))
+	if (!has_valid_heredoc(tokens))
+	{
+		ft_lstclear(&tokens, free);
+		return (2);
+	}
+	if (!heredoc(tokens, shell_table))
 	{
 		ft_lstclear(&tokens, free);
 		return (130);

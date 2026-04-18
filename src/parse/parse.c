@@ -32,7 +32,7 @@ static int	parse_redir(t_list **current, t_cmd *cmd)
 	if (kind == R_NOT_FOUND)
 		return (ERROR);
 	*current = (*current)->next;
-	if (!*current)
+	if (!*current || !is_word(*current))
 		return (ERROR);
 	if (!add_redir_to_cmd(cmd, kind, (*current)->content))
 		return (ERROR);
@@ -78,6 +78,8 @@ t_ast	*parse_cmd(t_list **current)
 		if (parse_token(current, cmd) == ERROR)
 			return (free_cmd(cmd), NULL);
 	}
+	if (!cmd->argv && !cmd->redirs)
+		return (free_cmd(cmd), NULL);
 	ast = new_ast_node(CMD);
 	if (!ast)
 		return (free_cmd(cmd), NULL);

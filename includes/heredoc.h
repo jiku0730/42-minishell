@@ -21,8 +21,14 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-t_list	*heredoc(t_list *tokens);
-char	*heredoc_prompt(const char *delimiter);
+# include "shell_table.h"
+# include <stdbool.h>
+
+t_list	*heredoc(t_list *tokens, t_shell_table *st);
+char	*heredoc_prompt(const char *delim, bool expand,
+			t_shell_table *st);
+
+char	*expand_heredoc_line(const char *line, t_shell_table *st);
 
 // tmpfile
 int		open_tmpfile(char *tmpfile_path);

@@ -94,6 +94,7 @@ SRCS_MAND	:=	src/main.c \
 				src/parse/utils/free_ast.c \
 				src/component/heredoc/heredoc.c \
 				src/component/heredoc/heredoc_prompt.c \
+				src/component/heredoc/heredoc_expand.c \
 				src/component/heredoc/tmpfile.c \
 				src/component/shell_table/shell_hash.c \
 				src/component/shell_table/shell_insert.c \
@@ -196,13 +197,3 @@ re: fclean all
 
 .PHONY: all clean fclean re bonus
 
-#-----------------------------------------------------------------------------
-
-#▸ original rules
-
-#-----------------------------------------------------------------------------
-
-docker:
-	docker compose up -d && docker compose exec minishell bash
-
-.PHONY: docker

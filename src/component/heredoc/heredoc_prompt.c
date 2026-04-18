@@ -14,8 +14,10 @@
 #include "signal_handler.h"
 #include <readline/readline.h>
 
-static int	write_line_to_file(int fd, char *line);
-static void	heredoc_child(const char *delimiter, int fd);
+static int	write_line(int fd, char *line, bool expand,
+				t_shell_table *st);
+static void	heredoc_child(const char *delim, int fd,
+				bool expand, t_shell_table *st);
 
 static int	wait_heredoc_child(pid_t pid)
 {
@@ -41,7 +43,8 @@ static void	*heredoc_interrupted(char *tmpfile_path)
 	return (NULL);
 }
 
-char	*heredoc_prompt(const char *delimiter)
+char	*heredoc_prompt(const char *delim, bool expand,
+		t_shell_table *st)
 {
 	char	*tmpfile_path;
 	int		fd;
@@ -57,7 +60,7 @@ char	*heredoc_prompt(const char *delimiter)
 	if (pid == 0)
 	{
 		set_signal_default();
-		heredoc_child(delimiter, fd);
+		heredoc_child(delim, fd, expand, st);
 	}
 	close(fd);
 	set_signal_ignore();
@@ -67,7 +70,8 @@ char	*heredoc_prompt(const char *delimiter)
 	return (tmpfile_path);
 }
 
-static void	heredoc_child(const char *delimiter, int fd)
+static void	heredoc_child(const char *delim, int fd,
+		bool expand, t_shell_table *st)
 {
 	char	*line;
 	int		status;
@@ -76,10 +80,10 @@ static void	heredoc_child(const char *delimiter, int fd)
 	while (1)
 	{
 		line = readline(HEREDOC_PROMPT);
-		if (!line || ft_strncmp(line, delimiter,
-				ft_strlen(delimiter) + 1) == 0)
+		if (!line || ft_strncmp(line, delim,
+				ft_strlen(delim) + 1) == 0)
 			break ;
-		if (write_line_to_file(fd, line) == ERROR)
+		if (write_line(fd, line, expand, st) == ERROR)
 		{
 			status = 1;
 			break ;
@@ -90,14 +94,25 @@ static void	heredoc_child(const char *delimiter, int fd)
 	exit(status);
 }
 
-static int	write_line_to_file(int fd, char *line)
+static int	write_line(int fd, char *line, bool expand,
+		t_shell_table *st)
 {
-	size_t	len;
+	char	*out;
 
-	len = ft_strlen(line);
-	if (write(fd, line, len) == -1)
+	if (expand)
+		out = expand_heredoc_line(line, st);
+	else
+		out = line;
+	if (!out)
 		return (ERROR);
-	if (write(fd, "\n", 1) == -1)
+	if (write(fd, out, ft_strlen(out)) == -1
+		|| write(fd, "\n", 1) == -1)
+	{
+		if (expand)
+			free(out);
 		return (ERROR);
+	}
+	if (expand)
+		free(out);
 	return (SUCCESS);
 }

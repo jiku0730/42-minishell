@@ -20,20 +20,14 @@ int	unset(t_list *argv, t_shell_table *shell_table)
 	int		result;
 
 	if (!argv || !argv->content)
-		return (ERROR);
+		return (SUCCESS);
 	result = SUCCESS;
 	skip_head_node(&argv);
 	while (argv)
 	{
 		key = (char *)argv->content;
-		if (!key)
-		{
-			result = ERROR;
-			skip_head_node(&argv);
-			continue ;
-		}
-		if (!st_delete(shell_table, key))
-			result = ERROR;
+		if (key)
+			st_delete(shell_table, key);
 		skip_head_node(&argv);
 	}
 	return (result);
