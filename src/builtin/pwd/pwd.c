@@ -24,7 +24,8 @@ int	pwd(t_list *argv, t_shell_table *shell_table)
 		perror("pwd");
 		return (EXIT_FAILURE);
 	}
-	printf("%s\n", pwd_path);
+	ft_putstr_fd(pwd_path, STDOUT_FILENO);
+	write(STDOUT_FILENO, "\n", 1);
 	free(pwd_path);
 	return (EXIT_SUCCESS);
 }

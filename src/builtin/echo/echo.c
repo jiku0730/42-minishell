@@ -71,12 +71,12 @@ static void	print_argv(t_list *to_print_argv, bool with_newline)
 	{
 		if (current->content)
 		{
-			printf("%s", (char *)current->content);
+			ft_putstr_fd((char *)current->content, STDOUT_FILENO);
 			if (current->next)
-				printf(" ");
+				write(STDOUT_FILENO, " ", 1);
 		}
 		current = current->next;
 	}
 	if (with_newline)
-		printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 }

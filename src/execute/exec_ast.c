@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "signal_handler.h"
 
 static int	exec_logical(t_ast *node, t_shell_table *shell_table)
 {
@@ -33,11 +34,16 @@ static int	exec_subshell(t_ast *node, t_shell_table *shell_table)
 	if (pid < 0)
 		return (perror("fork"), 1);
 	if (pid == 0)
+	{
+		set_signal_default();
 		exit(exec_ast(node->right, shell_table));
+	}
+	set_signal_ignore();
 	waitpid(pid, &wstatus, 0);
+	set_signal_interactive();
 	if (ft_wifexited(wstatus))
 		return (ft_wexitstatus(wstatus));
-	return (1);
+	return (128 + WTERMSIG(wstatus));
 }
 
 int	exec_ast(t_ast *node, t_shell_table *shell_table)

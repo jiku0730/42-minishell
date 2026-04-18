@@ -64,7 +64,6 @@ static int	exec_builtin_with_redir(t_ast *node, t_shell_table *st)
 		return (1);
 	}
 	status = exec_builtin_cmd(node, st);
-	fflush(stdout);
 	restore_fds(saved_in, saved_out);
 	return (status);
 }
