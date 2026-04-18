@@ -51,6 +51,8 @@ static int	parse_token(t_list **current, t_cmd *cmd)
 		if (!add_argv_to_cmd(cmd, (*current)->content))
 			return (ERROR);
 	}
+	else
+		return (ERROR);
 	*current = (*current)->next;
 	return (SUCCESS);
 }
